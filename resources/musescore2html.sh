@@ -1,0 +1,88 @@
+#!/bin/bash
+
+CUR_DIR=`pwd`
+
+REQ_JVER1=1
+REQ_JVER2=8
+REQ_JVER3=0
+REQ_JVER4=0
+
+#-------------------------------------------------------------------------------
+CheckJavaVersion() {
+	JVER1=`echo $JAVA_VERSION_OUTPUT | sed 's/java version "\([0-9]*\)\.[0-9]*\.[0-9]*_[0-9]*".*/\1/'`
+	JVER2=`echo $JAVA_VERSION_OUTPUT | sed 's/java version "[0-9]*\.\([0-9]*\)\.[0-9]*_[0-9]*".*/\1/'`
+	JVER3=`echo $JAVA_VERSION_OUTPUT | sed 's/java version "[0-9]*\.[0-9]*\.\([0-9]*\)_[0-9]*".*/\1/'`
+	JVER4=`echo $JAVA_VERSION_OUTPUT | sed 's/java version "[0-9]*\.[0-9]*\.[0-9]*_\([0-9]*\)".*/\1/'`
+
+	if [ $JVER1 -gt $REQ_JVER1 ]; then
+		return 0
+	elif [ $JVER1 -lt $REQ_JVER1 ]; then
+		return 1
+	fi
+
+	if [ $JVER2 -gt $REQ_JVER2 ]; then
+		return 0
+	elif [ $JVER2 -lt $REQ_JVER2 ]; then
+		return 1
+	fi
+
+	if [ $JVER3 -gt $REQ_JVER3 ]; then
+		return 0
+	elif [ $JVER3 -lt $REQ_JVER3 ]; then
+		return 1
+	fi
+
+	if [ $JVER4 -lt $REQ_JVER4 ]; then
+		return 1
+	fi
+
+	return 0
+}
+
+#-------------------------------------------------------------------------------
+OS=`uname -s`
+if [ "${OS}" = "Darwin" ]
+then
+  READLINK_OPTION="-n"
+else
+  READLINK_OPTION="-f"
+fi
+
+PROGRAM="$0"
+BASE_DIR=`dirname $0`
+
+# Handle symlinks
+while [ -L "$PROGRAM" ]; do
+	PROGRAM=`readlink ${READLINK_OPTION} "$PROGRAM"`
+	BASE_DIR=`dirname "${PROGRAM}"`
+done
+pushd "`dirname \"$PROGRAM\"`" > /dev/null
+
+popd > /dev/null
+
+# Check default java
+if [ -x "`which java`" ]
+then
+	JAVA_VERSION_OUTPUT=`java -version 2>&1`
+	JAVA_VERSION_OUTPUT=`echo "${JAVA_VERSION_OUTPUT}" | sed 's/openjdk version/java version/'`
+	CheckJavaVersion
+	RC=$?
+	if  [ ${RC} -eq 0 ]
+	then
+		if [ "${OS}" = "Darwin" ]
+		then
+			BASE_SUB_DIR=`basename "${BASE_DIR}"`
+			if [ "${BASE_SUB_DIR}" = "MacOS" ]
+			then
+				LIB_DIR=`dirname "${BASE_DIR}"`"/Resources/lib"
+			else
+				LIB_DIR="${BASE_DIR}/resources/lib"
+			fi
+		else
+			LIB_DIR="${BASE_DIR}/resources/lib"
+		fi
+		java -jar "${LIB_DIR}/musescore2html.jar" "$@"
+	else
+		echo "Use or install java ${REQ_JVER1}.${REQ_JVER2}.${REQ_JVER3}.${REQ_JVER4} or higher"
+	fi
+fi

@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MuseScore2Html" basedir="." default="prepare_dist_bin">
+    <description>Builds project MuseScore2Html</description>    
+                             
+    <loadproperties srcfile="build.properties"/>
+    <loadproperties srcfile="build_version.properties"/>
+    
+	<uptodate property="source.version" targetfile="${src.dir}/musescore2html/Version.java">
+  		<srcfiles file="build_version.properties"/>
+	</uptodate>
+	
+    <property name="jar.filename" value="${prefix.filename}"/>
+    <property name="build.dist.sub.dir" value="${prefix.filename}_${major.version}.${minor.version}"/>
+
+     <target name="updateversion" description="Update version in java sources" unless="source.version">
+         <echo file="${src.dir}/musescore2html/Version.java">package musescore2html.process;
+
+public class Version {
+	public static final String
+		NAME = "MuseScore2Html",
+		VENDOR_ID = NAME,
+		MAJOR_VERSION = "${major.version}",
+		MINOR_VERSION = "${minor.version}",
+		VERSION = MAJOR_VERSION+"."+MINOR_VERSION,
+		APPLICATION_ID = NAME+MAJOR_VERSION;
+}
+          </echo>
+    </target>
+        
+     <target name="compile" description="Compile java sources" depends="updateversion">
+        <mkdir dir="${build.compile.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.compile.dir}" 
+        	includes="**/*.java" target="${target.java}" source="${target.java}" debug="true"
+            debuglevel="lines,vars,source" includeantruntime="false" encoding="utf-8">
+            <compilerarg line="-Xdiags:verbose -Xlint:deprecation -Xlint:unchecked"/>
+            <classpath>
+                <fileset dir="${rsc.dir}/lib" includes="**/*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+    
+     <target name="jar" description="Create jar" depends="compile">
+         <mkdir dir="${build.dir}"/>       
+         <copy todir="${build.compile.dir}" preservelastmodified="true">
+             <fileset dir="${src.dir}" includes="**/*.properties"/>
+         </copy>
+         <path id="manifest">
+             <fileset dir="${rsc.dir}/lib" includes="**/*.jar"/>
+         </path>
+         <echo message="base.dir : ${basedir}"/>
+         <pathconvert pathsep=" " property="manifestClassPath" refid="manifest">
+             <map from="${basedir}/${rsc.dir}/lib/" to=""/>
+         </pathconvert>
+         <jar destfile="${build.dir}/${jar.filename}.jar" basedir="${build.compile.dir}">
+             <manifest>
+                 <attribute name="Main-Class" value="${main.class}"/>
+                 <attribute name="Class-Path" value="${manifestClassPath}"/>
+             </manifest>
+         </jar>
+    </target>
+    
+     <target name="prepare_dist_bin" description="Prepare bin dist" depends="jar">
+         <mkdir dir="${build.dist.bin.dir}/${build.dist.sub.dir}"/>
+         <copy file="${rsc.dir}/${rsc.script.unix}" todir="${build.dist.bin.dir}/${build.dist.sub.dir}" preservelastmodified="true"/>
+         <chmod file="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.script.unix}" perm="ugo+rx"/>
+         <copy file="${rsc.dir}/${rsc.script.windows}" todir="${build.dist.bin.dir}/${build.dist.sub.dir}" preservelastmodified="true"/>
+         <copy todir="${build.dist.bin.dir}/${build.dist.sub.dir}" preservelastmodified="true">
+             <fileset dir="${basedir}" includes="${rsc.lib.dir}/**/*.jar"/>
+             <fileset dir="${basedir}" includes="${rsc.xsl.dir}/**/*.xsl"/>
+             <fileset dir="${basedir}" includes="${rsc.help.dir}/**/*.*"/>
+             <fileset dir="${basedir}" includes="${rsc.dir}/*.icns"/>
+             <fileset dir="${basedir}" includes="${install.img.dir}/**/*.svg"/>
+             <fileset dir="${basedir}" includes="${install.css.dir}/**/*.css"/>
+             <fileset dir="${basedir}" includes="${install.js.dir}/**/*.js"/>
+             <fileset dir="${basedir}" includes="${install.dir}/**/*.html"/>
+        </copy>
+         <copy file="${build.dir}/${jar.filename}.jar" todir="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.lib.dir}" preservelastmodified="true"/>     
+    </target>
+    
+     <target name="prepare_dist_src" description="Prepare src dist" >
+         <mkdir dir="${build.dist.src.dir}/${build.dist.sub.dir}"/>
+         <copy todir="${build.dist.src.dir}/${build.dist.sub.dir}" preservelastmodified="true">
+             <fileset dir="${basedir}" includes="src/**/*"/>
+             <fileset dir="${basedir}" includes="resources/**/*"/>
+             <fileset file="${basedir}/build.properties"/>
+             <fileset file="${basedir}/build_version.properties"/>
+             <fileset file="${basedir}/build.xml"/>
+         </copy>           
+    </target>
+
+     <target name="dist_bin" description="Create bin dist" depends="prepare_dist_bin">
+         <mkdir dir="${dist.dir}"/>
+     	 <zip destfile="${dist.dir}/${prefix.filename}_${major.version}.${minor.version}_bin.zip" basedir="${build.dir}/dist/bin/${build.dist.sub.dir}"/>
+    </target>
+
+     <target name="dist_src" description="Create src dist" depends="prepare_dist_src">
+         <mkdir dir="${dist.dir}"/>
+     	 <zip destfile="${dist.dir}/${prefix.filename}_${major.version}.${minor.version}_src.zip" basedir="${build.dir}/dist/src/${build.dist.sub.dir}"/>
+    </target>
+
+    <target name="dist" description="Create dist" depends="dist_bin, dist_src" >
+    </target>
+    
+    <target name="clean" description="Clean" >
+        <delete dir="${build.dir}"/>        
+        <delete dir="${dist.dir}"/>        
+    </target>
+    
+    <target name="all" description="Create all" depends="jar">
+    </target>
+    
+    <tstamp>
+        <format property="current.time" pattern="yyyy-MM-dd'T'hh:mm:ss"/>
+    </tstamp>
+    
+	<property environment="env"/>
+	
+    <target name="info" description="Show info">
+        <echo message="Date/time : ${current.time}"/>
+        <echo message="Project   : ${ant.project.name}"/>
+        <echo message="Buildfile : ${ant.file}"/>
+        <echo message="Basedir   : ${basedir}"/>
+        <echo message="OS        : ${os.name} ${os.version}"/>
+        <echo message="Ant       : ${ant.version}"/>
+        <echo message="Ant home  : ${ant.home}"/>
+        <echo message="Ant core  : ${ant.core.lib}"/>
+        <echo message="Ant lib   : ${ant.library.dir}"/>
+        <echo message="Java      : ${ant.java.version} (${java.vm.name}, ${java.vm.version})"/>
+        <echo message="Java home : ${env.JAVA_HOME}"/>
+
+        <echo message=""/>
+        <echo message="To list all targets use :"/>
+        <echo message="${ant.home}/bin/ant -f ${ant.file} -p"/>
+
+        <echo message=""/>
+        <echo message="Ant targets :"/>
+        <exec executable="${ant.home}/bin/ant">
+            <arg value="-f"/>
+            <arg value="${ant.file}"/>
+            <arg value="-p"/>
+        </exec>
+        <echo message=""/>
+        <echo message="Ant default target : ${ant.project.default-target}"/>
+   </target>
+
+	<target name="test-cli" description="Test commandline interface" depends="prepare_dist_bin">
+        <mkdir dir="${build.test.dir}"/>
+  	 	<java jar="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.lib.dir}/${jar.filename}.jar" fork="true">
+      		<arg value="-cli"/>
+      		<arg value="-o"/>
+      		<arg value="${build.test.dir}"/>
+      		<arg value="${rsc.test.dir}/${test.file1}"/>
+      		<arg value="${rsc.test.dir}/${test.file2}"/>
+      		<arg value="${rsc.test.dir}/${test.file3}"/>
+   		</java>
+	</target>
+
+	<target name="test-gui" description="Test gui interface" depends="prepare_dist_bin">
+        <delete dir="${build.test.dir}"/>
+        <mkdir dir="${build.test.dir}"/>
+  	 	<java jar="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.lib.dir}/${jar.filename}.jar" fork="true">
+      		<arg value="-gui"/>
+      		<arg value="-o"/>
+      		<arg value="${build.test.dir}"/>
+      		<arg value="${rsc.test.dir}/${test.file1}"/>
+      		<arg value="${rsc.test.dir}/${test.file2}"/>
+      		<arg value="${rsc.test.dir}/${test.file3}"/>
+   		</java>
+	</target>
+	
+    <target name="javadoc" description="Create Javadoc API documentation" depends="compile">
+        <mkdir dir="${dist.doc.dir}/api"/>
+        <javadoc destdir="${dist.doc.dir}/api" linksource="yes" private="yes">
+             <fileset dir=".">
+                <include name="*.java"/>
+            </fileset>
+            <fileset dir=".">
+                <include name="*/*.java"/>
+            </fileset>
+        </javadoc>
+    </target>
+	
+	<target name="check_if_spotbugs_home_is_set" unless="spotbugs.home">
+  		  <echo message="property 'spotbugs.home' is not set"/>
+  		  <echo message="adapt build.properties to specify where you installed spotbugs"/>
+    </target>
+
+    <typedef name="spotbugs" classname="edu.umd.cs.findbugs.anttask.FindBugsTask" onerror="ignore">
+           <classpath>
+               <fileset dir="${spotbugs.home}" includes="lib/spotbugs-ant.jar" erroronmissingdir="false"/>
+            </classpath>
+	</typedef>
+	
+	<target name="spotbugs" description="Use spotbugs to check code" depends="jar, check_if_spotbugs_home_is_set" if="spotbugs.home">
+       	<mkdir dir="${spotbugs.dir.output}"/>
+       	<loadproperties srcFile="${spotbugs.properties}"/>
+  			<spotbugs home="${spotbugs.home}" output="html" outputFile="${spotbugs.dir.output}/spotbugs.html">
+            <auxClasspath path="${rsc.lib.dir}/ant.jar"/>
+    		<sourcePath path="${src.dir}"/>
+    		<class location="${build.dir}/${jar.filename}.jar"/>
+  		</spotbugs>
+	</target>
+
+</project>
+ 

@@ -1,0 +1,210 @@
+.\" Automatically generated from an mdoc input file.  Do not edit.
+.TH "PROGNAME" "1" "February 15, 2021" "Darwin 15.6.0" "General Commands Manual"
+.nh
+.if n .ad l
+.SH "NAME"
+\fBm2h\fR
+\- (musescore2html) generate html-files from a musescore score
+.sp
+.SH "SYNOPSIS"
+m2h
+[\fB\-gui\fR | \fB\-cli\fR]
+[\fB\-C\fR \fI'configuration-file'\fR]
+[\fB\-l\fR \fI'language'\fR]
+[\fB\-m\fR \fI'musescore'\fR]
+[\fB\-o\fR \fI'output-directory'\fR]
+[\fB\-i\fR \fI'index-filename'\fR | \fB\-I\fR \fI'index-filename'\fR]
+[\fB\-p\fR | \fB\-n\fR | \fB\-r\fR]
+[\fB\-v\fR | \fB\-q\fR | \fB\-s\fR]
+[\fB\-c\fR]
+[score ...]
+.sp
+.SH "DESCRIPTION"
+The musescore2html utility is used to generate files from a musescore score to show it as a html-file.
+.sp
+.PP
+Options:
+.TP 8n
+\fB\-gui\fR
+Use graphical user interface (default).
+.TP 8n
+\fB\-cli\fR
+Use commandline interface.
+.sp
+.TP 8n
+\fB\-C\fR \fI'configuration-file'\fR
+Read configuration from 'configuration-file'.
+.TP 8n
+\fB\-l\fR \fIlanguage\fR
+Specify the language to be used.
+ Overrules the language specified in 'configuration-file' (if used).
+.sp
+.TP 8n
+\fB\-m\fR \fI'mscore'\fR
+Location of MuseScore executable.
+.sp
+.TP 8n
+\fB\-o\fR \fI'output-directory'\fR
+Specify where to place files generated.
+ Defaukt:
+.PP
+.RS 8n
+.PD 0
+.TP 8n
+Commandline interface: the current directory.
+.PD
+.TP 8n
+Graphical user interface: user-directory.
+.PD 0
+.PP
+.RE
+.PP
+Except if option -I 'index-filename' is used, a html-file for every score will be generated.
+.PD
+.TP 8n
+\fB\-i\fR \fI'index-filename'\fR
+Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the generated html-files for the scores.
+.TP 8n
+\fB\-I\fR \fI'index-filename'\fR
+Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the html-file 'ShowScore.html' to show the scores.
+ A html-file for each score will NOT be generated, only the other files to show a score (with 'ShowScore.html').
+.sp
+.TP 8n
+\fB\-p\fR
+Preserve existing files (default).
+.TP 8n
+\fB\-n\fR
+Overwrite existing files only if score is newer than existing files to be generated.
+.TP 8n
+\fB\-r\fR
+Replace existing files.
+.PP
+.sp
+In case of commandline usage :
+.TP 8n
+Information about processing defaults to information about files generated/installed/replaced/skipped and will be send to standard output.
+.TP 8n
+Information about errors will be send as diagnostic messages to standard error.
+.PD 0
+.PP
+Default is 'normal' information.
+ Options
+[\fB\-v\fR | \fB\-q\fR | \fB\-s\fR]
+can be used to change the amount of information.
+.sp
+.PD
+.TP 8n
+\fB\-v\fR
+Verbose, show extensive information about processing files.
+.TP 8n
+\fB\-q\fR
+Quiet, don't show detailed information about processing files.
+ Only a summary will be displayed.
+.TP 8n
+\fB\-s\fR
+Silent, (utterly silent) don't show any information about processing files, even error messages.
+.sp
+.TP 8n
+\fB\-c\fR
+Check only, dry run which shows what should have happened.
+.PP
+.SH "CONTEXT"
+Java 8+ should be installed.
+ Musescore should be installed (see https://musescore.org).
+.sp
+.SH "IMPLEMENTATION NOTES"
+Uses :
+.TP 8n
+Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+.TP 8n
+Saxon-EE 10 (http://saxon.sourceforge.net)
+.TP 8n
+Apache Ant 1.10.9 (https://ant.apache.org)
+.PP
+.SH "RETURN VALUES"
+.SH "FILES"
+For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
+.PP
+MyScore.metajson
+.PP
+MyScore_space.json
+.PP
+MyScore-1.png
+.PP
+MyScore-2.png
+.PP
+MyScore.ogg
+.PP
+MyScore.mp3
+.PD 0
+.PP
+If
+.br
+is not used:
+.PD
+.PP
+MyScore.html
+.PD 0
+.PP
+will be generated.
+.sp
+Creates subdirectories:
+.PD
+.PP
+js,
+.PP
+css
+.PP
+images
+.PD 0
+.PP
+and installs javascript, css-stylesheet en svg-images
+.PD
+.PP
+js/ms_player.js
+.PP
+css/ms_player.css
+.PP
+images/media-playback-loop.svg
+.PP
+images/media-playback-metronome.svg
+.PP
+images/media-playback-pause.svg
+.PP
+images/media-playback-start.svg
+.PP
+images/media-skip-backward.svg
+.PP
+images/media-skip-forward.svg
+.PP
+images/window-close.svg
+.PP
+If
+.br
+is used:
+.PP
+js/ms_player_query.js
+.PP
+ShowScore.html
+.PD 0
+.PP
+wille be installed.
+.sp
+.PD
+.SH "EXIT STATUS"
+If an error occurs return code will be non-zero.
+.SH "EXAMPLES"
+To generate html-files for all scores in directory MyMusic and place then in directory Sites :
+.PP
+m2h -d Sites MyMusic/*.mscz
+.PD 0
+.PP
+To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
+.PD
+.PP
+m2h -d Sites MyMusic/**/*.mscz
+.SH "DIAGNOSTICS"
+.SH "ERRORS"
+.SH "LICENSE"
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode

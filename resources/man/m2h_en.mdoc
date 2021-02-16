@@ -1,0 +1,204 @@
+.Dd $Mdocdate$
+.Dt PROGNAME 1
+.Os
+.Sh NAME
+.Nm m2h
+.Nd (musescore2html) generate html-files from a musescore score
+
+.Sh SYNOPSIS
+m2h
+.Op Fl gui | cli
+.Op Fl C Ar 'configuration-file'
+.Op Fl l Ar 'language'
+.Op Fl m Ar 'musescore'
+.Op Fl o Ar 'output-directory'
+.Op Fl i Ar 'index-filename' | Fl I Ar 'index-filename'
+.Op Fl p | n | r
+.Op Fl v | q | s
+.Op Fl c
+.Op score ...
+
+.Sh DESCRIPTION
+The musescore2html utility is used to generate files from a musescore score to show it as a html-file.
+ 
+.Pp
+Options:
+.Bl -tag -width Ds
+.It Fl gui
+Use graphical user interface (default).
+.It Fl cli
+Use commandline interface.
+ 
+.It Fl C Ar 'configuration-file'
+Read configuration from 'configuration-file'.
+.It Fl l Ar language
+Specify the language to be used.
+ Overrules the language specified in 'configuration-file' (if used).
+ 
+.It Fl m Ar 'mscore'
+Location of MuseScore executable.
+ 
+.It Fl o Ar 'output-directory'
+Specify where to place files generated.
+ Defaukt:
+.Bl -tag -width Ds
+.It
+Commandline interface: the current directory.
+.It
+Graphical user interface: user-directory.
+.El
+.El
+ 
+Except if option -I 'index-filename' is used, a html-file for every score will be generated.
+.Bl -tag -width Ds
+.It Fl i Ar 'index-filename'
+Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the generated html-files for the scores.
+.It Fl I Ar 'index-filename'
+Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the html-file 'ShowScore.html' to show the scores.
+ A html-file for each score will NOT be generated, only the other files to show a score (with 'ShowScore.html').
+ 
+.It Fl p
+Preserve existing files (default).
+.It Fl n
+Overwrite existing files only if score is newer than existing files to be generated.
+.It Fl r
+Replace existing files.
+.El
+ 
+ 
+In case of commandline usage :
+.Bl -tag -width Ds
+.It
+Information about processing defaults to information about files generated/installed/replaced/skipped and will be send to standard output.
+.It
+Information about errors will be send as diagnostic messages to standard error.
+.El
+Default is 'normal' information.
+ Options
+.Op Fl v | q | s
+can be used to change the amount of information.
+
+.Bl -tag -width Ds
+.It Fl v
+Verbose, show extensive information about processing files.
+.It Fl q
+Quiet, don't show detailed information about processing files.
+ Only a summary will be displayed.
+.It Fl s
+Silent, (utterly silent) don't show any information about processing files, even error messages.
+ 
+.It Fl c
+Check only, dry run which shows what should have happened.
+.El
+
+.Sh CONTEXT
+Java 8+ should be installed.
+ Musescore should be installed (see https://musescore.org).
+
+.Sh IMPLEMENTATION NOTES
+Uses :
+.Bl -tag -width Ds
+.It
+Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+.It
+Saxon-EE 10 (http://saxon.sourceforge.net)
+.It
+Apache Ant 1.10.9 (https://ant.apache.org)
+.El
+
+.Sh RETURN VALUES
+
+.Sh FILES
+For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
+.Bl
+.It
+MyScore.metajson
+.It
+MyScore_space.json
+.It
+MyScore-1.png
+.It
+MyScore-2.png
+.It
+\...
+.It
+MyScore.ogg
+.It
+MyScore.mp3
+.El
+If
+.It Fl I Ar 'index-bestandsnaam'
+is not used:
+.Bl
+.It
+MyScore.html
+.El
+will be generated.
+ 
+Creates subdirectories:
+.Bl
+.It
+js, 
+.It
+css
+.It
+images
+.El
+and installs javascript, css-stylesheet en svg-images
+.Bl
+.It
+js/ms_player.js
+.It
+css/ms_player.css
+.It
+images/media-playback-loop.svg
+.It
+images/media-playback-metronome.svg
+.It
+images/media-playback-pause.svg
+.It
+images/media-playback-start.svg
+.It
+images/media-skip-backward.svg
+.It
+images/media-skip-forward.svg
+.It
+images/window-close.svg
+.El
+
+If
+.It Fl I Ar 'index-bestandsnaam'
+is used:
+.Bl
+.It
+js/ms_player_query.js
+.It
+ShowScore.html
+.El
+wille be installed.
+
+.Sh EXIT STATUS
+If an error occurs return code will be non-zero.
+.Sh EXAMPLES
+To generate html-files for all scores in directory MyMusic and place then in directory Sites :
+.Bl
+.It
+m2h -d Sites MyMusic/*.mscz
+.El
+To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
+.Bl
+.It
+m2h -d Sites MyMusic/**/*.mscz
+.El
+.Sh DIAGNOSTICS
+.Sh ERRORS
+.Sh LICENSE
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+.\" .Sh SEE ALSO
+.\" .Sh STANDARDS
+.\" .Sh HISTORY
+.\" .Sh AUTHORS
+.\" .Sh CAVEATS
+.\" .Sh BUGS
+.\" .Sh SECURITY CONSIDERATIONS

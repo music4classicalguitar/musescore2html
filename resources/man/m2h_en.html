@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <style>
+    table.head, table.foot { width: 100%; }
+    td.head-rtitle, td.foot-os { text-align: right; }
+    td.head-vol { text-align: center; }
+    div.Pp { margin: 1ex 0ex; }
+    div.Nd, div.Bf, div.Op { display: inline; }
+    span.Pa, span.Ad { font-style: italic; }
+    span.Ms { font-weight: bold; }
+    dl.Bl-diag > dt { font-weight: bold; }
+    code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
+    code.Cd { font-weight: bold; font-family: inherit; }
+  </style>
+  <title>PROGNAME(1)</title>
+</head>
+<body>
+<table class="head">
+  <tr>
+    <td class="head-ltitle">PROGNAME(1)</td>
+    <td class="head-vol">General Commands Manual</td>
+    <td class="head-rtitle">PROGNAME(1)</td>
+  </tr>
+</table>
+<div class="manual-text">
+<section class="Sh">
+<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<code class="Nm">m2h</code> &#x2014;
+<div class="Nd">(musescore2html) generate html-files from a musescore score
+<p class="Pp"></p>
+</div>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="SYNOPSIS"><a class="permalink" href="#SYNOPSIS">SYNOPSIS</a></h1>
+m2h [<code class="Fl">-gui</code> | <code class="Fl">-cli</code>]
+  [<code class="Fl">-C</code> <var class="Ar">'configuration-file'</var>]
+  [<code class="Fl">-l</code> <var class="Ar">'language'</var>]
+  [<code class="Fl">-m</code> <var class="Ar">'musescore'</var>]
+  [<code class="Fl">-o</code> <var class="Ar">'output-directory'</var>]
+  [<code class="Fl">-i</code> <var class="Ar">'index-filename'</var> |
+  <code class="Fl">-I</code> <var class="Ar">'index-filename'</var>]
+  [<code class="Fl">-p</code> | <code class="Fl">-n</code> |
+  <code class="Fl">-r</code>] [<code class="Fl">-v</code> |
+  <code class="Fl">-q</code> | <code class="Fl">-s</code>]
+  [<code class="Fl">-c</code>] [score ...]
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DESCRIPTION"><a class="permalink" href="#DESCRIPTION">DESCRIPTION</a></h1>
+The musescore2html utility is used to generate files from a musescore score to
+  show it as a html-file.
+<p class="Pp"></p>
+<p class="Pp">Options:</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#gui"><code class="Fl" id="gui">-gui</code></a></dt>
+  <dd>Use graphical user interface (default).</dd>
+  <dt><a class="permalink" href="#cli"><code class="Fl" id="cli">-cli</code></a></dt>
+  <dd>Use commandline interface.
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a>
+    <var class="Ar">'configuration-file'</var></dt>
+  <dd>Read configuration from 'configuration-file'.</dd>
+  <dt><a class="permalink" href="#l"><code class="Fl" id="l">-l</code></a>
+    <var class="Ar">language</var></dt>
+  <dd>Specify the language to be used.
+    <br/>
+     Overrules the language specified in 'configuration-file' (if used).
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#m"><code class="Fl" id="m">-m</code></a>
+    <var class="Ar">'mscore'</var></dt>
+  <dd>Location of MuseScore executable.
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#o"><code class="Fl" id="o">-o</code></a>
+    <var class="Ar">'output-directory'</var></dt>
+  <dd>Specify where to place files generated.
+    <br/>
+     Defaukt:
+    <dl class="Bl-tag">
+      <dt></dt>
+      <dd>Commandline interface: the current directory.</dd>
+      <dt></dt>
+      <dd>Graphical user interface: user-directory.</dd>
+    </dl>
+  </dd>
+</dl>
+<p class="Pp">Except if option -I 'index-filename' is used, a html-file for
+    every score will be generated.</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a>
+    <var class="Ar">'index-filename'</var></dt>
+  <dd>Create an indexfile with name 'index-filename' in directory
+      'output-directory' with a link to the generated html-files for the
+    scores.</dd>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
+    <var class="Ar">'index-filename'</var></dt>
+  <dd>Create an indexfile with name 'index-filename' in directory
+      'output-directory' with a link to the html-file 'ShowScore.html' to show
+      the scores.
+    <br/>
+     A html-file for each score will NOT be generated, only the other files to
+      show a score (with 'ShowScore.html').
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a></dt>
+  <dd>Preserve existing files (default).</dd>
+  <dt><a class="permalink" href="#n"><code class="Fl" id="n">-n</code></a></dt>
+  <dd>Overwrite existing files only if score is newer than existing files to be
+      generated.</dd>
+  <dt><a class="permalink" href="#r"><code class="Fl" id="r">-r</code></a></dt>
+  <dd>Replace existing files.</dd>
+</dl>
+<p class="Pp"></p>
+<p class="Pp">In case of commandline usage :</p>
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Information about processing defaults to information about files
+      generated/installed/replaced/skipped and will be send to standard
+    output.</dd>
+  <dt></dt>
+  <dd>Information about errors will be send as diagnostic messages to standard
+      error.</dd>
+</dl>
+Default is 'normal' information.
+<br/>
+ Options [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
+  <code class="Fl">-s</code>] can be used to change the amount of information.
+<p class="Pp"></p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
+  <dd>Verbose, show extensive information about processing files.</dd>
+  <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
+  <dd>Quiet, don't show detailed information about processing files.
+    <br/>
+     Only a summary will be displayed.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
+  <dd>Silent, (utterly silent) don't show any information about processing
+      files, even error messages.
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a></dt>
+  <dd>Check only, dry run which shows what should have happened.</dd>
+</dl>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="CONTEXT"><a class="permalink" href="#CONTEXT">CONTEXT</a></h1>
+Java 8+ should be installed.
+<br/>
+ Musescore should be installed (see https://musescore.org).
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="IMPLEMENTATION_NOTES"><a class="permalink" href="#IMPLEMENTATION_NOTES">IMPLEMENTATION
+  NOTES</a></h1>
+Uses :
+<dl class="Bl-tag">
+  <dt></dt>
+  <dd>Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)</dd>
+  <dt></dt>
+  <dd>Saxon-EE 10 (http://saxon.sourceforge.net)</dd>
+  <dt></dt>
+  <dd>Apache Ant 1.10.9 (https://ant.apache.org)</dd>
+</dl>
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
+  VALUES</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="FILES"><a class="permalink" href="#FILES">FILES</a></h1>
+For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
+<ul class="Bl-item">
+  <li>MyScore.metajson</li>
+  <li>MyScore_space.json</li>
+  <li>MyScore-1.png</li>
+  <li>MyScore-2.png</li>
+  <li></li>
+  <li>MyScore.ogg</li>
+  <li>MyScore.mp3</li>
+</ul>
+If
+<br/>
+is not used:
+<ul class="Bl-item">
+  <li>MyScore.html</li>
+</ul>
+will be generated.
+<p class="Pp">Creates subdirectories:</p>
+<ul class="Bl-item">
+  <li>js,</li>
+  <li>css</li>
+  <li>images</li>
+</ul>
+and installs javascript, css-stylesheet en svg-images
+<ul class="Bl-item">
+  <li>js/ms_player.js</li>
+  <li>css/ms_player.css</li>
+  <li>images/media-playback-loop.svg</li>
+  <li>images/media-playback-metronome.svg</li>
+  <li>images/media-playback-pause.svg</li>
+  <li>images/media-playback-start.svg</li>
+  <li>images/media-skip-backward.svg</li>
+  <li>images/media-skip-forward.svg</li>
+  <li>images/window-close.svg</li>
+</ul>
+<p class="Pp">If
+  <br/>
+  is used:</p>
+<ul class="Bl-item">
+  <li>js/ms_player_query.js</li>
+  <li>ShowScore.html</li>
+</ul>
+wille be installed.
+<p class="Pp"></p>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXIT_STATUS"><a class="permalink" href="#EXIT_STATUS">EXIT
+  STATUS</a></h1>
+If an error occurs return code will be non-zero.
+</section>
+<section class="Sh">
+<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
+To generate html-files for all scores in directory MyMusic and place then in
+  directory Sites :
+<ul class="Bl-item">
+  <li>m2h -d Sites MyMusic/*.mscz</li>
+</ul>
+To generate html-files for all scores in directory MyMusic and all
+  subdirectories and place then in directory Sites :
+<ul class="Bl-item">
+  <li>m2h -d Sites MyMusic/**/*.mscz</li>
+</ul>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="DIAGNOSTICS"><a class="permalink" href="#DIAGNOSTICS">DIAGNOSTICS</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="ERRORS"><a class="permalink" href="#ERRORS">ERRORS</a></h1>
+</section>
+<section class="Sh">
+<h1 class="Sh" id="LICENSE"><a class="permalink" href="#LICENSE">LICENSE</a></h1>
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International See
+  https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+</section>
+</div>
+<table class="foot">
+  <tr>
+    <td class="foot-date">February 15, 2021</td>
+    <td class="foot-os">Darwin 15.6.0</td>
+  </tr>
+</table>
+</body>
+</html>

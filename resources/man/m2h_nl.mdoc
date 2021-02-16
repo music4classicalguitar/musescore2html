@@ -1,0 +1,192 @@
+.Dd $Mdocdate$
+.Dt PROGNAME 1
+.Os
+.Sh NAME
+.Nm m2h
+.Nd (musescore2html) genereert html-bestanden voor een musescore partituur
+
+.Sh KORTE INHOUD
+m2h
+.Op Fl gui | cli
+.Op Fl C Ar 'configuratie-bestand'
+.Op Fl l Ar 'taal'
+.Op Fl m Ar 'musescore'
+.Op Fl o Ar 'uitvoermap'
+.Op Fl i Ar 'index-bestandsnaam' | Fl I Ar 'index-bestandsnaam'
+.Op Fl p | n | r
+.Op Fl v | q | s
+.Op Fl c
+.Op partituur ...
+
+.Sh OMSCHRIJVING
+Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om een MuseScore partituur als html-bestand te laten zien.
+ 
+.Pp
+Opties:
+.Bl -tag -width Ds
+.It Fl gui
+Gebruik de grafische gebruikersinterface (standaard).
+.It Fl cli
+Gebruik de opdrachtregelinterface.
+ 
+.It Fl C Ar 'configuratie-bestand'
+Lees configuratie in 'configuratie-bestand'.
+.It Fl l Ar taal
+Specificeer de te gebruiken taal.
+ Overstemt de taal gespecificeerd in 'configuratie-bestand' (indien gebruikt).
+ 
+.It Fl m Ar 'mscore'
+Locatie van het MuseScore uitvoerbaar bestand.
+ 
+.It Fl o Ar 'uitvoermap'
+Specificeerd waar de genenereerde bestanden dienen te worden geplaatst.
+ Standaard:
+.Bl -tag -width Ds
+.It
+Opdrachtregelinterface: de huidige map.
+.It
+Grafische gebruikersinterface: gebruikersmap.
+.El
+.El
+ 
+Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt voor iedere partituur een html-bestand gegenereerd.
+.Bl -tag -width Ds
+.It Fl i Ar 'index-bestandsnaam'
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
+.It Fl I Ar 'index-bestandsnaam'
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
+ Er wordt GEEN html-bestand per partituur gegenereerd, wel de andere benodigde bestanden om de partituren te laten zien (via 'ShowScore.html').
+ 
+.It Fl p
+Bewaar bestaande bestanden  (standaard).
+.It Fl n
+Overschrijf bestaande bestanden alleen als de partituur nieuwer is dan bestaande bestanden die moeten worden gegenereerd.
+.It Fl r
+Vervang bestaande bestanden.
+.El
+ 
+ 
+In het geval de opdrachtregelinterface wordt gebruikt:
+.Bl -tag -width Ds
+.It
+Informatie over het verwerken van standaards naar informatie over gegenereerde/geïnstalleerde/vervangen/overgeslagen bestanden wordt naar standaarduitvoer gestuurd.
+.It
+Informatie over fouten wordt als diagnostische berichten naar standaardfout gestuurd.
+.El
+Standaard is 'normale' informatie. 
+ Opties
+.Op Fl v | q | s
+kunnen worden gebruikt om de hoeveelheid informatie te wijzigen.
+
+.Bl -tag -width Ds
+.It Fl v
+Uitgebreid, toon uitgebreide informatie over het verwerken van bestanden.
+.It Fl q
+Beperkt, toon geen gedetailleerde informatie over het verwerken van bestanden.
+ Er wordt alleen een samenvatting getoond.
+.It Fl s
+Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen. 
+ 
+.It Fl c
+Controleer alleen, droogloop die laten zien wat er had moeten gebeuren. 
+.El
+
+.Sh CONTEXT
+Java 8+ dient te zijn geïnstalleerd.
+ Musescore dient te zijn geïnstalleerd (see https://musescore.org).
+
+.Sh OPMERKINGEN T.A.V. DE IMPLEMENTATIE
+Gebruikte bibliotheken:
+.Bl -tag -width Ds
+.It
+Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+.It
+Saxon-EE 10 (http://saxon.sourceforge.net)
+.It
+Apache Ant 1.10.9 (https://ant.apache.org)
+.El
+
+.Sh RETURN VALUES
+
+.Sh BESTANDEN
+Voor iedere partituur 'MyScore.mscz' (of 'MyScore.mscx') worden onderstaande bestanden gegenereerd:
+.Bl
+.It
+MyScore.metajson
+.It
+MyScore_space.json
+.It
+MyScore-1.png
+.It
+MyScore-2.png
+.It
+\...
+.It
+MyScore.ogg
+.It
+MyScore.mp3
+.El
+Als
+.Op Fl I Ar 'index-bestandsnaam'
+niet wordt gebruikt wordt tevens:
+.Bl
+.It
+MyScore.html
+.El
+gegenereerd.
+ 
+Creates subdirectories:
+.Bl
+.It
+js, 
+.It
+css
+.It
+images
+.El
+and installs javascript, css-stylesheet en svg-images
+.Bl
+.It
+js/ms_player.js
+.It
+css/ms_player.css
+.It
+images/media-playback-loop.svg
+.It
+images/media-playback-metronome.svg
+.It
+images/media-playback-pause.svg
+.It
+images/media-playback-start.svg
+.It
+images/media-skip-backward.svg
+.It
+images/media-skip-forward.svg
+.It
+images/window-close.svg
+.El
+.Sh EXIT STATUS
+If an error occurs return code will be non-zero.
+.Sh EXAMPLES
+To generate html-files for all scores in directory MyMusic and place then in directory Sites :
+.Bl
+.It
+m2h -d Sites MyMusic/*.mscz
+.El
+To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
+.Bl
+.It
+m2h -d Sites MyMusic/**/*.mscz
+.El
+.Sh DIAGNOSTICS
+.Sh ERRORS
+.Sh LICENSE
+Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+.\" .Sh SEE ALSO
+.\" .Sh STANDARDS
+.\" .Sh HISTORY
+.\" .Sh AUTHORS
+.\" .Sh CAVEATS
+.\" .Sh BUGS
+.\" .Sh SECURITY CONSIDERATIONS
