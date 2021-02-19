@@ -13,7 +13,7 @@
     <property name="build.dist.sub.dir" value="${prefix.filename}_${major.version}.${minor.version}"/>
 
      <target name="updateversion" description="Update version in java sources" unless="source.version">
-         <echo file="${src.dir}/musescore2html/Version.java">package musescore2html.process;
+         <echo file="${src.dir}/musescore2html/Version.java">package musescore2html;
 
 public class Version {
 	public static final String
