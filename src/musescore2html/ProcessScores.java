@@ -33,7 +33,6 @@ public class ProcessScores implements Callable<Integer>  {
 	private ProcessData processData;
 	private Translations translations;
 	private Arguments arguments;
-	private boolean isCaseSensitive=false;
 
 	private final String jarDirectory=this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 	private final String rscDirectory=(new File(jarDirectory)).getParentFile().getParent();
@@ -42,9 +41,6 @@ public class ProcessScores implements Callable<Integer>  {
 
 	private static final String tempDirectory=System.getProperty("java.io.tmpdir");
 
-	public static enum FILE_OPTION { ONLY_IF_NEW, ONLY_IF_NEWER, REPLACE }
-	FILE_OPTION fileOption = FILE_OPTION.ONLY_IF_NEW;
-	public static enum INDEX_FILE_OPTION { HTML_ONLY, HTML_AND_INDEX, INDEX_ONLY }
    	String translateCheckOnly="";
    	private int scores_processed=0, scores_skipped=0, files_generated=0, files_installed=0, directories_created=0;
 
@@ -81,7 +77,10 @@ public class ProcessScores implements Callable<Integer>  {
 		codes=codes|code;
 		if (code != 0) errors++;
 		try {
-			if (logLevel.ordinal()<=arguments.logLevel.ordinal()) processData.addData(message,code);
+			if (logLevel.ordinal()<=arguments.logLevel.ordinal()) {
+				if (processData == null) arguments.logging.add(new Arguments.Logging(message, code));
+				else processData.addData(message,code);
+			}
 		} catch (InterruptedException iexc) {
 			iexc.printStackTrace();
 			System.err.println(translations.getKey("Error")+": '"+iexc.getMessage());
@@ -89,7 +88,7 @@ public class ProcessScores implements Callable<Integer>  {
 	}
 
 	private String validateMuseScore() {
-		String foundMuseScore[]=MuseScore2HtmlUtils.findItems(arguments.museScore, MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+		String foundMuseScore[]=MuseScore2HtmlUtils.findItems(arguments.museScore, MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
 		if (foundMuseScore.length==0) {
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"musescore.not.found", arguments.museScore}),256);
 			return "?";
@@ -115,7 +114,7 @@ public class ProcessScores implements Callable<Integer>  {
 	}
 
 	private String validateOutputDirectory() {
-		String foundDirectories[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory, MuseScore2HtmlUtils.TYPE.DIRECTORY, isCaseSensitive);
+		String foundDirectories[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory, MuseScore2HtmlUtils.TYPE.DIRECTORY, arguments.isCaseSensitive);
 		if (foundDirectories.length==0) {
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"outputdirectory.not.found",arguments.outputDirectory}),256);
 			return "?";
@@ -138,31 +137,26 @@ public class ProcessScores implements Callable<Integer>  {
 	}
 
 	private void validateIndexFile() {
-		switch (arguments.indexFileOption) {
-			case HTML_ONLY:
-				break;
-			default:
-				if (arguments.indexFileName==null||arguments.indexFileName.equals("")) {
-					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.specified"}),2048);					
-				} else {
-					File f = new File(arguments.indexFileName);
-					if (f.getParent()!=null) {
-						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.afilename",arguments.indexFileName}),1);
-						return;
-					}
-					String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+arguments.indexFileName,
-					MuseScore2HtmlUtils.TYPE.DIRECTORY, isCaseSensitive);
-					if (foundFiles.length>1) {
-						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.unique",arguments.indexFileName}),512);
-						f = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
-						if (f.exists()) {
-							if (!f.canWrite()) {
-								processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"file.not.writable",arguments.indexFileName}),2048);
-							}
-						}
+		if (arguments.generateIndexFileOption==Arguments.GENERATE_INDEX_FILE_OPTION.NONE) return ;
+		if (arguments.indexFileName==null||arguments.indexFileName.equals("")) {
+			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.specified"}),2048);					
+		} else {
+			File f = new File(arguments.indexFileName);
+			if (f.getParent()!=null) {
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.afilename",arguments.indexFileName}),1);
+				return;
+			}
+			String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+arguments.indexFileName,
+			MuseScore2HtmlUtils.TYPE.DIRECTORY, arguments.isCaseSensitive);
+			if (foundFiles.length>1) {
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.not.unique",arguments.indexFileName}),512);
+				f = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
+				if (f.exists()) {
+					if (!f.canWrite()) {
+						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"file.not.writable",arguments.indexFileName}),2048);
 					}
 				}
-				break;
+			}
 		}
 	}
 
@@ -203,7 +197,7 @@ public class ProcessScores implements Callable<Integer>  {
 				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.extension.error", scoreParts[0],scoreParts[3]}),8);
 				break;
 		}
-		String foundScores[]=MuseScore2HtmlUtils.findItems(scoreParts[0], MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+		String foundScores[]=MuseScore2HtmlUtils.findItems(scoreParts[0], MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
 		if (foundScores.length==0) {
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.not.found",scoreParts[0]}),16);
 			return;
@@ -221,7 +215,7 @@ public class ProcessScores implements Callable<Integer>  {
     	if (tgt.exists()) {
  			long srcLastModified = src.lastModified();
  			long tgtLastModified = tgt.lastModified();
-			if (fileOption==FILE_OPTION.REPLACE||(fileOption==FILE_OPTION.ONLY_IF_NEWER&&srcLastModified>tgtLastModified)) {
+			if (arguments.fileOption==Arguments.FILE_OPTION.REPLACE||(arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEWER&&srcLastModified>tgtLastModified)) {
  				if (!tgt.canWrite()) {
 					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"file.not.writable",tgtFile}),2048);
 				}
@@ -235,7 +229,7 @@ public class ProcessScores implements Callable<Integer>  {
 			String s;
 			boolean action=false;
 			if (e==imageExtension) s="-*"; else s=""; // s="-[0-9]"; else s="";
-			String foundFiles[]=MuseScore2HtmlUtils.findItems(outputDirectory+File.separator+fileName+s+extensions[e], MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+			String foundFiles[]=MuseScore2HtmlUtils.findItems(outputDirectory+File.separator+fileName+s+extensions[e], MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
 			if (foundFiles.length>0) {
 				for (int i=0;i<foundFiles.length;i++) {
 					action = action || validateAction(score, foundFiles[i]);
@@ -269,7 +263,7 @@ public class ProcessScores implements Callable<Integer>  {
 		}
 		process.destroy();
 		if (extension.equals(".png")) {
-			String foundFiles[]=MuseScore2HtmlUtils.findItems(outputDirectory+File.separator+name+"-*"+extension, MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+			String foundFiles[]=MuseScore2HtmlUtils.findItems(outputDirectory+File.separator+name+"-*"+extension, MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
  			files_generated+=foundFiles.length;
 		} else files_generated++;
 	}
@@ -295,7 +289,7 @@ public class ProcessScores implements Callable<Integer>  {
     }
 
     private void generateIndexHtml(String fileName) throws IOException {
-    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
     	if (foundFiles.length==0) {
     		processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.no.files", arguments.outputDirectory}),2048);
     		return;
@@ -325,7 +319,7 @@ public class ProcessScores implements Callable<Integer>  {
     }
 
     private void generateIndexHtmlLinks2HtmlFiles(String fileName) throws IOException {
-    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
     	if (foundFiles.length==0) {
     		processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.no.files", arguments.outputDirectory}),2048);
     		return;
@@ -392,7 +386,7 @@ public class ProcessScores implements Callable<Integer>  {
     			String srcFile=insDirectory+File.separator+files2copy[i], tgtFile=outputDirectory+File.separator+files2copy[i];
     			File src = new File(srcFile), tgt = new File(tgtFile);
     			if (tgt.exists()) {
-					if (fileOption==FILE_OPTION.ONLY_IF_NEW||fileOption==FILE_OPTION.ONLY_IF_NEWER&&src.lastModified()<=tgt.lastModified()) {
+					if (arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEW||arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEWER&&src.lastModified()<=tgt.lastModified()) {
 						processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {actionPart+".already.exists"+translateCheckOnly,files2copy[i]}),0);
 						continue;
 					}
@@ -436,13 +430,13 @@ public class ProcessScores implements Callable<Integer>  {
 			if (e==imageExtension) sf="-*"; else sf="";
 			String foundFiles[];
 			String action="file.generated";
-			foundFiles=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+fileName+sf+extensions[e], MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+			foundFiles=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+fileName+sf+extensions[e], MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
 			if (foundFiles.length>0) {
 				action="file.replaced";
-				if (fileOption==FILE_OPTION.ONLY_IF_NEW) {
+				if (arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEW) {
 					processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"file.already.exists"+translateCheckOnly,fileName+sf+extensions[e]}),0);
 					continue;
-				} else if (fileOption==FILE_OPTION.ONLY_IF_NEWER) {
+				} else if (arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEWER) {
 					boolean scoreIsNewer = false;
 					for (int i=0; i<foundFiles.length; i++) {
 						scoreIsNewer = scoreIsNewer || validateAction(score, foundFiles[i]);
@@ -481,23 +475,20 @@ public class ProcessScores implements Callable<Integer>  {
 		} else scores_skipped++;
     }
 
-	public ProcessScores(ProcessData processData, Arguments arguments) {
-		this.processData = processData;
-		this.translations = arguments.translations;
+	public ProcessScores(Arguments arguments, ProcessData processData) {
 		this.arguments = arguments;
+		this.translations = arguments.translations;
+		this.processData = processData;
 	}
 
-	public Integer call() {
+	public int validateArguments() {
 		try {
    			translateCheckOnly = arguments.checkOnly?".checkonly":"";
-			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("info.generate.start"),0);
 			if (arguments.errors>0) {
 				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
 				processData.setFinished();
 				return errors;
 			}
-
-			fileOption=arguments.fileOption;
 
 			arguments.museScore=validateMuseScore();
 			//if (errors>0) { processData.setFinished(); return errors; }
@@ -509,7 +500,74 @@ public class ProcessScores implements Callable<Integer>  {
 
 			ArrayList<String> scores = new ArrayList<String>();
 			for (int i=0;i<arguments.scores.size();i++) {
-				String result[] = MuseScore2HtmlUtils.findItems(arguments.scores.get(i), MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+				String result[] = MuseScore2HtmlUtils.findItems(arguments.scores.get(i), MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
+				if (result.length==0) {
+					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.not.found",arguments.scores.get(i)}), 4);
+				} else {
+					scores.addAll(Arrays.asList(result));
+				}
+			}
+
+			/* Remove duplicate scores which may be caused by a caseinsensitive filesystem e.g. parameters : b*.mscz and B*.mscz */
+			ArrayList<String> uniqueScores = new ArrayList<String>();
+			for (int i=0;i<scores.size();i++) {
+				boolean found=false;
+				for (int j=0;j<uniqueScores.size(); j++) {
+					if (scores.get(i).equals(uniqueScores.get(j))) { found=true; break; }
+				}
+				if (!found) uniqueScores.add(scores.get(i));
+			}
+			scores=uniqueScores;
+			arguments.scores = uniqueScores;
+
+			ArrayList<String[]> scoreParts = new ArrayList<String[]>();
+			for (int i=0;i<scores.size();i++) {
+				scoreParts.add(splitPath(scores.get(i)));
+			}
+
+			for (int i=0;i<scoreParts.size()-1;i++) {
+				for (int j=i+1;j<scoreParts.size();j++) {
+					if (scoreParts.get(i)[2].equals(scoreParts.get(j)[2])) {
+						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.duplicate.names", scoreParts.get(i)[0], scoreParts.get(j)[0]}), 5);
+					}
+				}
+			}
+			//if (errors>0) { processData.setFinished(); return errors; }
+
+			for (int i=0;i<scoreParts.size();i++) {
+				validateScore(scoreParts.get(i));
+			}
+		} catch (InterruptedException exc) {
+			exc.printStackTrace();
+			System.err.println(translations.translate(new String[] {"exception.error", exc.getMessage()}));
+		}
+		return errors;
+	}
+
+	public Integer call() {
+		try {
+			int validateErrors = validateArguments();
+			if (validateErrors>0) { processData.setFinished(); return validateErrors; }
+			
+   			translateCheckOnly = arguments.checkOnly?".checkonly":"";
+			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("info.generate.start"),0);
+			if (arguments.errors>0) {
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
+				processData.setFinished();
+				return errors;
+			}
+
+			arguments.museScore=validateMuseScore();
+			//if (errors>0) { processData.setFinished(); return errors; }
+
+			arguments.outputDirectory=validateOutputDirectory();
+			//if (errors>0) { processData.setFinished(); return errors; }
+
+			validateIndexFile();
+
+			ArrayList<String> scores = new ArrayList<String>();
+			for (int i=0;i<arguments.scores.size();i++) {
+				String result[] = MuseScore2HtmlUtils.findItems(arguments.scores.get(i), MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
 				if (result.length==0) {
 					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.not.found",arguments.scores.get(i)}), 4);
 				} else {
@@ -562,7 +620,21 @@ public class ProcessScores implements Callable<Integer>  {
 				}
 			}
 
-			String foundFiles[] = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, isCaseSensitive);
+			String foundFiles[] = new String[0];;
+			if (arguments.generateIndexAll) {
+				foundFiles = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
+			} else {
+				String metajsonFiles[] = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
+				if (metajsonFiles.length>0) {
+					ArrayList<String> htmlFiles = new ArrayList<String>();
+					for (int i=0; i<metajsonFiles.length; i++) {
+						String htmlFile = metajsonFiles[i].replaceAll(".metajson", ".html");
+						File tgt = new File(htmlFile);
+						if (tgt.exists()) htmlFiles.add(htmlFile);
+					}
+					foundFiles = htmlFiles.toArray(new String[0]);
+				}
+			}
 
 			if (foundFiles.length>0) {
 				try {
@@ -576,14 +648,14 @@ public class ProcessScores implements Callable<Integer>  {
 				}
 			}
 
-			if (arguments.indexFileName!=null) {
+			if (arguments.generateIndexFileOption!=Arguments.GENERATE_INDEX_FILE_OPTION.NONE&&arguments.indexFileName!=null) {
 				File src = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
 				String action = "indexfile.generated";
 				boolean createIndexFile = false;
 				if (src.exists()) {
-					if (fileOption==FILE_OPTION.ONLY_IF_NEW) {
+					if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEW) {
 						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.already.exists"+translateCheckOnly,arguments.indexFileName}),0);
-					} else if (fileOption==FILE_OPTION.ONLY_IF_NEWER) {
+					} else if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEWER) {
 						long srcLastModified = src.lastModified();
 						if (foundFiles.length>0) {
 							for (int i=0; i<foundFiles.length; i++) {
@@ -597,7 +669,7 @@ public class ProcessScores implements Callable<Integer>  {
 							}
 						}
 						if (foundFiles.length>0&&!createIndexFile) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.is.newer"+translateCheckOnly,arguments.indexFileName}), 0);
-					} else if (fileOption==FILE_OPTION.REPLACE) {
+					} else if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_REPLACE) {
 						if (foundFiles.length>0) {
 							action="indexfile.replaced";
 							createIndexFile = true;
@@ -608,11 +680,11 @@ public class ProcessScores implements Callable<Integer>  {
 				if (createIndexFile) {
 					if (!arguments.checkOnly) {
 						try {
-							switch (arguments.indexFileOption) {
-								case HTML_AND_INDEX:
+							switch (arguments.generateIndexFileOption) {
+								case INDEX_AND_HTML:
 									generateIndexHtmlLinks2HtmlFiles(arguments.outputDirectory+File.separator+arguments.indexFileName);
 									break;
-								case INDEX_ONLY:
+								case INDEX_NO_HTML:
 									generateIndexHtml(arguments.outputDirectory+File.separator+arguments.indexFileName);
 									copyFiles(arguments.outputDirectory, files2copyForIndexFile, "indexfile");
 									break;

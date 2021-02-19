@@ -32,7 +32,7 @@ public class ProcessData {
 	}
 
 	public synchronized boolean isFinished() throws InterruptedException {
-		return finished&&list.size()==0;
+		return finished&&(list.size()==0);
 	}
 
 	public synchronized boolean hasData() throws InterruptedException {
@@ -41,7 +41,7 @@ public class ProcessData {
 
 	public synchronized Data[] getData() throws InterruptedException {
 		synchronized(this) {
-			while (!finished&&list.size() == 0) wait();
+			while (list.size() == 0) wait();
 			Data data[] = list.toArray(new Data[0]);
 			list.clear();
 			notify();

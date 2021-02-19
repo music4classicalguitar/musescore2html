@@ -104,7 +104,8 @@ public class Version {
     <target name="clean" description="Clean" >
         <delete dir="${build.dir}"/>        
         <delete dir="${dist.dir}"/>        
-    </target>
+        <delete file="${src.dir}/musescore2html/Version.java"/>        
+   </target>
     
     <target name="all" description="Create all" depends="jar">
     </target>

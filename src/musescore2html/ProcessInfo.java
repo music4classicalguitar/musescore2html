@@ -23,6 +23,7 @@ class ProcessInfo implements Callable<Integer> {
 						else System.out.println(data[i].message);
 					}
 				}
+				
 			}
 		} catch (InterruptedException iexc) {
 			iexc.printStackTrace();

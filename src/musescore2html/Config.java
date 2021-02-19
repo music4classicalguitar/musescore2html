@@ -19,6 +19,7 @@ public class Config {
 	public static enum OSId { WINDOWS, OSX, UNIX };
 	private OSId osId;
 	private String language;
+	private boolean hasCaseSensitiveFileSystem = MuseScore2HtmlUtils.isCaseSensitiveFileSystem(FileSystems.getDefault().getPath(System.getProperty("java.io.tmpdir")));
 
 	private static final String userName = System.getProperty("user.name");
 	private static final String userHomeDirectory = System.getProperty("user.home");
@@ -155,6 +156,10 @@ public class Config {
 
 	public Translations getTranslations() {
 		return translations;
+	}
+
+	public boolean isCaseSensitive() {
+		return hasCaseSensitiveFileSystem;
 	}
 
 	public String getLanguage() {

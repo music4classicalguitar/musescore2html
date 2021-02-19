@@ -14,10 +14,15 @@ esac
 #-------------------------------------------------------------------------------
 
 cd "${BASE_DIR}"
+
 DIR=`dirname "${BASE_DIR}"`
 BUILD_DIR=`dirname "${DIR}"`"/build"
 JAR="${BUILD_DIR}/musescore2html.jar"
 CLASS="musescore2html.Translations"
+DIR=`dirname "${DIR}"`
+
+cd "${DIR}"
+ant dist
 
 if [ ! -f "${JAR}" ]
 then

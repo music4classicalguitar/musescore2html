@@ -5,7 +5,11 @@ import musescore2html.Translations;
 import musescore2html.Config;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.FlowLayout;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
@@ -19,18 +23,19 @@ public class Gui extends JFrame {
 	private void setUp() {
 		//Create and set up the window.
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());
-
+		
+		setLayout(new FlowLayout());
 		//Add content to the window.
-		//jframe.getContentPane().add(mainPanel.getJPanel());
-		getContentPane().add(new MainPanel(arguments));
-		//System.out.println("MenuBar arguments");
-		//menuBar = new MenuBar(arguments);
-		//setJMenuBar(menuBar.mainJMenuBar);
-		//setJMenuBar(mainJMenuBar);
-
-		//Display the window.
+		MainPanel mainpanel = new MainPanel(arguments);
+		getContentPane().add(mainpanel);	
 		pack();
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+ 		int x = (int) ((dimension.getWidth() - this.getContentPane().getWidth()) / 2);
+ 		int y = (int) ((dimension.getHeight() - this.getContentPane().getHeight()) / 2);
+ 		setLocation(x, y);
+		
+		//Display the window.
 		setVisible(true);
 	}
 

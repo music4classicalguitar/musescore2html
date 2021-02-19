@@ -1,28 +1,6 @@
 window.onerror = function(message, source, lineno, colno, error) {
-	alert("Message : " + message + "\nSource : " + source + "\nLine : " + lineno + "\nCol : " + colno + "\nError : " + error);
+	window.alert("Message : " + message + "\nSource : " + source + "\nLine : " + lineno + "\nCol : " + colno + "\nError : " + error);
 };
-
-/*
-function findScreenCoords(mouseEvent)
-{
-  var xpos;
-  var ypos;
-  if (mouseEvent)
-  {
-    //FireFox
-    xpos = mouseEvent.screenX;
-    ypos = mouseEvent.screenY;
-  }
-  else
-  {
-    //IE
-    xpos = window.event.screenX;
-    ypos = window.event.screenY;
-  }
-  console.log("x "+xpos + " y " + ypos);
-}
-document.onclick = findScreenCoords;
-*/
 
 function urlOfScript(jsfile) {
 	var scriptElements = document.getElementsByTagName('script');
@@ -110,34 +88,12 @@ if (!("ms_player" in window)) {
 			this.image_metronome="images/media-playback-metronome.svg";
 			this.image_loop="images/media-playback-loop.svg";
 			this.image_close="images/window-close.svg";
+			this.stylesheet="css/ms_player.css";
 		};
 
-		/*
-		MuseScorePlayer.prototype.getPosition=function(el) {
-    		var _x = 0;
-   			var _y = 0;
-   			var e=el;
-    		while (el) {
-        		_x += el.offsetLeft;// - el.scrollLeft;
-        		_y += el.offsetTop;// - el.scrollTop;
-       		 	el = el.parentElement;
-    		}
-    		//console.log("pos "+e.nodeName+" id "+e.getAttribute("id")+" top "+_y+" left "+_x);
-   			return { top: _y, left: _x };
-		}
-
-		MuseScorePlayer.prototype.getPosition=function(el) {
-			var rect = el.getBoundingClientRect();
-			console.log("pos "+el.nodeName+" top "+rect.top+" left "+rect.left);
-			//if (includeScroll) return { top: rect.top+window.scrollY , left: rect.left+window.scrollX };
-			//else 
-			return { top: rect.top , left: rect.left };
-		}
-		*/
 		MuseScorePlayer.prototype.getPosition=function(el) {
 			var rect = el.getBoundingClientRect();
 			return { top: rect.top , left: rect.left };
-			//return { top: rect.y , left: rect.x };
 		}
 
 		MuseScorePlayer.prototype.setAudioPosition=function(_this) {
@@ -174,8 +130,6 @@ if (!("ms_player" in window)) {
 			_this.score_audio.currentTime=_this.time_space.time[s].position/1000;
 			_this.audioPosition.value=Math.ceil(_this.score_audio.currentTime/_this.score_audio.duration*1000);
 			_this.setAudioPosition(_this);
-			//_this.setMeasure(_this, m);
-			//_this.updateSlider(_this);
 		}
 		
 		MuseScorePlayer.prototype.isScrolledIntoView=function(_this, elem) {
@@ -187,10 +141,6 @@ if (!("ms_player" in window)) {
 				pw=parseFloat(s.width);						
 				ph=parseFloat(s.height);
 			}
-
-			//var s=window.getComputedStyle(_this.ms_player_parent);
-			//var pw=parseFloat(s.width);						
-			//var ph=parseFloat(s.height);						
 			var rect = elem.getBoundingClientRect();
 			return (0<rect.left && rect.left+rect.width<pw && 0<rect.top-200 && rect.top+rect.height<ph);
 		}
@@ -217,15 +167,10 @@ if (!("ms_player" in window)) {
 			_this.elid=m;
 			var e=_this.getMeasureElement(_this, m);
 			if (e) {				
-				//e.style.cssText.opacity="0.2";
-				//e.style.cssText["background-color"]="red";
 				e.style.opacity="0.2";
 				e.style["background-color"]="red";
 				var ps = _this.ms_score_div.getBoundingClientRect();
 				var pe = e.getBoundingClientRect();
-				//var ps=_this.getPosition(_this.ms_score_div, false);
-				//var pe=_this.getPosition(e, true);
-				console.log(_this.score_name+" set measure "+m+" id "+e.getAttribute("id")+" "+ps.top+" "+pe.top+" "+e.style.top +" scroll to "+(pe.top-ps.top));
 				if (!_this.isScrolledIntoView(_this, e)) {
 					_this.ms_score_div.scrollTo(0,parseInt(e.style.top)-50);
 				}
@@ -235,14 +180,13 @@ if (!("ms_player" in window)) {
 		MuseScorePlayer.prototype.clearMeasure=function(_this, m) {
 			var e=_this.getMeasureElement(_this, m);
 			if (e) {
-				//e.style.cssText.opacity=0;
-				//	e.style.cssText["background-color"]="none";
 				e.style.opacity=0;
 				e.style["background-color"]="none";
 			}
 		}
 
 		MuseScorePlayer.prototype.resize=function(_this) {
+				console.log("Loaded " + _this.loaded);
 			if (_this.loaded < 3) {
 				console.log("Loaded " + _this.loaded);
 				return;
@@ -264,11 +208,8 @@ if (!("ms_player" in window)) {
 			var scaledHeight=Math.ceil(imageScale*_this.firstScoreImage.naturalHeight)+10;
 			var computedHeight=Math.ceil(ph - offset);
 			var h = scaledHeight<computedHeight?scaledHeight:computedHeight;
-			var minHeight=200;
-			//h=h<minHeight?minHeight:h;
-			console.log(_this.score_name+" resize pw "+pw+" ph "+ph+" p.top "+p.top+" h "+h+" "+_this.score_name+" imageScale "+imageScale+" "+scaledHeight+"<?"+computedHeight);						
+					
 			_this.ms_score_div.style.cssText="height : "+h+"px";
-			//_this.ms_player.cssText="height : "+h+"px";
 			_this.setMeasureDivs(_this, false);
 			_this.setMeasure(_this, _this.elid);
 		}
@@ -321,14 +262,12 @@ if (!("ms_player" in window)) {
 
 		MuseScorePlayer.prototype.togglePlay=function(_this) {
 			if (!_this.score_audio.paused) {
-				//if (_this.loopIsSet)
 				_this.audioIsPlaying=false;
 				_this.score_audio.pause();
 				_this.buttonPlayPause.src = _this.image_play;
 				if (_this.rafId) cancelAnimationFrame(_this.rafId);
 			} else {
 				_this.score_audio.play();
-				//if (_this.loopIsSet)
 				_this.audioIsPlaying=true;
 				_this.buttonPlayPause.src = _this.image_pause;
 				_this.rafId = requestAnimationFrame(function(timeStamp) {
@@ -344,13 +283,7 @@ if (!("ms_player" in window)) {
 
 		MuseScorePlayer.prototype.setOptions=function(_this) {
 			if (_this.score_options) {
-				/*
-				for (const key in _this.score_options) {
-					console.log(`${key}: ${_this.score_options[key]}`);
-				}
-				*/
 				if (_this.score_options.tagId) {
-					//console.log("setOptions "+_this.score_name+" '"+_this.score_options.tagId+"'");
 					_this.ms_player_parent = document.getElementById(_this.score_options.tagId);
 					if (_this.ms_player_parent===null) window.alert("Element with id '"+_this.score_options.tagId+"' not found.");
 					if (_this.ms_player_parent.nodeName.toLowerCase()==="body") _this.ms_player_parent_is_body=true;
@@ -366,6 +299,7 @@ if (!("ms_player" in window)) {
 					_this.image_metronome=_this.score_path+_this.image_metronome;
 					_this.image_loop=_this.score_path+_this.image_loop;
 					_this.image_close=_this.score_path+_this.image_close;
+					_this.stylesheet=_this.score_path+_this.stylesheet;
 				}
 			}
 		}
@@ -428,9 +362,9 @@ if (!("ms_player" in window)) {
 					console.log("Loop measure ["+_this.loopMeasureStart+"-"+_this.loopMeasureEnd+
 				"] audio ["+_this.loopAudioStart+"-"+_this.loopAudioEnd+"]");
 				} else {
-					alert("Loop error, first is set: "+firstIsSet+", last is set: "+lastIsSet+" ["+_this.loopStartElement.value+"-"+_this.loopEndElement.value+"]");
+					window.alert("Loop error, first is set: "+firstIsSet+", last is set: "+lastIsSet+" ["+_this.loopStartElement.value+"-"+_this.loopEndElement.value+"]");
 				}
-			} else alert(message);
+			} else window.alert(message);
 		}
 
 		MuseScorePlayer.prototype.clearLoop=function(_this) {
@@ -469,7 +403,6 @@ if (!("ms_player" in window)) {
 		}
 
 		MuseScorePlayer.prototype.createPlayer=function(_this) {
-			//console.log("createPlayer "+_this.score_name);
 			var controls, div, span, hr, br, label;
 
 			controls = document.createElement("div");
@@ -568,26 +501,9 @@ if (!("ms_player" in window)) {
 			controls.appendChild(_this.audioPosition);
 			_this.ms_player.appendChild(controls);
 			_this.ms_player.appendChild(br);
-			var p = _this.getPosition(br);
 
-			/*
-			var pw, ph;
-			if (_this.ms_player_parent_is_body) {
-				//pw = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-				ph = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			} else {
-				var s=window.getComputedStyle(_this.ms_player_parent);
-				//pw=parseFloat(s.innerWidth);						
-				ph=parseFloat(s.height);
-			}
-			var h = ph - p.top - 50;
-			//imageNaturalHeight=_this.firstScoreImage.naturalHeight;
-			console.log(_this.score_name+" p.top "+p.top+" h "+h);
-			*/
 			_this.ms_score_div = document.createElement("div");
 			_this.ms_score_div.classList.add("ms_score_div");
-			//_this.ms_score_div.style.cssText.height = h + "px";
-			//_this.ms_score_div.height = h;// + "px";
 			_this.ms_player.appendChild(_this.ms_score_div);
 			
 			window.addEventListener("resize", function() {
@@ -617,7 +533,6 @@ if (!("ms_player" in window)) {
 		MuseScorePlayer.prototype.getImage=function(_this, n) {
 			var elements=_this.ms_score_div.childNodes;
 			for (var e=0;e<elements.length;e++) {
-				//console.log("getImage "+n+" "+elements[e].nodeName+" "+elements[e].getAttribute("id"));
 				if (elements[e].getAttribute("id")!==null&&elements[e].getAttribute("id").substr(0,10)=="container_") {
 					var items=elements[e].childNodes;
 					for (var i=0;i<items.length;i++) {
@@ -632,7 +547,6 @@ if (!("ms_player" in window)) {
 		}
 
 		MuseScorePlayer.prototype.setMeasureDivs=function (_this, create) {
-			//var img=_this.getImage(_this, 1);
 			if (create) {
 				if (_this.firstScoreImage===null) {
 					_this.loadRaf = requestAnimationFrame(function(timeStamp) {
@@ -645,7 +559,6 @@ if (!("ms_player" in window)) {
 			}
 			var s = window.getComputedStyle(_this.firstScoreImage);
 			var scoreWidth = parseFloat(s.width);
-			//var p=0;
 			imageScale = scoreWidth/_this.firstScoreImage.naturalWidth;
 			for (var i=0;i<_this.time_space.space.length;i++) {
 				var space = _this.time_space.space[i];
@@ -654,7 +567,6 @@ if (!("ms_player" in window)) {
 				var pc=_this.getPosition(container);
 				var ps=_this.getPosition(_this.ms_score_div);
 				var pi=_this.getPosition(img);
-				//if (p!=space.page) { console.log(_this.score_name+" pi.top "+pi.top+" pc.top "+pc.top+" ps.top "+ps.top); p=space.page;}
 				var offset=pi.top-ps.top;
 				var div=null;
 				var f = 12;
@@ -698,7 +610,7 @@ if (!("ms_player" in window)) {
 				link.rel="stylesheet";
 				link.type="text/css";
 				link.id="ms_player_style";
-				link.href="css/ms_player.css";
+				link.href=_this.stylesheet;
 				document.getElementsByTagName("head")[0].appendChild(link);
 			}
 			
@@ -711,6 +623,7 @@ if (!("ms_player" in window)) {
 		}
 		
 		MuseScorePlayer.prototype.isLoaded=function (_this) {
+			console.log("isloaded "+_this.loaded);
 			if (_this.errors) {
 				_this.ms_player.removeChild(_this.ms_loader);
 				if (_this.errorMessage!="") _this.ms_player.innerHTML=_this.errorMessage;
@@ -724,15 +637,6 @@ if (!("ms_player" in window)) {
 					_this.loaded++;
 				}
 			}
-			if (!_this.firstScoreImageReady) {
-				if (_this.firstScoreImage !== null) {
-					if (_this.firstScoreImage.naturalHeight !== Infinity) {
-						_this.firstScoreImageReady = true;
-						_this.loaded++;
-					}
-				}
-			}
-			//console.log("Loaded :"+_this.loaded);
 			switch (_this.loaded) {
 				case 0:
 				case 1:
@@ -742,6 +646,7 @@ if (!("ms_player" in window)) {
 					});
 					return;
 				case 3:
+					console.log("isloaded images "+_this.loaded);
 					_this.ms_loader.remove();
 					_this.createPlayer(_this);
 					var p = _this.info.pages;
@@ -763,23 +668,36 @@ if (!("ms_player" in window)) {
 						}
 						if (i===1) _this.firstScoreImage=img;
 					}
+					_this.loaded++;
 					_this.loadRaf = requestAnimationFrame(function(timeStamp) {
 						_this.isLoaded(_this);
 					});
 					return;
 				case 4:
-					_this.setMeasureDivs(_this, true);
-					_this.setMeasure(_this, 0);
-					_this.resize(_this);
-					console.log("Ready to play "+_this.score_name);
-					//var e=_this.getMeasureElement(_this, 0);
-					//console.log("Element "+e.style.cssText);
-					break;
+					if (!isNaN(_this.firstScoreImage.naturalWidth) && _this.firstScoreImage.naturalWidth>0) {		
+						_this.setMeasureDivs(_this, true);
+						_this.setMeasure(_this, 0);
+						_this.resize(_this);
+						console.log("Ready to play "+_this.score_name);
+						return;
+					}
+					_this.loadRaf = requestAnimationFrame(function(timeStamp) {
+						_this.isLoaded(_this);
+					});
+					return;
 			}
+		}
+
+		MuseScorePlayer.prototype.loadJSONError=function (e) {
+			_this.errors++;
+			_this.errorMessage="Error loading JSON file";
+			window.console.log(_this.errorMessage);
 		}
 
 		MuseScorePlayer.prototype.loadJSON=function (_this, url, callback) {
 			var req = new XMLHttpRequest();
+			req.addEventListener("error", _this.LoadJSONError);
+			req.addEventListener("abort", _this.LoadJSONError);
 			req.overrideMimeType("application/json");
 			req.open('GET', url, true);
 			req.onreadystatechange = function() {
@@ -792,8 +710,9 @@ if (!("ms_player" in window)) {
 							callback(req.responseText);
 							break;
 						default:
-							alert("url " + url + " status " + status + " : " + req.statusText);
+							window.alert("url " + url + " status " + status + " : " + req.statusText);
 							_this.errors++;
+							_this.errorMessage = "url " + url + " status " + status + " : " + req.statusText;
 							break;
 					}
 				}
@@ -802,7 +721,6 @@ if (!("ms_player" in window)) {
 		}
 
 		MuseScorePlayer.prototype.onAudioError = function(_this, e) {
-			//console.log("Event "+JSON.stringify(e.target));
 			if (!e.target.error.code===undefined) switch (e.target.error.code) {
      			case e.target.error.code.MEDIA_ERR_ABORTED:
        				_this.errorMessage="Aborted the audio playback.";
@@ -838,6 +756,16 @@ if (!("ms_player" in window)) {
 			_this.score_options = options;
 			_this.init(_this);
 
+			var source_ogg=document.createElement("source");
+			source_ogg.src=_this.score_path+name+".mp3";
+			source_ogg.type="audio/mpeg";
+			_this.score_audio.appendChild(source_ogg);
+
+			source_ogg.addEventListener("error", function(e) {				
+				_this.errors++;
+				_this.errorMessage="Audio source error: "+this.src+" "+JSON.stringify(e.currentTarget);
+			});
+
 			var source_mp3=document.createElement("source");
 			source_mp3.src=_this.score_path+name+".mp3";
 			source_mp3.type="audio/mpeg";
@@ -846,42 +774,46 @@ if (!("ms_player" in window)) {
 			source_mp3.addEventListener("error", function(e) {				
 				_this.errors++;
 				_this.errorMessage="Audio source error: "+this.src+" "+JSON.stringify(e.currentTarget);
-				alert("Audio error");
-			});
-
-			var source_ogg=document.createElement("source");
-			source_ogg.src=_this.score_path+name+".ogg";
-			source_ogg.type="audio/ogg";
-			_this.score_audio.appendChild(source_ogg);
-
-			source_ogg.addEventListener("error", function(e) {				
-				_this.errors++;
-				_this.errorMessage="Audio source error: "+this.src+" "+JSON.stringify(e.target);
-				//alert("Audio error");
 			});
 			
 			_this.score_audio.addEventListener("error", function(e) {				
 				_this.errors++;
 				_this.errorMessage="Audio error: "+this.src+" "+JSON.stringify(e.currentTarget);
-				alert("Audio error");
 			});
-/*
-	*/		
+
 
 			_this.loadRaf = requestAnimationFrame(function(timeStamp) {
 				_this.isLoaded(_this);
 			});
 
 			_this.loadJSON(_this, _this.score_path+name + ".metajson", function(response) {
-				_this.info=JSON.parse(response);
-				_this.loopMeasureStart=0;
-				_this.loopMeasureEnd=_this.info.measures;
-				_this.loaded++;
+				try {
+					_this.info=JSON.parse(response);
+					_this.loopMeasureStart=0;
+					_this.loopMeasureEnd=_this.info.measures;
+					_this.loaded++;
+				} catch (error) {
+					_this.errors++;
+					_this.errorMessage="Error loading "+_this.score_path+name + ".metajson";
+					if (window.location.protocol == "file:") {
+						_this.errorMessage	+=" Your browser might not allow local files."+
+							"Place your files on a webserver or disable local file restrictions (not advisable).";
+					}
+				}
 			});
 
 			_this.loadJSON(_this, _this.score_path+name + "_space.json", function(response) {
-				_this.time_space=JSON.parse(response);
-				_this.loaded++;
+				try {
+					_this.time_space=JSON.parse(response);
+					_this.loaded++;
+				} catch (error) {
+					_this.errors++;
+					_this.errorMessage="Error loading "+_this.score_path+name + "_space.json";					
+					if (window.location.protocol == "file:") {
+						_this.errorMessage	+=" Your browser might not allow local files."+
+							" Please place your files on a webserver or disable local file restrictions (not advisable).";
+					}
+				}
 			});
 		}
 
