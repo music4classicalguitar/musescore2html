@@ -117,685 +117,696 @@ ET
 BT
 /F1 11 Tf
 107.745 626.043 Td
+(-V) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+119.350 626.043 Td
+(]) Tj
+ET
+BT
+/F0 11 Tf
+125.763 626.043 Td
+([) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+129.426 626.043 Td
 (-gui) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-128.832 626.043 Td
+150.513 626.043 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-133.782 626.043 Td
+155.463 626.043 Td
 (-cli) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-148.445 626.043 Td
+170.126 626.043 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-154.858 626.043 Td
+176.539 626.043 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-158.521 626.043 Td
+180.202 626.043 Td
 (-C) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-172.876 626.043 Td
+194.557 626.043 Td
 ('configuratie-bestand') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-271.865 626.043 Td
+293.546 626.043 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-278.278 626.043 Td
+299.959 626.043 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-281.941 626.043 Td
+303.622 626.043 Td
 (-l) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-291.412 626.043 Td
+313.093 626.043 Td
 ('taal') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-315.854 626.043 Td
+337.535 626.043 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-322.267 626.043 Td
+343.948 626.043 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-325.930 626.043 Td
+347.611 626.043 Td
 (-m) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-341.506 626.043 Td
+363.187 626.043 Td
 ('musescore') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-395.263 626.043 Td
+416.944 626.043 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-401.676 626.043 Td
+423.357 626.043 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-405.339 626.043 Td
+427.020 626.043 Td
 (-o) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-417.252 626.043 Td
+438.933 626.043 Td
 ('uitvoermap') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-474.683 626.043 Td
+496.364 626.043 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-481.096 626.043 Td
+81.774 595.265 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-484.759 626.043 Td
+85.437 595.265 Td
 (-i) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-81.774 610.654 Td
+94.908 595.265 Td
 ('index-bestandsnaam') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-182.281 610.654 Td
+195.415 595.265 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-187.231 610.654 Td
+200.365 595.265 Td
 (-I) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-197.923 610.654 Td
+211.057 595.265 Td
 ('index-bestandsnaam') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-295.680 610.654 Td
+308.814 595.265 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-302.093 610.654 Td
+315.227 595.265 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-305.756 610.654 Td
+318.890 595.265 Td
+(-P) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+332.024 595.265 Td
+(|) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+336.974 595.265 Td
+(-N) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+351.329 595.265 Td
+(|) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+356.279 595.265 Td
+(-R) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+367.884 595.265 Td
+(]) Tj
+ET
+BT
+/F0 11 Tf
+374.297 595.265 Td
+([) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+377.960 595.265 Td
+(-a) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+387.123 595.265 Td
+(]) Tj
+ET
+BT
+/F0 11 Tf
+81.774 564.487 Td
+([) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+85.437 564.487 Td
+(-x) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+94.600 564.487 Td
+(]) Tj
+ET
+BT
+/F0 11 Tf
+101.013 564.487 Td
+([) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+104.676 564.487 Td
 (-p) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-318.285 610.654 Td
+117.205 564.487 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-323.235 610.654 Td
+122.155 564.487 Td
 (-n) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-335.764 610.654 Td
+134.684 564.487 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-340.714 610.654 Td
+139.634 564.487 Td
 (-r) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-349.261 610.654 Td
+148.181 564.487 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-355.674 610.654 Td
+154.594 564.487 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-359.337 610.654 Td
+158.257 564.487 Td
 (-v) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-371.250 610.654 Td
+170.170 564.487 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-376.200 610.654 Td
+175.120 564.487 Td
 (-q) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-388.729 610.654 Td
+187.649 564.487 Td
 (|) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-393.679 610.654 Td
+192.599 564.487 Td
 (-s) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-401.621 610.654 Td
+200.541 564.487 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-408.034 610.654 Td
+206.954 564.487 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-411.697 610.654 Td
+210.617 564.487 Td
 (-c) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-420.244 610.654 Td
+219.164 564.487 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-426.657 610.654 Td
+81.774 533.709 Td
 ([partituur) Tj
 ET
 BT
 /F0 11 Tf
-470.954 610.654 Td
+126.071 533.709 Td
 (...]) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-68.024 564.487 Td
+68.024 487.542 Td
 (OMSCHRIJVING) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-81.774 549.098 Td
+81.774 472.153 Td
 (Het) Tj
 ET
 BT
 /F0 11 Tf
-100.408 549.098 Td
+100.408 472.153 Td
 (programma) Tj
 ET
 BT
 /F0 11 Tf
-153.868 549.098 Td
+153.868 472.153 Td
 (m2h) Tj
 ET
 BT
 /F0 11 Tf
-176.176 549.098 Td
+176.176 472.153 Td
 (\(musescore2html\)) Tj
 ET
 BT
 /F0 11 Tf
-258.357 549.098 Td
+258.357 472.153 Td
 (is) Tj
 ET
 BT
 /F0 11 Tf
-268.444 549.098 Td
+268.444 472.153 Td
 (te) Tj
 ET
 BT
 /F0 11 Tf
-279.136 549.098 Td
+279.136 472.153 Td
 (gebruiken) Tj
 ET
 BT
 /F0 11 Tf
-325.875 549.098 Td
+325.875 472.153 Td
 (om) Tj
 ET
 BT
 /F0 11 Tf
-342.683 549.098 Td
+342.683 472.153 Td
 (bestanden) Tj
 ET
 BT
 /F0 11 Tf
-389.422 549.098 Td
+389.422 472.153 Td
 (te) Tj
 ET
 BT
 /F0 11 Tf
-400.114 549.098 Td
+400.114 472.153 Td
 (genereren) Tj
 ET
 BT
 /F0 11 Tf
-446.226 549.098 Td
+446.226 472.153 Td
 (om) Tj
 ET
 BT
 /F0 11 Tf
-463.034 549.098 Td
+463.034 472.153 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-481.052 549.098 Td
+481.052 472.153 Td
 (MuseScore) Tj
 ET
 BT
 /F0 11 Tf
-81.774 533.709 Td
+81.774 456.764 Td
 (partituur) Tj
 ET
 BT
 /F0 11 Tf
-122.408 533.709 Td
+122.408 456.764 Td
 (als) Tj
 ET
 BT
 /F0 11 Tf
-137.379 533.709 Td
+137.379 456.764 Td
 (html-bestand) Tj
 ET
 BT
 /F0 11 Tf
-197.571 533.709 Td
+197.571 456.764 Td
 (te) Tj
 ET
 BT
 /F0 11 Tf
-208.263 533.709 Td
+208.263 456.764 Td
 (laten) Tj
 ET
 BT
 /F0 11 Tf
-232.397 533.709 Td
+232.397 456.764 Td
 (zien.) Tj
 ET
 BT
 /F0 11 Tf
-81.774 487.542 Td
+81.774 410.597 Td
 (Opties:) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-81.774 456.764 Td
-(-gui) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.890 456.764 Td
-(Gebruik) Tj
-ET
-BT
-/F0 11 Tf
-159.687 456.764 Td
-(de) Tj
-ET
-BT
-/F0 11 Tf
-172.821 456.764 Td
-(grafische) Tj
-ET
-BT
-/F0 11 Tf
-215.886 456.764 Td
-(gebruikersinterface) Tj
-ET
-BT
-/F0 11 Tf
-303.545 456.764 Td
-(\(standaard\).) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 425.986 Td
-(-cli) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.274 425.986 Td
-(Gebruik) Tj
-ET
-BT
-/F0 11 Tf
-159.071 425.986 Td
-(de) Tj
-ET
-BT
-/F0 11 Tf
-172.205 425.986 Td
-(opdrachtregelinterface.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
 81.774 379.819 Td
-(-C) Tj
-ET
-/F2 11 Tf
-BT
-/F2 11 Tf
-96.129 379.819 Td
-('configuratie-bestand') Tj
+(-V) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.274 364.430 Td
-(Lees) Tj
+120.274 379.819 Td
+(Toon) Tj
 ET
 BT
 /F0 11 Tf
-143.792 364.430 Td
-(configuratie) Tj
-ET
-BT
-/F0 11 Tf
-199.694 364.430 Td
-(in) Tj
-ET
-BT
-/F0 11 Tf
-211.002 364.430 Td
-('configuratie-bestand'.) Tj
+146.245 379.819 Td
+(versie.) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
 81.774 333.652 Td
-(-l) Tj
-ET
-/F2 11 Tf
-BT
-/F2 11 Tf
-91.245 333.652 Td
-(taal) Tj
+(-gui) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-121.506 333.652 Td
-(Specificeer) Tj
+120.890 333.652 Td
+(Gebruik) Tj
 ET
 BT
 /F0 11 Tf
-173.734 333.652 Td
+159.687 333.652 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-186.868 333.652 Td
-(te) Tj
+172.821 333.652 Td
+(grafische) Tj
 ET
 BT
 /F0 11 Tf
-197.560 333.652 Td
-(gebruiken) Tj
+215.886 333.652 Td
+(gebruikersinterface) Tj
 ET
 BT
 /F0 11 Tf
-244.299 333.652 Td
-(taal.) Tj
+303.545 333.652 Td
+(\(standaard\).) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 302.874 Td
+(-cli) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 302.874 Td
+(Gebruik) Tj
 ET
 BT
 /F0 11 Tf
-123.024 318.263 Td
-(Overstemt) Tj
-ET
-BT
-/F0 11 Tf
-171.600 318.263 Td
+159.071 302.874 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-184.734 318.263 Td
-(taal) Tj
+172.205 302.874 Td
+(opdrachtregelinterface.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 256.707 Td
+(-C) Tj
+ET
+/F2 11 Tf
+BT
+/F2 11 Tf
+96.129 256.707 Td
+('configuratie-bestand') Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 241.318 Td
+(Lees) Tj
 ET
 BT
 /F0 11 Tf
-203.368 318.263 Td
-(gespecificeerd) Tj
+143.792 241.318 Td
+(configuratie) Tj
 ET
 BT
 /F0 11 Tf
-269.643 318.263 Td
+199.694 241.318 Td
 (in) Tj
 ET
 BT
 /F0 11 Tf
-280.951 318.263 Td
-('configuratie-bestand') Tj
-ET
-BT
-/F0 11 Tf
-381.447 318.263 Td
-(\(indien) Tj
-ET
-BT
-/F0 11 Tf
-415.360 318.263 Td
-(gebruikt\).) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 272.096 Td
-(-m) Tj
-ET
-/F2 11 Tf
-BT
-/F2 11 Tf
-97.350 272.096 Td
-('mscore') Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.274 256.707 Td
-(Locatie) Tj
-ET
-BT
-/F0 11 Tf
-156.013 256.707 Td
-(van) Tj
-ET
-BT
-/F0 11 Tf
-174.647 256.707 Td
-(het) Tj
-ET
-BT
-/F0 11 Tf
-190.839 256.707 Td
-(MuseScore) Tj
-ET
-BT
-/F0 11 Tf
-243.078 256.707 Td
-(uitvoerbaar) Tj
-ET
-BT
-/F0 11 Tf
-295.922 256.707 Td
-(bestand.) Tj
+211.002 241.318 Td
+('configuratie-bestand'.) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
 81.774 210.540 Td
-(-o) Tj
+(-l) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-93.687 210.540 Td
-('uitvoermap') Tj
+91.245 210.540 Td
+(taal) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.274 195.151 Td
-(Specificeerd) Tj
+121.506 210.540 Td
+(Specificeer) Tj
 ET
 BT
 /F0 11 Tf
-178.002 195.151 Td
-(waar) Tj
-ET
-BT
-/F0 11 Tf
-202.125 195.151 Td
+173.734 210.540 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-215.259 195.151 Td
-(genenereerde) Tj
-ET
-BT
-/F0 11 Tf
-276.639 195.151 Td
-(bestanden) Tj
-ET
-BT
-/F0 11 Tf
-323.378 195.151 Td
-(dienen) Tj
-ET
-BT
-/F0 11 Tf
-355.454 195.151 Td
+186.868 210.540 Td
 (te) Tj
 ET
 BT
 /F0 11 Tf
-366.146 195.151 Td
-(worden) Tj
+197.560 210.540 Td
+(gebruiken) Tj
 ET
 BT
 /F0 11 Tf
-401.885 195.151 Td
-(geplaatst.) Tj
+244.299 210.540 Td
+(taal.) Tj
 ET
 BT
 /F0 11 Tf
-123.024 179.762 Td
-(Standaard:) Tj
+123.024 195.151 Td
+(Overstemt) Tj
 ET
 BT
 /F0 11 Tf
-158.774 148.984 Td
-(Opdrachtregelinterface:) Tj
-ET
-BT
-/F0 11 Tf
-265.980 148.984 Td
+171.600 195.151 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-279.114 148.984 Td
-(huidige) Tj
+184.734 195.151 Td
+(taal) Tj
 ET
 BT
 /F0 11 Tf
-314.864 148.984 Td
-(map.) Tj
+203.368 195.151 Td
+(gespecificeerd) Tj
 ET
 BT
 /F0 11 Tf
-158.774 118.206 Td
-(Grafische) Tj
+269.643 195.151 Td
+(in) Tj
 ET
 BT
 /F0 11 Tf
-204.281 118.206 Td
-(gebruikersinterface:) Tj
+280.951 195.151 Td
+('configuratie-bestand') Tj
 ET
 BT
 /F0 11 Tf
-294.998 118.206 Td
-(gebruikersmap.) Tj
+381.447 195.151 Td
+(\(indien) Tj
+ET
+BT
+/F0 11 Tf
+415.360 195.151 Td
+(gebruikt\).) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 148.984 Td
+(-m) Tj
+ET
+/F2 11 Tf
+BT
+/F2 11 Tf
+97.350 148.984 Td
+('mscore') Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 133.595 Td
+(Locatie) Tj
+ET
+BT
+/F0 11 Tf
+156.013 133.595 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+174.647 133.595 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+190.839 133.595 Td
+(MuseScore) Tj
+ET
+BT
+/F0 11 Tf
+243.078 133.595 Td
+(uitvoerbaar) Tj
+ET
+BT
+/F0 11 Tf
+295.922 133.595 Td
+(bestand.) Tj
 ET
 /F0 11 Tf
 BT
@@ -835,17 +846,17 @@ BT
 ET
 BT
 /F0 11 Tf
-267.036 36.245 Td
-(February) Tj
+275.286 36.245 Td
+(March) Tj
 ET
 BT
 /F0 11 Tf
-309.496 36.245 Td
-(15,) Tj
+306.746 36.245 Td
+(3,) Tj
 ET
 BT
 /F0 11 Tf
-325.996 36.245 Td
+317.746 36.245 Td
 (2021) Tj
 ET
 BT
@@ -861,7 +872,7 @@ ET
 endstream
 endobj
 8 0 obj
-7738
+7708
 endobj
 9 0 obj
 <<
@@ -888,1033 +899,779 @@ endobj
 >>
 stream
 BT
-/F0 11 Tf
+/F1 11 Tf
 81.774 702.988 Td
+(-o) Tj
+ET
+/F2 11 Tf
+BT
+/F2 11 Tf
+93.687 702.988 Td
+('uitvoermap') Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 687.599 Td
+(Specificeerd) Tj
+ET
+BT
+/F0 11 Tf
+178.002 687.599 Td
+(waar) Tj
+ET
+BT
+/F0 11 Tf
+202.125 687.599 Td
+(de) Tj
+ET
+BT
+/F0 11 Tf
+215.259 687.599 Td
+(genenereerde) Tj
+ET
+BT
+/F0 11 Tf
+276.639 687.599 Td
+(bestanden) Tj
+ET
+BT
+/F0 11 Tf
+323.378 687.599 Td
+(dienen) Tj
+ET
+BT
+/F0 11 Tf
+355.454 687.599 Td
+(te) Tj
+ET
+BT
+/F0 11 Tf
+366.146 687.599 Td
+(worden) Tj
+ET
+BT
+/F0 11 Tf
+401.885 687.599 Td
+(geplaatst.) Tj
+ET
+BT
+/F0 11 Tf
+123.024 672.210 Td
+(Standaard:) Tj
+ET
+BT
+/F0 11 Tf
+158.774 641.432 Td
+(Opdrachtregelinterface:) Tj
+ET
+BT
+/F0 11 Tf
+265.980 641.432 Td
+(de) Tj
+ET
+BT
+/F0 11 Tf
+279.114 641.432 Td
+(huidige) Tj
+ET
+BT
+/F0 11 Tf
+314.864 641.432 Td
+(map.) Tj
+ET
+BT
+/F0 11 Tf
+158.774 610.654 Td
+(Grafische) Tj
+ET
+BT
+/F0 11 Tf
+204.281 610.654 Td
+(gebruikersinterface:) Tj
+ET
+BT
+/F0 11 Tf
+294.998 610.654 Td
+(gebruikersmap.) Tj
+ET
+BT
+/F0 11 Tf
+81.774 579.876 Td
 (Behalve) Tj
 ET
 BT
 /F0 11 Tf
-120.571 702.988 Td
+120.571 579.876 Td
 (als) Tj
 ET
 BT
 /F0 11 Tf
-135.542 702.988 Td
+135.542 579.876 Td
 (optie) Tj
 ET
 BT
 /F0 11 Tf
-160.292 702.988 Td
+160.292 579.876 Td
 (-I) Tj
 ET
 BT
 /F0 11 Tf
-170.368 702.988 Td
+170.368 579.876 Td
 ('index-bestandsnaam') Tj
 ET
 BT
 /F0 11 Tf
-270.259 702.988 Td
+270.259 579.876 Td
 (wordt) Tj
 ET
 BT
 /F0 11 Tf
-298.672 702.988 Td
+298.672 579.876 Td
 (gebruikt,) Tj
 ET
 BT
 /F0 11 Tf
-340.835 702.988 Td
+340.835 579.876 Td
 (wordt) Tj
 ET
 BT
 /F0 11 Tf
-369.248 702.988 Td
+369.248 579.876 Td
 (voor) Tj
 ET
 BT
 /F0 11 Tf
-392.161 702.988 Td
+392.161 579.876 Td
 (iedere) Tj
 ET
 BT
 /F0 11 Tf
-421.784 702.988 Td
+421.784 579.876 Td
 (partituur) Tj
 ET
 BT
 /F0 11 Tf
-462.418 702.988 Td
+462.418 579.876 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-480.436 702.988 Td
+480.436 579.876 Td
 (html-bestand) Tj
 ET
 BT
 /F0 11 Tf
-81.774 687.599 Td
+81.774 564.487 Td
 (gegenereerd.) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-81.774 656.821 Td
+81.774 533.709 Td
 (-i) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-91.245 656.821 Td
+91.245 533.709 Td
 ('index-bestandsnaam') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.274 641.432 Td
+120.274 518.320 Td
 (Maak) Tj
 ET
 BT
 /F0 11 Tf
-148.071 641.432 Td
+148.071 518.320 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-166.089 641.432 Td
+166.089 518.320 Td
 (index-bestand) Tj
 ET
 BT
 /F0 11 Tf
-230.549 641.432 Td
+230.549 518.320 Td
 (met) Tj
 ET
 BT
 /F0 11 Tf
-249.799 641.432 Td
+249.799 518.320 Td
 (naam) Tj
 ET
 BT
 /F0 11 Tf
-276.375 641.432 Td
+276.375 518.320 Td
 ('index-bestandsnaam') Tj
 ET
 BT
 /F0 11 Tf
-376.266 641.432 Td
+376.266 518.320 Td
 (in) Tj
 ET
 BT
 /F0 11 Tf
-387.574 641.432 Td
+387.574 518.320 Td
 (map) Tj
 ET
 BT
 /F0 11 Tf
-409.266 641.432 Td
+409.266 518.320 Td
 ('uitvoermap') Tj
 ET
 BT
 /F0 11 Tf
-469.447 641.432 Td
+469.447 518.320 Td
 (met) Tj
 ET
 BT
 /F0 11 Tf
-488.697 641.432 Td
+488.697 518.320 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-506.715 641.432 Td
+506.715 518.320 Td
 (link) Tj
 ET
 BT
 /F0 11 Tf
-120.274 626.043 Td
+120.274 502.931 Td
 (naar) Tj
 ET
 BT
 /F0 11 Tf
-141.955 626.043 Td
+141.955 502.931 Td
+(html-bestand) Tj
+ET
+BT
+/F0 11 Tf
+202.147 502.931 Td
+('ShowScore.html') Tj
+ET
+BT
+/F0 11 Tf
+285.252 502.931 Td
+(om) Tj
+ET
+BT
+/F0 11 Tf
+302.060 502.931 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-155.089 626.043 Td
-(gegenereerde) Tj
+315.194 502.931 Td
+(partituur) Tj
 ET
 BT
 /F0 11 Tf
-216.469 626.043 Td
-(html-bestanden) Tj
+355.828 502.931 Td
+(te) Tj
 ET
 BT
 /F0 11 Tf
-287.045 626.043 Td
-(voor) Tj
+366.520 502.931 Td
+(laten) Tj
 ET
 BT
 /F0 11 Tf
-309.958 626.043 Td
-(de) Tj
+390.654 502.931 Td
+(zien.) Tj
 ET
 BT
 /F0 11 Tf
-323.092 626.043 Td
-(partituren.) Tj
+125.774 487.542 Td
+(Bestanden) Tj
+ET
+BT
+/F0 11 Tf
+174.350 487.542 Td
+('ShowScore.html') Tj
+ET
+BT
+/F0 11 Tf
+257.455 487.542 Td
+(en) Tj
+ET
+BT
+/F0 11 Tf
+270.589 487.542 Td
+('css/ms_player_index.css') Tj
+ET
+BT
+/F0 11 Tf
+389.125 487.542 Td
+(zullen) Tj
+ET
+BT
+/F0 11 Tf
+418.759 487.542 Td
+(worden) Tj
+ET
+BT
+/F0 11 Tf
+454.498 487.542 Td
+(ge") Tj
+ET
+BT
+/F0 11 Tf
+465.597 487.542 Td
+(i) Tj
+ET
+BT
+/F0 11 Tf
+469.370 487.542 Td
+(nstalleerd) Tj
+ET
+BT
+/F0 11 Tf
+514.888 487.542 Td
+(in) Tj
+ET
+BT
+/F0 11 Tf
+526.196 487.542 Td
+(map) Tj
+ET
+BT
+/F0 11 Tf
+120.274 472.153 Td
+('uitvoermap'.) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-81.774 595.265 Td
+81.774 441.375 Td
 (-I) Tj
 ET
 /F2 11 Tf
 BT
 /F2 11 Tf
-92.466 595.265 Td
+92.466 441.375 Td
 ('index-bestandsnaam') Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.274 579.876 Td
+120.274 425.986 Td
 (Maak) Tj
 ET
 BT
 /F0 11 Tf
-148.071 579.876 Td
+148.071 425.986 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-166.089 579.876 Td
+166.089 425.986 Td
 (index-bestand) Tj
 ET
 BT
 /F0 11 Tf
-230.549 579.876 Td
+230.549 425.986 Td
 (met) Tj
 ET
 BT
 /F0 11 Tf
-249.799 579.876 Td
+249.799 425.986 Td
 (naam) Tj
 ET
 BT
 /F0 11 Tf
-276.375 579.876 Td
+276.375 425.986 Td
 ('index-bestandsnaam') Tj
 ET
 BT
 /F0 11 Tf
-376.266 579.876 Td
+376.266 425.986 Td
 (in) Tj
 ET
 BT
 /F0 11 Tf
-387.574 579.876 Td
+387.574 425.986 Td
 (map) Tj
 ET
 BT
 /F0 11 Tf
-409.266 579.876 Td
+409.266 425.986 Td
 ('uitvoermap') Tj
 ET
 BT
 /F0 11 Tf
-469.447 579.876 Td
+469.447 425.986 Td
 (met) Tj
 ET
 BT
 /F0 11 Tf
-488.697 579.876 Td
+488.697 425.986 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-506.715 579.876 Td
+506.715 425.986 Td
 (link) Tj
 ET
 BT
 /F0 11 Tf
-120.274 564.487 Td
+120.274 410.597 Td
 (naar) Tj
 ET
 BT
 /F0 11 Tf
-141.955 564.487 Td
-(html-bestand) Tj
-ET
-BT
-/F0 11 Tf
-202.147 564.487 Td
-('ShowScore.html') Tj
-ET
-BT
-/F0 11 Tf
-285.252 564.487 Td
-(om) Tj
-ET
-BT
-/F0 11 Tf
-302.060 564.487 Td
+141.955 410.597 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-315.194 564.487 Td
-(partituur) Tj
+155.089 410.597 Td
+(gegenereerde) Tj
 ET
 BT
 /F0 11 Tf
-355.828 564.487 Td
-(te) Tj
+216.469 410.597 Td
+(html-bestanden) Tj
 ET
 BT
 /F0 11 Tf
-366.520 564.487 Td
-(laten) Tj
+287.045 410.597 Td
+(voor) Tj
 ET
 BT
 /F0 11 Tf
-390.654 564.487 Td
-(zien.) Tj
-ET
-BT
-/F0 11 Tf
-123.024 549.098 Td
-(Er) Tj
-ET
-BT
-/F0 11 Tf
-136.158 549.098 Td
-(wordt) Tj
-ET
-BT
-/F0 11 Tf
-164.571 549.098 Td
-(GEEN) Tj
-ET
-BT
-/F0 11 Tf
-196.647 549.098 Td
-(html-bestand) Tj
-ET
-BT
-/F0 11 Tf
-256.839 549.098 Td
-(per) Tj
-ET
-BT
-/F0 11 Tf
-273.636 549.098 Td
-(partituur) Tj
-ET
-BT
-/F0 11 Tf
-314.270 549.098 Td
-(gegenereerd,) Tj
-ET
-BT
-/F0 11 Tf
-373.516 549.098 Td
-(wel) Tj
-ET
-BT
-/F0 11 Tf
-392.150 549.098 Td
+309.958 410.597 Td
 (de) Tj
 ET
 BT
 /F0 11 Tf
-405.284 549.098 Td
-(andere) Tj
+323.092 410.597 Td
+(partituren.) Tj
 ET
 BT
 /F0 11 Tf
-437.349 549.098 Td
-(benodigde) Tj
+125.774 395.208 Td
+(Bestand) Tj
 ET
 BT
 /F0 11 Tf
-485.925 549.098 Td
-(bestanden) Tj
+163.966 395.208 Td
+('css/ms_player_index.css') Tj
 ET
 BT
 /F0 11 Tf
-120.274 533.709 Td
-(om) Tj
+282.502 395.208 Td
+(zal) Tj
 ET
 BT
 /F0 11 Tf
-137.082 533.709 Td
-(de) Tj
+298.078 395.208 Td
+(worden) Tj
 ET
 BT
 /F0 11 Tf
-150.216 533.709 Td
-(partituren) Tj
+333.817 395.208 Td
+(ge") Tj
 ET
 BT
 /F0 11 Tf
-195.734 533.709 Td
-(te) Tj
+344.916 395.208 Td
+(i) Tj
 ET
 BT
 /F0 11 Tf
-206.426 533.709 Td
-(laten) Tj
+348.689 395.208 Td
+(nstalleerd) Tj
 ET
 BT
 /F0 11 Tf
-230.560 533.709 Td
-(zien) Tj
+394.207 395.208 Td
+(in) Tj
 ET
 BT
 /F0 11 Tf
-251.636 533.709 Td
-(\(via) Tj
+405.515 395.208 Td
+(map) Tj
 ET
 BT
 /F0 11 Tf
-271.491 533.709 Td
-('ShowScore.html'\).) Tj
+427.207 395.208 Td
+('uitvoermap'.) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-81.774 487.542 Td
-(-p) Tj
+81.774 333.652 Td
+(-P) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.890 487.542 Td
+120.879 333.652 Td
 (Bewaar) Tj
 ET
 BT
 /F0 11 Tf
-157.234 487.542 Td
-(bestaande) Tj
+157.223 333.652 Td
+(het) Tj
 ET
 BT
 /F0 11 Tf
-203.357 487.542 Td
-(bestanden) Tj
+173.415 333.652 Td
+(aanwezige) Tj
 ET
 BT
 /F0 11 Tf
-252.846 487.542 Td
+222.585 333.652 Td
+(indexbestand) Tj
+ET
+BT
+/F0 11 Tf
+283.382 333.652 Td
 (\(standaard\).) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-81.774 456.764 Td
-(-n) Tj
+81.774 302.874 Td
+(-N) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.890 456.764 Td
+120.274 302.874 Td
 (Overschrijf) Tj
 ET
 BT
 /F0 11 Tf
-173.734 456.764 Td
-(bestaande) Tj
-ET
-BT
-/F0 11 Tf
-219.857 456.764 Td
-(bestanden) Tj
-ET
-BT
-/F0 11 Tf
-266.596 456.764 Td
-(alleen) Tj
-ET
-BT
-/F0 11 Tf
-295.614 456.764 Td
-(als) Tj
-ET
-BT
-/F0 11 Tf
-310.585 456.764 Td
-(de) Tj
-ET
-BT
-/F0 11 Tf
-323.719 456.764 Td
-(partituur) Tj
-ET
-BT
-/F0 11 Tf
-364.353 456.764 Td
-(nieuwer) Tj
-ET
-BT
-/F0 11 Tf
-402.534 456.764 Td
-(is) Tj
-ET
-BT
-/F0 11 Tf
-412.621 456.764 Td
-(dan) Tj
-ET
-BT
-/F0 11 Tf
-431.255 456.764 Td
-(bestaande) Tj
-ET
-BT
-/F0 11 Tf
-477.378 456.764 Td
-(bestanden) Tj
-ET
-BT
-/F0 11 Tf
-524.117 456.764 Td
-(die) Tj
-ET
-BT
-/F0 11 Tf
-120.274 441.375 Td
-(moeten) Tj
-ET
-BT
-/F0 11 Tf
-155.408 441.375 Td
-(worden) Tj
-ET
-BT
-/F0 11 Tf
-191.147 441.375 Td
-(gegenereerd.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 410.597 Td
-(-r) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-121.495 410.597 Td
-(Vervang) Tj
-ET
-BT
-/F0 11 Tf
-162.118 410.597 Td
-(bestaande) Tj
-ET
-BT
-/F0 11 Tf
-208.241 410.597 Td
-(bestanden.) Tj
-ET
-BT
-/F0 11 Tf
-81.774 364.430 Td
-(In) Tj
-ET
-BT
-/F0 11 Tf
-93.687 364.430 Td
-(het) Tj
-ET
-BT
-/F0 11 Tf
-109.879 364.430 Td
-(geval) Tj
-ET
-BT
-/F0 11 Tf
-136.455 364.430 Td
-(de) Tj
-ET
-BT
-/F0 11 Tf
-149.589 364.430 Td
-(opdrachtregelinterface) Tj
-ET
-BT
-/F0 11 Tf
-251.295 364.430 Td
-(wordt) Tj
-ET
-BT
-/F0 11 Tf
-279.708 364.430 Td
-(gebruikt:) Tj
-ET
-BT
-/F0 11 Tf
-120.274 333.652 Td
-(Informatie) Tj
-ET
-BT
-/F0 11 Tf
-169.455 333.652 Td
-(over) Tj
-ET
-BT
-/F0 11 Tf
-191.752 333.652 Td
-(het) Tj
-ET
-BT
-/F0 11 Tf
-207.944 333.652 Td
-(verwerken) Tj
-ET
-BT
-/F0 11 Tf
-257.114 333.652 Td
-(van) Tj
-ET
-BT
-/F0 11 Tf
-275.748 333.652 Td
-(standaards) Tj
-ET
-BT
-/F0 11 Tf
-324.929 333.652 Td
-(naar) Tj
-ET
-BT
-/F0 11 Tf
-346.610 333.652 Td
-(informatie) Tj
-ET
-BT
-/F0 11 Tf
-395.186 333.652 Td
-(over) Tj
-ET
-BT
-/F0 11 Tf
-120.274 318.263 Td
-(gegenereerde/ge") Tj
-ET
-BT
-/F0 11 Tf
-193.061 318.263 Td
-(i) Tj
-ET
-BT
-/F0 11 Tf
-196.834 318.263 Td
-(nstalleerde/vervangen/overgeslagen) Tj
-ET
-BT
-/F0 11 Tf
-357.203 318.263 Td
-(bestanden) Tj
-ET
-BT
-/F0 11 Tf
-403.942 318.263 Td
-(wordt) Tj
-ET
-BT
-/F0 11 Tf
-432.355 318.263 Td
-(naar) Tj
-ET
-BT
-/F0 11 Tf
-454.036 318.263 Td
-(standaarduitvoer) Tj
-ET
-BT
-/F0 11 Tf
-120.274 302.874 Td
-(gestuurd.) Tj
-ET
-BT
-/F0 11 Tf
-120.274 272.096 Td
-(Informatie) Tj
-ET
-BT
-/F0 11 Tf
-169.455 272.096 Td
-(over) Tj
-ET
-BT
-/F0 11 Tf
-191.752 272.096 Td
-(fouten) Tj
-ET
-BT
-/F0 11 Tf
-222.607 272.096 Td
-(wordt) Tj
-ET
-BT
-/F0 11 Tf
-251.020 272.096 Td
-(als) Tj
-ET
-BT
-/F0 11 Tf
-265.991 272.096 Td
-(diagnostische) Tj
-ET
-BT
-/F0 11 Tf
-328.625 272.096 Td
-(berichten) Tj
-ET
-BT
-/F0 11 Tf
-372.306 272.096 Td
-(naar) Tj
-ET
-BT
-/F0 11 Tf
-393.987 272.096 Td
-(standaardfout) Tj
-ET
-BT
-/F0 11 Tf
-456.610 272.096 Td
-(gestuurd.) Tj
-ET
-BT
-/F0 11 Tf
-81.774 256.707 Td
-(Standaard) Tj
-ET
-BT
-/F0 11 Tf
-128.513 256.707 Td
-(is) Tj
-ET
-BT
-/F0 11 Tf
-138.600 256.707 Td
-('normale') Tj
-ET
-BT
-/F0 11 Tf
-184.723 256.707 Td
-(informatie.) Tj
-ET
-BT
-/F0 11 Tf
-84.524 241.318 Td
-(Opties) Tj
-ET
-BT
-/F0 11 Tf
-115.995 241.318 Td
-([) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-119.658 241.318 Td
-(-v) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-131.571 241.318 Td
-(|) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-136.521 241.318 Td
-(-q) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-149.050 241.318 Td
-(|) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-154.000 241.318 Td
-(-s) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-161.942 241.318 Td
-(]) Tj
-ET
-BT
-/F0 11 Tf
-168.355 241.318 Td
-(kunnen) Tj
-ET
-BT
-/F0 11 Tf
-203.489 241.318 Td
-(worden) Tj
-ET
-BT
-/F0 11 Tf
-239.228 241.318 Td
-(gebruikt) Tj
-ET
-BT
-/F0 11 Tf
-278.641 241.318 Td
-(om) Tj
-ET
-BT
-/F0 11 Tf
-295.449 241.318 Td
-(de) Tj
-ET
-BT
-/F0 11 Tf
-308.583 241.318 Td
-(hoeveelheid) Tj
-ET
-BT
-/F0 11 Tf
-364.485 241.318 Td
-(informatie) Tj
-ET
-BT
-/F0 11 Tf
-413.061 241.318 Td
-(te) Tj
-ET
-BT
-/F0 11 Tf
-423.753 241.318 Td
-(wijzigen.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 195.151 Td
-(-v) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.274 195.151 Td
-(Uitgebreid,) Tj
-ET
-BT
-/F0 11 Tf
-172.821 195.151 Td
-(toon) Tj
-ET
-BT
-/F0 11 Tf
-195.129 195.151 Td
-(uitgebreide) Tj
-ET
-BT
-/F0 11 Tf
-247.368 195.151 Td
-(informatie) Tj
-ET
-BT
-/F0 11 Tf
-295.944 195.151 Td
-(over) Tj
-ET
-BT
-/F0 11 Tf
-318.241 195.151 Td
-(het) Tj
-ET
-BT
-/F0 11 Tf
-334.433 195.151 Td
-(verwerken) Tj
-ET
-BT
-/F0 11 Tf
-383.603 195.151 Td
-(van) Tj
-ET
-BT
-/F0 11 Tf
-402.237 195.151 Td
-(bestanden.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 164.373 Td
-(-q) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.890 164.373 Td
-(Beperkt,) Tj
-ET
-BT
-/F0 11 Tf
-161.216 164.373 Td
-(toon) Tj
-ET
-BT
-/F0 11 Tf
-183.524 164.373 Td
-(geen) Tj
-ET
-BT
-/F0 11 Tf
-207.042 164.373 Td
-(gedetailleerde) Tj
-ET
-BT
-/F0 11 Tf
-271.491 164.373 Td
-(informatie) Tj
-ET
-BT
-/F0 11 Tf
-320.067 164.373 Td
-(over) Tj
-ET
-BT
-/F0 11 Tf
-342.364 164.373 Td
-(het) Tj
-ET
-BT
-/F0 11 Tf
-358.556 164.373 Td
-(verwerken) Tj
-ET
-BT
-/F0 11 Tf
-407.726 164.373 Td
-(van) Tj
-ET
-BT
-/F0 11 Tf
-426.360 164.373 Td
-(bestanden.) Tj
-ET
-BT
-/F0 11 Tf
-123.024 148.984 Td
-(Er) Tj
-ET
-BT
-/F0 11 Tf
-136.158 148.984 Td
-(wordt) Tj
-ET
-BT
-/F0 11 Tf
-164.571 148.984 Td
-(alleen) Tj
-ET
-BT
-/F0 11 Tf
-193.589 148.984 Td
+173.118 302.874 Td
 (een) Tj
 ET
 BT
 /F0 11 Tf
-211.607 148.984 Td
-(samenvatting) Tj
+191.136 302.874 Td
+(reeds) Tj
 ET
 BT
 /F0 11 Tf
-273.020 148.984 Td
-(getoond.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-81.774 118.206 Td
-(-s) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-120.274 118.206 Td
-(Stil,) Tj
+217.096 302.874 Td
+(aanwezig) Tj
 ET
 BT
 /F0 11 Tf
-141.064 118.206 Td
-(\(volkomen) Tj
+261.382 302.874 Td
+(indexbestand) Tj
 ET
 BT
 /F0 11 Tf
-191.477 118.206 Td
-(stil\)) Tj
+322.179 302.874 Td
+(alleen) Tj
 ET
 BT
 /F0 11 Tf
-211.343 118.206 Td
-(toon) Tj
+351.197 302.874 Td
+(als) Tj
 ET
 BT
 /F0 11 Tf
-233.651 118.206 Td
-(geen) Tj
+366.168 302.874 Td
+(de) Tj
 ET
 BT
 /F0 11 Tf
-257.169 118.206 Td
-(informatie) Tj
+379.302 302.874 Td
+(gegeneerde) Tj
 ET
 BT
 /F0 11 Tf
-305.745 118.206 Td
-(over) Tj
+432.135 302.874 Td
+(bestanden) Tj
 ET
 BT
 /F0 11 Tf
-328.042 118.206 Td
+478.874 302.874 Td
+(nieuwer) Tj
+ET
+BT
+/F0 11 Tf
+517.055 302.874 Td
+(zijn) Tj
+ET
+BT
+/F0 11 Tf
+120.274 287.485 Td
+(dan) Tj
+ET
+BT
+/F0 11 Tf
+138.908 287.485 Td
 (het) Tj
 ET
 BT
 /F0 11 Tf
-344.234 118.206 Td
-(verwerken) Tj
+155.100 287.485 Td
+(indexbestand.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 256.707 Td
+(-R) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.879 256.707 Td
+(Vervang) Tj
 ET
 BT
 /F0 11 Tf
-393.404 118.206 Td
-(van) Tj
+161.502 256.707 Td
+(het) Tj
 ET
 BT
 /F0 11 Tf
-412.038 118.206 Td
+177.694 256.707 Td
+(aanwezige) Tj
+ET
+BT
+/F0 11 Tf
+226.864 256.707 Td
+(indexbestand.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 210.540 Td
+(-a) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.890 210.540 Td
+(Genereer) Tj
+ET
+BT
+/F0 11 Tf
+163.944 210.540 Td
+(een) Tj
+ET
+BT
+/F0 11 Tf
+181.962 210.540 Td
+(indexbestand) Tj
+ET
+BT
+/F0 11 Tf
+242.759 210.540 Td
+(voor) Tj
+ET
+BT
+/F0 11 Tf
+265.672 210.540 Td
+(alle) Tj
+ET
+BT
+/F0 11 Tf
+284.306 210.540 Td
+(gegenereerde) Tj
+ET
+BT
+/F0 11 Tf
+345.686 210.540 Td
 (bestanden,) Tj
 ET
 BT
 /F0 11 Tf
-461.527 118.206 Td
-(zelfs) Tj
+395.175 210.540 Td
+(inclusief) Tj
 ET
 BT
 /F0 11 Tf
-485.045 118.206 Td
+435.809 210.540 Td
+(reeds) Tj
+ET
+BT
+/F0 11 Tf
+461.769 210.540 Td
+(aanwezige.) Tj
+ET
+BT
+/F0 11 Tf
+81.774 179.762 Td
+(Voor) Tj
+ET
+BT
+/F0 11 Tf
+107.129 179.762 Td
+(bestanden) Tj
+ET
+BT
+/F0 11 Tf
+153.868 179.762 Td
+(die) Tj
+ET
+BT
+/F0 11 Tf
+170.060 179.762 Td
+(worden) Tj
+ET
+BT
+/F0 11 Tf
+205.799 179.762 Td
+(gegenereerd:) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 148.984 Td
+(-x) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 148.984 Td
+(Genereer) Tj
+ET
+BT
+/F0 11 Tf
+163.328 148.984 Td
 (geen) Tj
 ET
 BT
 /F0 11 Tf
-120.274 102.817 Td
-(foutmeldingen.) Tj
+186.846 148.984 Td
+(html-bestand.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 102.817 Td
+(-p) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.890 102.817 Td
+(Bewaar) Tj
+ET
+BT
+/F0 11 Tf
+157.234 102.817 Td
+(bestaande) Tj
+ET
+BT
+/F0 11 Tf
+203.357 102.817 Td
+(bestanden) Tj
+ET
+BT
+/F0 11 Tf
+252.846 102.817 Td
+(\(standaard\).) Tj
 ET
 /F0 11 Tf
 BT
@@ -1954,17 +1711,17 @@ BT
 ET
 BT
 /F0 11 Tf
-267.036 36.245 Td
-(February) Tj
+275.286 36.245 Td
+(March) Tj
 ET
 BT
 /F0 11 Tf
-309.496 36.245 Td
-(15,) Tj
+306.746 36.245 Td
+(3,) Tj
 ET
 BT
 /F0 11 Tf
-325.996 36.245 Td
+317.746 36.245 Td
 (2021) Tj
 ET
 BT
@@ -1980,7 +1737,7 @@ ET
 endstream
 endobj
 12 0 obj
-10390
+8047
 endobj
 13 0 obj
 <<
@@ -2009,402 +1766,887 @@ stream
 BT
 /F1 11 Tf
 81.774 702.988 Td
-(-c) Tj
+(-n) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-120.274 702.988 Td
-(Controleer) Tj
+120.890 702.988 Td
+(Overschrijf) Tj
 ET
 BT
 /F0 11 Tf
-170.071 702.988 Td
-(alleen,) Tj
+173.734 702.988 Td
+(bestaande) Tj
 ET
 BT
 /F0 11 Tf
-201.839 702.988 Td
-(droogloop) Tj
-ET
-BT
-/F0 11 Tf
-249.810 702.988 Td
-(die) Tj
-ET
-BT
-/F0 11 Tf
-266.002 702.988 Td
-(laten) Tj
-ET
-BT
-/F0 11 Tf
-290.136 702.988 Td
-(zien) Tj
-ET
-BT
-/F0 11 Tf
-311.212 702.988 Td
-(wat) Tj
-ET
-BT
-/F0 11 Tf
-329.846 702.988 Td
-(er) Tj
-ET
-BT
-/F0 11 Tf
-341.143 702.988 Td
-(had) Tj
-ET
-BT
-/F0 11 Tf
-359.777 702.988 Td
-(moeten) Tj
-ET
-BT
-/F0 11 Tf
-394.911 702.988 Td
-(gebeuren.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 656.821 Td
-(CONTEXT) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-81.774 641.432 Td
-(Java) Tj
-ET
-BT
-/F0 11 Tf
-104.071 641.432 Td
-(8+) Tj
-ET
-BT
-/F0 11 Tf
-118.525 641.432 Td
-(dient) Tj
-ET
-BT
-/F0 11 Tf
-143.275 641.432 Td
-(te) Tj
-ET
-BT
-/F0 11 Tf
-153.967 641.432 Td
-(zijn) Tj
-ET
-BT
-/F0 11 Tf
-173.217 641.432 Td
-(ge") Tj
-ET
-BT
-/F0 11 Tf
-184.316 641.432 Td
-(i) Tj
-ET
-BT
-/F0 11 Tf
-188.089 641.432 Td
-(nstalleerd.) Tj
-ET
-BT
-/F0 11 Tf
-84.524 626.043 Td
-(Musescore) Tj
-ET
-BT
-/F0 11 Tf
-134.926 626.043 Td
-(dient) Tj
-ET
-BT
-/F0 11 Tf
-159.676 626.043 Td
-(te) Tj
-ET
-BT
-/F0 11 Tf
-170.368 626.043 Td
-(zijn) Tj
-ET
-BT
-/F0 11 Tf
-189.618 626.043 Td
-(ge") Tj
-ET
-BT
-/F0 11 Tf
-200.717 626.043 Td
-(i) Tj
-ET
-BT
-/F0 11 Tf
-204.490 626.043 Td
-(nstalleerd) Tj
-ET
-BT
-/F0 11 Tf
-250.008 626.043 Td
-(\(see) Tj
-ET
-BT
-/F0 11 Tf
-270.468 626.043 Td
-(https://musescore.org\).) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 579.876 Td
-(OPMERKINGEN) Tj
-ET
-BT
-/F1 11 Tf
-156.332 579.876 Td
-(T.A.V.) Tj
-ET
-BT
-/F1 11 Tf
-190.553 579.876 Td
-(DE) Tj
-ET
-BT
-/F1 11 Tf
-208.582 579.876 Td
-(IMPLEMENTATIE) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-81.774 564.487 Td
-(Gebruikte) Tj
-ET
-BT
-/F0 11 Tf
-128.513 564.487 Td
-(bibliotheken:) Tj
-ET
-BT
-/F0 11 Tf
-120.274 533.709 Td
-(Xerces2) Tj
-ET
-BT
-/F0 11 Tf
-159.060 533.709 Td
-(Java) Tj
-ET
-BT
-/F0 11 Tf
-181.357 533.709 Td
-(2.12.1) Tj
-ET
-BT
-/F0 11 Tf
-211.607 533.709 Td
-(\(http://xerces.apache.org/xerces2-j/\)) Tj
-ET
-BT
-/F0 11 Tf
-120.274 502.931 Td
-(Saxon-EE) Tj
-ET
-BT
-/F0 11 Tf
-167.629 502.931 Td
-(10) Tj
-ET
-BT
-/F0 11 Tf
-181.379 502.931 Td
-(\(http://saxon.sourceforge.net\)) Tj
-ET
-BT
-/F0 11 Tf
-120.274 472.153 Td
-(Apache) Tj
-ET
-BT
-/F0 11 Tf
-156.618 472.153 Td
-(Ant) Tj
-ET
-BT
-/F0 11 Tf
-175.868 472.153 Td
-(1.10.9) Tj
-ET
-BT
-/F0 11 Tf
-206.118 472.153 Td
-(\(https://ant.apache.org\)) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 425.986 Td
-(RETURN) Tj
-ET
-BT
-/F1 11 Tf
-117.216 425.986 Td
-(VALUES) Tj
-ET
-BT
-/F1 11 Tf
-68.024 410.597 Td
-(BESTANDEN) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-81.774 395.208 Td
-(Voor) Tj
-ET
-BT
-/F0 11 Tf
-107.129 395.208 Td
-(iedere) Tj
-ET
-BT
-/F0 11 Tf
-136.752 395.208 Td
-(partituur) Tj
-ET
-BT
-/F0 11 Tf
-177.386 395.208 Td
-('MyScore.mscz') Tj
-ET
-BT
-/F0 11 Tf
-253.143 395.208 Td
-(\(of) Tj
-ET
-BT
-/F0 11 Tf
-268.719 395.208 Td
-('MyScore.mscx'\)) Tj
-ET
-BT
-/F0 11 Tf
-348.755 395.208 Td
-(worden) Tj
-ET
-BT
-/F0 11 Tf
-384.494 395.208 Td
-(onderstaande) Tj
-ET
-BT
-/F0 11 Tf
-445.280 395.208 Td
+219.857 702.988 Td
 (bestanden) Tj
 ET
 BT
 /F0 11 Tf
-81.774 379.819 Td
-(gegenereerd:) Tj
+266.596 702.988 Td
+(alleen) Tj
 ET
 BT
 /F0 11 Tf
-81.774 349.041 Td
-(MyScore.metajson) Tj
+295.614 702.988 Td
+(als) Tj
 ET
 BT
 /F0 11 Tf
-81.774 318.263 Td
-(MyScore_space.json) Tj
+310.585 702.988 Td
+(de) Tj
 ET
 BT
 /F0 11 Tf
-81.774 287.485 Td
-(MyScore-1.png) Tj
+323.719 702.988 Td
+(partituur) Tj
 ET
 BT
 /F0 11 Tf
-81.774 256.707 Td
-(MyScore-2.png) Tj
+364.353 702.988 Td
+(nieuwer) Tj
 ET
 BT
 /F0 11 Tf
-81.774 210.540 Td
-(MyScore.ogg) Tj
+402.534 702.988 Td
+(is) Tj
 ET
 BT
 /F0 11 Tf
-81.774 179.762 Td
-(MyScore.mp3) Tj
+412.621 702.988 Td
+(dan) Tj
 ET
 BT
 /F0 11 Tf
-81.774 164.373 Td
-(Als) Tj
+431.255 702.988 Td
+(bestaande) Tj
 ET
 BT
 /F0 11 Tf
-99.803 164.373 Td
+477.378 702.988 Td
+(bestanden) Tj
+ET
+BT
+/F0 11 Tf
+524.117 702.988 Td
+(die) Tj
+ET
+BT
+/F0 11 Tf
+120.274 687.599 Td
+(moeten) Tj
+ET
+BT
+/F0 11 Tf
+155.408 687.599 Td
+(worden) Tj
+ET
+BT
+/F0 11 Tf
+191.147 687.599 Td
+(gegenereerd.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 656.821 Td
+(-r) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+121.495 656.821 Td
+(Vervang) Tj
+ET
+BT
+/F0 11 Tf
+162.118 656.821 Td
+(bestaande) Tj
+ET
+BT
+/F0 11 Tf
+208.241 656.821 Td
+(bestanden.) Tj
+ET
+BT
+/F0 11 Tf
+81.774 610.654 Td
+(In) Tj
+ET
+BT
+/F0 11 Tf
+93.687 610.654 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+109.879 610.654 Td
+(geval) Tj
+ET
+BT
+/F0 11 Tf
+136.455 610.654 Td
+(de) Tj
+ET
+BT
+/F0 11 Tf
+149.589 610.654 Td
+(opdrachtregelinterface) Tj
+ET
+BT
+/F0 11 Tf
+251.295 610.654 Td
+(wordt) Tj
+ET
+BT
+/F0 11 Tf
+279.708 610.654 Td
+(gebruikt:) Tj
+ET
+BT
+/F0 11 Tf
+120.274 579.876 Td
+(Informatie) Tj
+ET
+BT
+/F0 11 Tf
+169.455 579.876 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+191.752 579.876 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+207.944 579.876 Td
+(verwerken) Tj
+ET
+BT
+/F0 11 Tf
+257.114 579.876 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+275.748 579.876 Td
+(standaards) Tj
+ET
+BT
+/F0 11 Tf
+324.929 579.876 Td
+(naar) Tj
+ET
+BT
+/F0 11 Tf
+346.610 579.876 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+395.186 579.876 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+120.274 564.487 Td
+(gegenereerde/ge") Tj
+ET
+BT
+/F0 11 Tf
+193.061 564.487 Td
+(i) Tj
+ET
+BT
+/F0 11 Tf
+196.834 564.487 Td
+(nstalleerde/vervangen/overgeslagen) Tj
+ET
+BT
+/F0 11 Tf
+357.203 564.487 Td
+(bestanden) Tj
+ET
+BT
+/F0 11 Tf
+403.942 564.487 Td
+(wordt) Tj
+ET
+BT
+/F0 11 Tf
+432.355 564.487 Td
+(naar) Tj
+ET
+BT
+/F0 11 Tf
+454.036 564.487 Td
+(standaarduitvoer) Tj
+ET
+BT
+/F0 11 Tf
+120.274 549.098 Td
+(gestuurd.) Tj
+ET
+BT
+/F0 11 Tf
+120.274 518.320 Td
+(Informatie) Tj
+ET
+BT
+/F0 11 Tf
+169.455 518.320 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+191.752 518.320 Td
+(fouten) Tj
+ET
+BT
+/F0 11 Tf
+222.607 518.320 Td
+(wordt) Tj
+ET
+BT
+/F0 11 Tf
+251.020 518.320 Td
+(als) Tj
+ET
+BT
+/F0 11 Tf
+265.991 518.320 Td
+(diagnostische) Tj
+ET
+BT
+/F0 11 Tf
+328.625 518.320 Td
+(berichten) Tj
+ET
+BT
+/F0 11 Tf
+372.306 518.320 Td
+(naar) Tj
+ET
+BT
+/F0 11 Tf
+393.987 518.320 Td
+(standaardfout) Tj
+ET
+BT
+/F0 11 Tf
+456.610 518.320 Td
+(gestuurd.) Tj
+ET
+BT
+/F0 11 Tf
+84.524 502.931 Td
+(Opties) Tj
+ET
+BT
+/F0 11 Tf
+115.995 502.931 Td
 ([) Tj
 ET
 /F1 11 Tf
 BT
 /F1 11 Tf
-103.466 164.373 Td
-(-I) Tj
-ET
-/F2 11 Tf
-BT
-/F2 11 Tf
-114.158 164.373 Td
-('index-bestandsnaam') Tj
+119.658 502.931 Td
+(-v) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-211.915 164.373 Td
+131.571 502.931 Td
+(|) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+136.521 502.931 Td
+(-q) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+149.050 502.931 Td
+(|) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+154.000 502.931 Td
+(-s) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+164.692 502.931 Td
+(|) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+169.642 502.931 Td
+(-e) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+178.189 502.931 Td
 (]) Tj
 ET
 BT
 /F0 11 Tf
-218.328 164.373 Td
-(niet) Tj
+184.602 502.931 Td
+(kunnen) Tj
 ET
 BT
 /F0 11 Tf
-237.578 164.373 Td
-(wordt) Tj
+219.736 502.931 Td
+(worden) Tj
 ET
 BT
 /F0 11 Tf
-265.991 164.373 Td
+255.475 502.931 Td
 (gebruikt) Tj
 ET
 BT
 /F0 11 Tf
-305.404 164.373 Td
+294.888 502.931 Td
+(om) Tj
+ET
+BT
+/F0 11 Tf
+311.696 502.931 Td
+(de) Tj
+ET
+BT
+/F0 11 Tf
+324.830 502.931 Td
+(hoeveelheid) Tj
+ET
+BT
+/F0 11 Tf
+380.732 502.931 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+429.308 502.931 Td
+(te) Tj
+ET
+BT
+/F0 11 Tf
+440.000 502.931 Td
+(wijzigen.) Tj
+ET
+BT
+/F0 11 Tf
+84.524 487.542 Td
+(Standaard) Tj
+ET
+BT
+/F0 11 Tf
+131.263 487.542 Td
+(is) Tj
+ET
+BT
+/F0 11 Tf
+141.350 487.542 Td
+('normale') Tj
+ET
+BT
+/F0 11 Tf
+187.473 487.542 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+236.049 487.542 Td
+(\(geen) Tj
+ET
+BT
+/F0 11 Tf
+263.230 487.542 Td
+(optie\).) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 441.375 Td
+(-s) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 441.375 Td
+(Stil,) Tj
+ET
+BT
+/F0 11 Tf
+141.064 441.375 Td
+(\(volkomen) Tj
+ET
+BT
+/F0 11 Tf
+191.477 441.375 Td
+(stil\)) Tj
+ET
+BT
+/F0 11 Tf
+211.343 441.375 Td
+(toon) Tj
+ET
+BT
+/F0 11 Tf
+233.651 441.375 Td
+(geen) Tj
+ET
+BT
+/F0 11 Tf
+257.169 441.375 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+305.745 441.375 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+328.042 441.375 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+344.234 441.375 Td
+(verwerken) Tj
+ET
+BT
+/F0 11 Tf
+393.404 441.375 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+412.038 441.375 Td
+(bestanden,) Tj
+ET
+BT
+/F0 11 Tf
+461.527 441.375 Td
+(zelfs) Tj
+ET
+BT
+/F0 11 Tf
+485.045 441.375 Td
+(geen) Tj
+ET
+BT
+/F0 11 Tf
+120.274 425.986 Td
+(foutmeldingen.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 395.208 Td
+(-q) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.890 395.208 Td
+(Beperkt,) Tj
+ET
+BT
+/F0 11 Tf
+161.216 395.208 Td
+(toon) Tj
+ET
+BT
+/F0 11 Tf
+183.524 395.208 Td
+(geen) Tj
+ET
+BT
+/F0 11 Tf
+207.042 395.208 Td
+(gedetailleerde) Tj
+ET
+BT
+/F0 11 Tf
+271.491 395.208 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+320.067 395.208 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+342.364 395.208 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+358.556 395.208 Td
+(verwerken) Tj
+ET
+BT
+/F0 11 Tf
+407.726 395.208 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+426.360 395.208 Td
+(bestanden.) Tj
+ET
+BT
+/F0 11 Tf
+123.024 379.819 Td
+(Er) Tj
+ET
+BT
+/F0 11 Tf
+136.158 379.819 Td
 (wordt) Tj
 ET
 BT
 /F0 11 Tf
-333.817 164.373 Td
-(tevens:) Tj
+164.571 379.819 Td
+(alleen) Tj
 ET
+BT
+/F0 11 Tf
+193.589 379.819 Td
+(een) Tj
+ET
+BT
+/F0 11 Tf
+211.607 379.819 Td
+(samenvatting) Tj
+ET
+BT
+/F0 11 Tf
+273.020 379.819 Td
+(getoond.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 349.041 Td
+(-v) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 349.041 Td
+(Uitgebreid,) Tj
+ET
+BT
+/F0 11 Tf
+172.821 349.041 Td
+(toon) Tj
+ET
+BT
+/F0 11 Tf
+195.129 349.041 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+243.705 349.041 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+266.002 349.041 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+282.194 349.041 Td
+(verwerken) Tj
+ET
+BT
+/F0 11 Tf
+331.364 349.041 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+349.998 349.041 Td
+(bestanden.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 318.263 Td
+(-e) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 318.263 Td
+(Zeer) Tj
+ET
+BT
+/F0 11 Tf
+143.176 318.263 Td
+(uitgebreid,) Tj
+ET
+BT
+/F0 11 Tf
+193.281 318.263 Td
+(toon) Tj
+ET
+BT
+/F0 11 Tf
+215.589 318.263 Td
+(uitgebreide) Tj
+ET
+BT
+/F0 11 Tf
+267.828 318.263 Td
+(informatie) Tj
+ET
+BT
+/F0 11 Tf
+316.404 318.263 Td
+(over) Tj
+ET
+BT
+/F0 11 Tf
+338.701 318.263 Td
+(het) Tj
+ET
+BT
+/F0 11 Tf
+354.893 318.263 Td
+(verwerken) Tj
+ET
+BT
+/F0 11 Tf
+404.063 318.263 Td
+(van) Tj
+ET
+BT
+/F0 11 Tf
+422.697 318.263 Td
+(bestanden..) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+81.774 272.096 Td
+(-c) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+120.274 272.096 Td
+(Controleer) Tj
+ET
+BT
+/F0 11 Tf
+170.071 272.096 Td
+(alleen,) Tj
+ET
+BT
+/F0 11 Tf
+201.839 272.096 Td
+(droogloop) Tj
+ET
+BT
+/F0 11 Tf
+249.810 272.096 Td
+(die) Tj
+ET
+BT
+/F0 11 Tf
+266.002 272.096 Td
+(laten) Tj
+ET
+BT
+/F0 11 Tf
+290.136 272.096 Td
+(zien) Tj
+ET
+BT
+/F0 11 Tf
+311.212 272.096 Td
+(wat) Tj
+ET
+BT
+/F0 11 Tf
+329.846 272.096 Td
+(er) Tj
+ET
+BT
+/F0 11 Tf
+341.143 272.096 Td
+(had) Tj
+ET
+BT
+/F0 11 Tf
+359.777 272.096 Td
+(moeten) Tj
+ET
+BT
+/F0 11 Tf
+394.911 272.096 Td
+(gebeuren.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+68.024 225.929 Td
+(CONTEXT) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+81.774 210.540 Td
+(Java) Tj
+ET
+BT
+/F0 11 Tf
+104.071 210.540 Td
+(8+) Tj
+ET
+BT
+/F0 11 Tf
+118.525 210.540 Td
+(dient) Tj
+ET
+BT
+/F0 11 Tf
+143.275 210.540 Td
+(te) Tj
+ET
+BT
+/F0 11 Tf
+153.967 210.540 Td
+(zijn) Tj
+ET
+BT
+/F0 11 Tf
+173.217 210.540 Td
+(ge") Tj
+ET
+BT
+/F0 11 Tf
+184.316 210.540 Td
+(i) Tj
+ET
+BT
+/F0 11 Tf
+188.089 210.540 Td
+(nstalleerd.) Tj
+ET
+BT
+/F0 11 Tf
+84.524 195.151 Td
+(Musescore) Tj
+ET
+BT
+/F0 11 Tf
+134.926 195.151 Td
+(dient) Tj
+ET
+BT
+/F0 11 Tf
+159.676 195.151 Td
+(te) Tj
+ET
+BT
+/F0 11 Tf
+170.368 195.151 Td
+(zijn) Tj
+ET
+BT
+/F0 11 Tf
+189.618 195.151 Td
+(ge") Tj
+ET
+BT
+/F0 11 Tf
+200.717 195.151 Td
+(i) Tj
+ET
+BT
+/F0 11 Tf
+204.490 195.151 Td
+(nstalleerd) Tj
+ET
+BT
+/F0 11 Tf
+250.008 195.151 Td
+(\(see) Tj
+ET
+BT
+/F0 11 Tf
+270.468 195.151 Td
+(https://musescore.org\).) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+68.024 148.984 Td
+(OPMERKINGEN) Tj
+ET
+BT
+/F1 11 Tf
+156.332 148.984 Td
+(T.A.V.) Tj
+ET
+BT
+/F1 11 Tf
+190.553 148.984 Td
+(DE) Tj
+ET
+BT
+/F1 11 Tf
+208.582 148.984 Td
+(IMPLEMENTATIE) Tj
+ET
+/F0 11 Tf
 BT
 /F0 11 Tf
 81.774 133.595 Td
-(MyScore.html) Tj
+(Gebruikte) Tj
 ET
 BT
 /F0 11 Tf
-81.774 118.206 Td
-(gegenereerd.) Tj
+128.513 133.595 Td
+(bibliotheken:) Tj
+ET
+BT
+/F0 11 Tf
+120.274 102.817 Td
+(Xerces2) Tj
+ET
+BT
+/F0 11 Tf
+159.060 102.817 Td
+(Java) Tj
+ET
+BT
+/F0 11 Tf
+181.357 102.817 Td
+(2.12.1) Tj
+ET
+BT
+/F0 11 Tf
+211.607 102.817 Td
+(\(http://xerces.apache.org/xerces2-j/\)) Tj
 ET
 /F0 11 Tf
 BT
@@ -2444,17 +2686,17 @@ BT
 ET
 BT
 /F0 11 Tf
-267.036 36.245 Td
-(February) Tj
+275.286 36.245 Td
+(March) Tj
 ET
 BT
 /F0 11 Tf
-309.496 36.245 Td
-(15,) Tj
+306.746 36.245 Td
+(3,) Tj
 ET
 BT
 /F0 11 Tf
-325.996 36.245 Td
+317.746 36.245 Td
 (2021) Tj
 ET
 BT
@@ -2470,7 +2712,7 @@ ET
 endstream
 endobj
 16 0 obj
-4490
+8994
 endobj
 17 0 obj
 <<
@@ -2498,388 +2740,263 @@ endobj
 stream
 BT
 /F0 11 Tf
-81.774 702.988 Td
-(Creates) Tj
+120.274 702.988 Td
+(Saxon-EE) Tj
 ET
 BT
 /F0 11 Tf
-117.513 702.988 Td
-(subdirectories:) Tj
+167.629 702.988 Td
+(10) Tj
 ET
 BT
 /F0 11 Tf
-81.774 672.210 Td
-(js,) Tj
+181.379 702.988 Td
+(\(http://saxon.sourceforge.net\)) Tj
 ET
 BT
 /F0 11 Tf
-81.774 641.432 Td
-(css) Tj
+120.274 672.210 Td
+(Apache) Tj
 ET
 BT
 /F0 11 Tf
-81.774 610.654 Td
-(images) Tj
+156.618 672.210 Td
+(Ant) Tj
 ET
+BT
+/F0 11 Tf
+175.868 672.210 Td
+(1.10.9) Tj
+ET
+BT
+/F0 11 Tf
+206.118 672.210 Td
+(\(https://ant.apache.org\)) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+68.024 626.043 Td
+(RETURN) Tj
+ET
+BT
+/F1 11 Tf
+117.216 626.043 Td
+(VALUES) Tj
+ET
+BT
+/F1 11 Tf
+68.024 610.654 Td
+(BESTANDEN) Tj
+ET
+/F0 11 Tf
 BT
 /F0 11 Tf
 81.774 595.265 Td
-(and) Tj
+(Voor) Tj
 ET
 BT
 /F0 11 Tf
-100.408 595.265 Td
-(installs) Tj
+107.129 595.265 Td
+(iedere) Tj
 ET
 BT
 /F0 11 Tf
-134.332 595.265 Td
-(javascript,) Tj
+136.752 595.265 Td
+(partituur) Tj
 ET
 BT
 /F0 11 Tf
-182.600 595.265 Td
-(css-stylesheet) Tj
+177.386 595.265 Td
+('MyScore.mscz') Tj
 ET
 BT
 /F0 11 Tf
-245.839 595.265 Td
-(en) Tj
+253.143 595.265 Td
+(\(of) Tj
 ET
 BT
 /F0 11 Tf
-258.973 595.265 Td
-(svg-images) Tj
+268.719 595.265 Td
+('MyScore.mscx'\)) Tj
 ET
 BT
 /F0 11 Tf
-81.774 564.487 Td
-(js/ms_player.js) Tj
+348.755 595.265 Td
+(worden) Tj
 ET
 BT
 /F0 11 Tf
-81.774 533.709 Td
-(css/ms_player.css) Tj
+384.494 595.265 Td
+(onderstaande) Tj
 ET
 BT
 /F0 11 Tf
-81.774 502.931 Td
-(images/media-playback-loop.svg) Tj
+445.280 595.265 Td
+(bestanden) Tj
 ET
 BT
 /F0 11 Tf
-81.774 472.153 Td
-(images/media-playback-metronome.svg) Tj
+81.774 579.876 Td
+(gegenereerd:) Tj
 ET
 BT
 /F0 11 Tf
-81.774 441.375 Td
-(images/media-playback-pause.svg) Tj
+81.774 549.098 Td
+(MyScore.metajson) Tj
+ET
+BT
+/F0 11 Tf
+81.774 518.320 Td
+(MyScore_space.json) Tj
+ET
+BT
+/F0 11 Tf
+81.774 487.542 Td
+(MyScore-1.png) Tj
+ET
+BT
+/F0 11 Tf
+81.774 456.764 Td
+(MyScore-2.png) Tj
 ET
 BT
 /F0 11 Tf
 81.774 410.597 Td
-(images/media-playback-start.svg) Tj
+(MyScore.ogg) Tj
 ET
 BT
 /F0 11 Tf
 81.774 379.819 Td
-(images/media-skip-backward.svg) Tj
+(MyScore.mp3) Tj
 ET
 BT
 /F0 11 Tf
-81.774 349.041 Td
-(images/media-skip-forward.svg) Tj
+81.774 364.430 Td
+(Als) Tj
+ET
+BT
+/F0 11 Tf
+99.803 364.430 Td
+([) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+103.466 364.430 Td
+(-I) Tj
+ET
+/F2 11 Tf
+BT
+/F2 11 Tf
+114.158 364.430 Td
+('index-bestandsnaam') Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+211.915 364.430 Td
+(]) Tj
+ET
+BT
+/F0 11 Tf
+218.328 364.430 Td
+(niet) Tj
+ET
+BT
+/F0 11 Tf
+237.578 364.430 Td
+(wordt) Tj
+ET
+BT
+/F0 11 Tf
+265.991 364.430 Td
+(gebruikt) Tj
+ET
+BT
+/F0 11 Tf
+305.404 364.430 Td
+(wordt) Tj
+ET
+BT
+/F0 11 Tf
+333.817 364.430 Td
+(tevens:) Tj
+ET
+BT
+/F0 11 Tf
+81.774 333.652 Td
+(MyScore.html) Tj
 ET
 BT
 /F0 11 Tf
 81.774 318.263 Td
-(images/window-close.svg) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 287.485 Td
-(EXIT) Tj
-ET
-BT
-/F1 11 Tf
-97.669 287.485 Td
-(STATUS) Tj
-ET
-/F0 11 Tf
-BT
-/F0 11 Tf
-81.774 272.096 Td
-(If) Tj
+(gegenereerd.) Tj
 ET
 BT
 /F0 11 Tf
-91.850 272.096 Td
-(an) Tj
+81.774 287.485 Td
+(Creates) Tj
 ET
 BT
 /F0 11 Tf
-104.984 272.096 Td
-(error) Tj
+117.513 287.485 Td
+(subdirectories:) Tj
 ET
 BT
 /F0 11 Tf
-129.107 272.096 Td
-(occurs) Tj
+81.774 256.707 Td
+(js,) Tj
 ET
-BT
-/F0 11 Tf
-160.567 272.096 Td
-(return) Tj
-ET
-BT
-/F0 11 Tf
-189.585 272.096 Td
-(code) Tj
-ET
-BT
-/F0 11 Tf
-213.103 272.096 Td
-(will) Tj
-ET
-BT
-/F0 11 Tf
-232.969 272.096 Td
-(be) Tj
-ET
-BT
-/F0 11 Tf
-246.103 272.096 Td
-(non-zero.) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 241.318 Td
-(EXAMPLES) Tj
-ET
-/F0 11 Tf
 BT
 /F0 11 Tf
 81.774 225.929 Td
-(To) Tj
-ET
-BT
-/F0 11 Tf
-96.745 225.929 Td
-(generate) Tj
-ET
-BT
-/F0 11 Tf
-136.752 225.929 Td
-(html-files) Tj
-ET
-BT
-/F0 11 Tf
-182.281 225.929 Td
-(for) Tj
-ET
-BT
-/F0 11 Tf
-197.857 225.929 Td
-(all) Tj
-ET
-BT
-/F0 11 Tf
-211.607 225.929 Td
-(scores) Tj
-ET
-BT
-/F0 11 Tf
-241.846 225.929 Td
-(in) Tj
-ET
-BT
-/F0 11 Tf
-253.154 225.929 Td
-(directory) Tj
-ET
-BT
-/F0 11 Tf
-295.614 225.929 Td
-(MyMusic) Tj
-ET
-BT
-/F0 11 Tf
-341.143 225.929 Td
-(and) Tj
-ET
-BT
-/F0 11 Tf
-359.777 225.929 Td
-(place) Tj
-ET
-BT
-/F0 11 Tf
-385.737 225.929 Td
-(then) Tj
-ET
-BT
-/F0 11 Tf
-407.429 225.929 Td
-(in) Tj
-ET
-BT
-/F0 11 Tf
-418.737 225.929 Td
-(directory) Tj
-ET
-BT
-/F0 11 Tf
-461.197 225.929 Td
-(Sites) Tj
-ET
-BT
-/F0 11 Tf
-485.342 225.929 Td
-(:) Tj
+(css) Tj
 ET
 BT
 /F0 11 Tf
 81.774 195.151 Td
-(m2h) Tj
-ET
-BT
-/F0 11 Tf
-104.082 195.151 Td
-(-d) Tj
-ET
-BT
-/F0 11 Tf
-115.995 195.151 Td
-(Sites) Tj
-ET
-BT
-/F0 11 Tf
-140.140 195.151 Td
-(MyMusic/*.mscz) Tj
+(images) Tj
 ET
 BT
 /F0 11 Tf
 81.774 179.762 Td
-(To) Tj
-ET
-BT
-/F0 11 Tf
-96.745 179.762 Td
-(generate) Tj
-ET
-BT
-/F0 11 Tf
-136.752 179.762 Td
-(html-files) Tj
-ET
-BT
-/F0 11 Tf
-182.281 179.762 Td
-(for) Tj
-ET
-BT
-/F0 11 Tf
-197.857 179.762 Td
-(all) Tj
-ET
-BT
-/F0 11 Tf
-211.607 179.762 Td
-(scores) Tj
-ET
-BT
-/F0 11 Tf
-241.846 179.762 Td
-(in) Tj
-ET
-BT
-/F0 11 Tf
-253.154 179.762 Td
-(directory) Tj
-ET
-BT
-/F0 11 Tf
-295.614 179.762 Td
-(MyMusic) Tj
-ET
-BT
-/F0 11 Tf
-341.143 179.762 Td
 (and) Tj
 ET
 BT
 /F0 11 Tf
-359.777 179.762 Td
-(all) Tj
+100.408 179.762 Td
+(installs) Tj
 ET
 BT
 /F0 11 Tf
-373.527 179.762 Td
-(subdirectories) Tj
+134.332 179.762 Td
+(javascript,) Tj
 ET
 BT
 /F0 11 Tf
-437.987 179.762 Td
-(and) Tj
+182.600 179.762 Td
+(css-stylesheet) Tj
 ET
 BT
 /F0 11 Tf
-456.621 179.762 Td
-(place) Tj
+245.839 179.762 Td
+(en) Tj
 ET
 BT
 /F0 11 Tf
-482.581 179.762 Td
-(then) Tj
+258.973 179.762 Td
+(svg-images) Tj
 ET
 BT
 /F0 11 Tf
-504.273 179.762 Td
-(in) Tj
+81.774 148.984 Td
+(js/ms_player.js) Tj
 ET
 BT
 /F0 11 Tf
-81.774 164.373 Td
-(directory) Tj
-ET
-BT
-/F0 11 Tf
-124.234 164.373 Td
-(Sites) Tj
-ET
-BT
-/F0 11 Tf
-148.379 164.373 Td
-(:) Tj
-ET
-BT
-/F0 11 Tf
-81.774 133.595 Td
-(m2h) Tj
-ET
-BT
-/F0 11 Tf
-104.082 133.595 Td
-(-d) Tj
-ET
-BT
-/F0 11 Tf
-115.995 133.595 Td
-(Sites) Tj
-ET
-BT
-/F0 11 Tf
-140.140 133.595 Td
-(MyMusic/**/*.mscz) Tj
-ET
-/F1 11 Tf
-BT
-/F1 11 Tf
-68.024 102.817 Td
-(DIAGNOSTICS) Tj
+81.774 118.206 Td
+(css/ms_player.css) Tj
 ET
 /F0 11 Tf
 BT
@@ -2919,17 +3036,17 @@ BT
 ET
 BT
 /F0 11 Tf
-267.036 36.245 Td
-(February) Tj
+275.286 36.245 Td
+(March) Tj
 ET
 BT
 /F0 11 Tf
-309.496 36.245 Td
-(15,) Tj
+306.746 36.245 Td
+(3,) Tj
 ET
 BT
 /F0 11 Tf
-325.996 36.245 Td
+317.746 36.245 Td
 (2021) Tj
 ET
 BT
@@ -2945,7 +3062,7 @@ ET
 endstream
 endobj
 20 0 obj
-4339
+3167
 endobj
 21 0 obj
 <<
@@ -2972,49 +3089,369 @@ endobj
 >>
 stream
 BT
+/F0 11 Tf
+81.774 702.988 Td
+(images/media-playback-loop.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 672.210 Td
+(images/media-playback-metronome.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 641.432 Td
+(images/media-playback-pause.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 610.654 Td
+(images/media-playback-start.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 579.876 Td
+(images/media-skip-backward.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 549.098 Td
+(images/media-skip-forward.svg) Tj
+ET
+BT
+/F0 11 Tf
+81.774 518.320 Td
+(images/window-close.svg) Tj
+ET
 /F1 11 Tf
-68.024 702.988 Td
+BT
+/F1 11 Tf
+68.024 487.542 Td
+(EXIT) Tj
+ET
+BT
+/F1 11 Tf
+97.669 487.542 Td
+(STATUS) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+81.774 472.153 Td
+(If) Tj
+ET
+BT
+/F0 11 Tf
+91.850 472.153 Td
+(an) Tj
+ET
+BT
+/F0 11 Tf
+104.984 472.153 Td
+(error) Tj
+ET
+BT
+/F0 11 Tf
+129.107 472.153 Td
+(occurs) Tj
+ET
+BT
+/F0 11 Tf
+160.567 472.153 Td
+(return) Tj
+ET
+BT
+/F0 11 Tf
+189.585 472.153 Td
+(code) Tj
+ET
+BT
+/F0 11 Tf
+213.103 472.153 Td
+(will) Tj
+ET
+BT
+/F0 11 Tf
+232.969 472.153 Td
+(be) Tj
+ET
+BT
+/F0 11 Tf
+246.103 472.153 Td
+(non-zero.) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+68.024 441.375 Td
+(EXAMPLES) Tj
+ET
+/F0 11 Tf
+BT
+/F0 11 Tf
+81.774 425.986 Td
+(To) Tj
+ET
+BT
+/F0 11 Tf
+96.745 425.986 Td
+(generate) Tj
+ET
+BT
+/F0 11 Tf
+136.752 425.986 Td
+(html-files) Tj
+ET
+BT
+/F0 11 Tf
+182.281 425.986 Td
+(for) Tj
+ET
+BT
+/F0 11 Tf
+197.857 425.986 Td
+(all) Tj
+ET
+BT
+/F0 11 Tf
+211.607 425.986 Td
+(scores) Tj
+ET
+BT
+/F0 11 Tf
+241.846 425.986 Td
+(in) Tj
+ET
+BT
+/F0 11 Tf
+253.154 425.986 Td
+(directory) Tj
+ET
+BT
+/F0 11 Tf
+295.614 425.986 Td
+(MyMusic) Tj
+ET
+BT
+/F0 11 Tf
+341.143 425.986 Td
+(and) Tj
+ET
+BT
+/F0 11 Tf
+359.777 425.986 Td
+(place) Tj
+ET
+BT
+/F0 11 Tf
+385.737 425.986 Td
+(then) Tj
+ET
+BT
+/F0 11 Tf
+407.429 425.986 Td
+(in) Tj
+ET
+BT
+/F0 11 Tf
+418.737 425.986 Td
+(directory) Tj
+ET
+BT
+/F0 11 Tf
+461.197 425.986 Td
+(Sites) Tj
+ET
+BT
+/F0 11 Tf
+485.342 425.986 Td
+(:) Tj
+ET
+BT
+/F0 11 Tf
+81.774 395.208 Td
+(m2h) Tj
+ET
+BT
+/F0 11 Tf
+104.082 395.208 Td
+(-d) Tj
+ET
+BT
+/F0 11 Tf
+115.995 395.208 Td
+(Sites) Tj
+ET
+BT
+/F0 11 Tf
+140.140 395.208 Td
+(MyMusic/*.mscz) Tj
+ET
+BT
+/F0 11 Tf
+81.774 379.819 Td
+(To) Tj
+ET
+BT
+/F0 11 Tf
+96.745 379.819 Td
+(generate) Tj
+ET
+BT
+/F0 11 Tf
+136.752 379.819 Td
+(html-files) Tj
+ET
+BT
+/F0 11 Tf
+182.281 379.819 Td
+(for) Tj
+ET
+BT
+/F0 11 Tf
+197.857 379.819 Td
+(all) Tj
+ET
+BT
+/F0 11 Tf
+211.607 379.819 Td
+(scores) Tj
+ET
+BT
+/F0 11 Tf
+241.846 379.819 Td
+(in) Tj
+ET
+BT
+/F0 11 Tf
+253.154 379.819 Td
+(directory) Tj
+ET
+BT
+/F0 11 Tf
+295.614 379.819 Td
+(MyMusic) Tj
+ET
+BT
+/F0 11 Tf
+341.143 379.819 Td
+(and) Tj
+ET
+BT
+/F0 11 Tf
+359.777 379.819 Td
+(all) Tj
+ET
+BT
+/F0 11 Tf
+373.527 379.819 Td
+(subdirectories) Tj
+ET
+BT
+/F0 11 Tf
+437.987 379.819 Td
+(and) Tj
+ET
+BT
+/F0 11 Tf
+456.621 379.819 Td
+(place) Tj
+ET
+BT
+/F0 11 Tf
+482.581 379.819 Td
+(then) Tj
+ET
+BT
+/F0 11 Tf
+504.273 379.819 Td
+(in) Tj
+ET
+BT
+/F0 11 Tf
+81.774 364.430 Td
+(directory) Tj
+ET
+BT
+/F0 11 Tf
+124.234 364.430 Td
+(Sites) Tj
+ET
+BT
+/F0 11 Tf
+148.379 364.430 Td
+(:) Tj
+ET
+BT
+/F0 11 Tf
+81.774 333.652 Td
+(m2h) Tj
+ET
+BT
+/F0 11 Tf
+104.082 333.652 Td
+(-d) Tj
+ET
+BT
+/F0 11 Tf
+115.995 333.652 Td
+(Sites) Tj
+ET
+BT
+/F0 11 Tf
+140.140 333.652 Td
+(MyMusic/**/*.mscz) Tj
+ET
+/F1 11 Tf
+BT
+/F1 11 Tf
+68.024 302.874 Td
+(DIAGNOSTICS) Tj
+ET
+BT
+/F1 11 Tf
+68.024 287.485 Td
 (ERRORS) Tj
 ET
 BT
 /F1 11 Tf
-68.024 687.599 Td
+68.024 272.096 Td
 (LICENSE) Tj
 ET
 /F0 11 Tf
 BT
 /F0 11 Tf
-81.774 672.210 Td
+81.774 256.707 Td
 (Creative) Tj
 ET
 BT
 /F0 11 Tf
-121.792 672.210 Td
+121.792 256.707 Td
 (Commons) Tj
 ET
 BT
 /F0 11 Tf
-169.774 672.210 Td
+169.774 256.707 Td
 (Attribution-NonCommercial-ShareAlike) Tj
 ET
 BT
 /F0 11 Tf
-351.560 672.210 Td
+351.560 256.707 Td
 (4.0) Tj
 ET
 BT
 /F0 11 Tf
-368.060 672.210 Td
+368.060 256.707 Td
 (International) Tj
 ET
 BT
 /F0 11 Tf
-427.020 672.210 Td
+427.020 256.707 Td
 (See) Tj
 ET
 BT
 /F0 11 Tf
-81.774 656.821 Td
+81.774 241.318 Td
 (https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode) Tj
 ET
 /F0 11 Tf
@@ -3055,17 +3492,17 @@ BT
 ET
 BT
 /F0 11 Tf
-267.036 36.245 Td
-(February) Tj
+275.286 36.245 Td
+(March) Tj
 ET
 BT
 /F0 11 Tf
-309.496 36.245 Td
-(15,) Tj
+306.746 36.245 Td
+(3,) Tj
 ET
 BT
 /F0 11 Tf
-325.996 36.245 Td
+317.746 36.245 Td
 (2021) Tj
 ET
 BT
@@ -3081,7 +3518,7 @@ ET
 endstream
 endobj
 24 0 obj
-1096
+4212
 endobj
 25 0 obj
 <<
@@ -3120,32 +3557,32 @@ xref
 0 28
 0000000000 65535 f 
 0000000009 00000 n 
-0000029681 00000 n 
+0000033755 00000 n 
 0000000030 00000 n 
 0000000112 00000 n 
 0000000193 00000 n 
 0000000276 00000 n 
 0000000363 00000 n 
-0000008153 00000 n 
-0000008173 00000 n 
-0000008268 00000 n 
-0000008349 00000 n 
-0000018793 00000 n 
-0000018815 00000 n 
-0000018911 00000 n 
-0000018994 00000 n 
-0000023538 00000 n 
-0000023559 00000 n 
-0000023655 00000 n 
-0000023738 00000 n 
-0000028131 00000 n 
-0000028152 00000 n 
-0000028248 00000 n 
-0000028331 00000 n 
-0000029481 00000 n 
-0000029502 00000 n 
-0000029598 00000 n 
-0000029792 00000 n 
+0000008123 00000 n 
+0000008143 00000 n 
+0000008238 00000 n 
+0000008319 00000 n 
+0000016420 00000 n 
+0000016441 00000 n 
+0000016537 00000 n 
+0000016620 00000 n 
+0000025668 00000 n 
+0000025689 00000 n 
+0000025785 00000 n 
+0000025868 00000 n 
+0000029089 00000 n 
+0000029110 00000 n 
+0000029206 00000 n 
+0000029289 00000 n 
+0000033555 00000 n 
+0000033576 00000 n 
+0000033672 00000 n 
+0000033866 00000 n 
 trailer
 <<
 /Size 28
@@ -3153,5 +3590,5 @@ trailer
 /Info 1 0 R
 >>
 startxref
-29842
+33916
 %%EOF

@@ -24,7 +24,11 @@ for LANG in ${LANGUAGES}
 	export "LANG=${LANG}"
 	FILENAME="${NAME}_${LANG}"
 	mandoc -K utf-8 -T man -mdoc  "${FILENAME}.mdoc" >  "${FILENAME}.man.1"
+	ls -l "${FILENAME}.man.1"
 	mandoc -K utf-8 -T html -mdoc  "${FILENAME}.mdoc" >  "${FILENAME}.html"
+	ls -l "${FILENAME}.html"
 	mandoc -K utf-8 -T pdf -mdoc  "${FILENAME}.mdoc" >  "${FILENAME}.pdf"
-	java '-Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl' '-Djavax.xml.parsers.SAXParserFactory=org.apache.xerces.jaxp.SAXParserFactoryImpl' -cp "${LIB_DIR}/xml-apis.jar:${LIB_DIR}/xercesImpl.jar:${LIB_DIR}/saxon9he.jar"  "net.sf.saxon.Transform" "-s:${FILENAME}.html" "-xsl:m2h.xsl" "-o:../help/MuseScore2Html_Commandline_${LANG}.html"
+	ls -l "${FILENAME}.pdf"
+	java '-Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl' '-Djavax.xml.parsers.SAXParserFactory=org.apache.xerces.jaxp.SAXParserFactoryImpl' -cp "${LIB_DIR}/xml-apis.jar:${LIB_DIR}/xercesImpl.jar:${LIB_DIR}/saxon-he-10.3.jar"  "net.sf.saxon.Transform" "-s:${FILENAME}.html" "-xsl:m2h.xsl" "-o:../help/MuseScore2Html_Commandline_${LANG}.html"
+	ls -l ../help/MuseScore2Html_Commandline_${LANG}.html
 	done

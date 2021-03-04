@@ -13,11 +13,37 @@ public class ProcessArguments {
 	private void processInfo(Arguments.LOG_LEVEL useLogLevel, String message, int code) {
 		arguments.errors=arguments.errors|code;			
 		if (arguments.logLevel.ordinal()>=useLogLevel.ordinal()) {
-			if (processData == null) {
+			if (processData == null && arguments.interfaceType == Arguments.INTERFACE_TYPE.CLI) {
 				if (code>0) System.err.println(message);
 				else System.out.println(message);
 			} else arguments.logging.add(new Arguments.Logging(message,code));
 		}
+	}
+
+	public void showArguments() {
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.getKey("info.arguments"), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.osid", String.valueOf(arguments.config.getOSId())}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.language", arguments.language}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.loglevel", String.valueOf(arguments.logLevel)}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.interface", String.valueOf(arguments.interfaceType)}), 0);
+		if (arguments.cfgPath!=null) processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.configuration.path", arguments.cfgPath}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.configuration", String.valueOf(arguments.config!=null)}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.musescore", arguments.museScore}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.outputdirectory", arguments.outputDirectory}), 0);
+		if (arguments.scores.size()>0) {
+			for (int i=0; i<arguments.scores.size(); i++) {
+				processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"score.selected", arguments.scores.get(i)}), 0);
+			}
+		}
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.fileoption", String.valueOf(arguments.fileOption)}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.generatehtml", String.valueOf(arguments.generateHtml)}), 0);
+		if (arguments.indexFileName!=null) {
+			processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.indexfilename", arguments.indexFileName}), 0);
+		}
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.indexfile.all", String.valueOf(arguments.generateIndexAll)}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.indexfileoption", String.valueOf(arguments.indexFileOption)}), 0);
+		if (arguments.errors>0) processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.errors", String.valueOf(arguments.errors)}), 0);
+		if (arguments.checkOnly) processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.checkonly", String.valueOf(arguments.checkOnly)}), 0);
 	}
 
 	public ProcessArguments(String[] args, Arguments arguments, ProcessData processData) {
@@ -67,19 +93,26 @@ public class ProcessArguments {
 		
 		try {
 			Config config;
-			if (arguments.cfgPath!=null) {
-				if (arguments.language!=null) config=new Config(new Translations(arguments.language), arguments.cfgPath);
-				else config=new Config(arguments.cfgPath);
+			if (arguments.cfgPath != null) {
+				if (arguments.language!=null) config = new Config(new Translations(arguments.language), arguments.cfgPath);
+				else config = new Config(arguments.cfgPath);
+				arguments.translations = config.getTranslations();
 			} else {
-				if (arguments.language!=null) config=new Config(new Translations(arguments.language));
-				else config=new Config();
+				if (arguments.language != null) {
+					config = new Config(new Translations(arguments.language));
+					arguments.translations = config.getTranslations();
+				} else {
+					config = new Config();
+					arguments.translations = config.getTranslations();
+				}
 			}
 			arguments.config=config;
-			if (arguments.config!=null)
-			arguments.translations=arguments.config.getTranslations();
-			arguments.language = arguments.translations.getLanguage();
-			arguments.museScore = config.getMuseScore();
-			arguments.outputDirectory = config.getOutputDirectory();
+			if (arguments.config!=null) {
+				arguments.translations=arguments.config.getTranslations();
+				arguments.language = arguments.translations.getLanguage();
+				arguments.museScore = config.getMuseScore();
+				arguments.outputDirectory = config.getOutputDirectory();
+			}
 		} catch (Exception exc) {
 			exc.printStackTrace();
 			if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[]{"exception.config.error.message", exc.getMessage()}));
@@ -195,7 +228,7 @@ public class ProcessArguments {
 						} else {
 							arguments.generateHtml = true;
 							arguments.indexFileName=args[++i];
-							arguments.generateIndexFileOption = Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_AND_HTML;
+							arguments.generateIndexFileOption = Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_TO_HTML;
 							if (!arguments.generateHtml) processInfo(Arguments.LOG_LEVEL.QUIET, arguments.translations.translate(new String[] {"option.indexfile.nohtml", args[i]}),1);
 						}
 					} else {
@@ -285,16 +318,14 @@ public class ProcessArguments {
 						String a=args[i].toLowerCase();
 						if (a.endsWith(".mscz")||a.endsWith(".mscx")) {
 							arguments.scores.add(args[i]);
-							processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info", args[i]}),1);
-
 						} else processInfo(Arguments.LOG_LEVEL.QUIET, arguments.translations.translate(new String[] {"option.unknown", args[+i]}),0);
 					} else {
 						arguments.scores.add(args[i]);
-						processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info", args[i]}),0);
 					}
 					break;
 			}
 		}
+		showArguments();
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.parsing.ready"}),0);
 	}
 }

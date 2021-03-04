@@ -186,7 +186,6 @@ if (!("ms_player" in window)) {
 		}
 
 		MuseScorePlayer.prototype.resize=function(_this) {
-				console.log("Loaded " + _this.loaded);
 			if (_this.loaded < 3) {
 				console.log("Loaded " + _this.loaded);
 				return;
@@ -293,9 +292,10 @@ if (!("ms_player" in window)) {
 				if (_this.score_options.path) {
 					_this.score_path = _this.score_options.path;
 					if (!_this.score_path.endsWith("/")) _this.score_path+="/";
+					_this.image_skip_backward=_this.score_path+_this.image_skip_backward;
 					_this.image_play=_this.score_path+_this.image_play;
 					_this.image_pause=_this.score_path+_this.image_pause;
-					_this.image_rewind=_this.score_path+_this.image_rewind;
+					_this.image_skip_forward=_this.score_path+_this.image_skip_forward;
 					_this.image_metronome=_this.score_path+_this.image_metronome;
 					_this.image_loop=_this.score_path+_this.image_loop;
 					_this.image_close=_this.score_path+_this.image_close;
@@ -403,6 +403,7 @@ if (!("ms_player" in window)) {
 		}
 
 		MuseScorePlayer.prototype.createPlayer=function(_this) {
+			var _this=this
 			var controls, div, span, hr, br, label;
 
 			controls = document.createElement("div");
@@ -507,12 +508,10 @@ if (!("ms_player" in window)) {
 			_this.ms_player.appendChild(_this.ms_score_div);
 			
 			window.addEventListener("resize", function() {
-				console.log("Event resize "+_this.score_name);
 				_this.resize(_this);
 			});
 
 			document.addEventListener("keydown" , function(e) {
-				console.log("onkeydown");
 				if ((e || window.event).code === "Escape") {
 				_this.togglePlay(_this);
 				}
@@ -623,7 +622,6 @@ if (!("ms_player" in window)) {
 		}
 		
 		MuseScorePlayer.prototype.isLoaded=function (_this) {
-			console.log("isloaded "+_this.loaded);
 			if (_this.errors) {
 				_this.ms_player.removeChild(_this.ms_loader);
 				if (_this.errorMessage!="") _this.ms_player.innerHTML=_this.errorMessage;
@@ -646,7 +644,6 @@ if (!("ms_player" in window)) {
 					});
 					return;
 				case 3:
-					console.log("isloaded images "+_this.loaded);
 					_this.ms_loader.remove();
 					_this.createPlayer(_this);
 					var p = _this.info.pages;

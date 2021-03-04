@@ -7,15 +7,22 @@
 
 .Sh KORTE INHOUD
 m2h
+.Op Fl V
 .Op Fl gui | cli
 .Op Fl C Ar 'configuratie-bestand'
 .Op Fl l Ar 'taal'
 .Op Fl m Ar 'musescore'
 .Op Fl o Ar 'uitvoermap'
+ 
 .Op Fl i Ar 'index-bestandsnaam' | Fl I Ar 'index-bestandsnaam'
+.Op Fl P | N | R
+.Op Fl a
+ 
+.Op Fl x
 .Op Fl p | n | r
 .Op Fl v | q | s
 .Op Fl c
+ 
 .Op partituur ...
 
 .Sh OMSCHRIJVING
@@ -24,6 +31,9 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om 
 .Pp
 Opties:
 .Bl -tag -width Ds
+.It Fl V
+Toon versie.
+ 
 .It Fl gui
 Gebruik de grafische gebruikersinterface (standaard).
 .It Fl cli
@@ -52,10 +62,28 @@ Grafische gebruikersinterface: gebruikersmap.
 Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt voor iedere partituur een html-bestand gegenereerd.
 .Bl -tag -width Ds
 .It Fl i Ar 'index-bestandsnaam'
-Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
-.It Fl I Ar 'index-bestandsnaam'
 Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
- Er wordt GEEN html-bestand per partituur gegenereerd, wel de andere benodigde bestanden om de partituren te laten zien (via 'ShowScore.html').
+  Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden geïnstalleerd in map 'uitvoermap'.
+.It Fl I Ar 'index-bestandsnaam'
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
+  Bestand 'css/ms_player_index.css' zal worden geïnstalleerd in map 'uitvoermap'.
+
+ 
+.It Fl P
+Bewaar het aanwezige indexbestand (standaard).
+.It Fl N
+Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde bestanden nieuwer zijn dan het indexbestand.
+.It Fl R
+Vervang het aanwezige indexbestand.
+ 
+.It Fl a
+Genereer een indexbestand voor alle gegenereerde bestanden, inclusief reeds aanwezige.
+.El
+ 
+.Bl -tag -width Ds
+Voor bestanden die worden gegenereerd:
+.It Fl x
+Genereer geen html-bestand.
  
 .It Fl p
 Bewaar bestaande bestanden  (standaard).
@@ -73,19 +101,21 @@ Informatie over het verwerken van standaards naar informatie over gegenereerde/g
 .It
 Informatie over fouten wordt als diagnostische berichten naar standaardfout gestuurd.
 .El
-Standaard is 'normale' informatie. 
  Opties
-.Op Fl v | q | s
+.Op Fl v | q | s | e
 kunnen worden gebruikt om de hoeveelheid informatie te wijzigen.
+ Standaard is 'normale' informatie (geen optie). 
 
 .Bl -tag -width Ds
-.It Fl v
-Uitgebreid, toon uitgebreide informatie over het verwerken van bestanden.
+.It Fl s
+Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen. 
 .It Fl q
 Beperkt, toon geen gedetailleerde informatie over het verwerken van bestanden.
  Er wordt alleen een samenvatting getoond.
-.It Fl s
-Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen. 
+.It Fl v
+Uitgebreid, toon informatie over het verwerken van bestanden.
+.It Fl e
+Zeer uitgebreid, toon uitgebreide informatie over het verwerken van bestanden..
  
 .It Fl c
 Controleer alleen, droogloop die laten zien wat er had moeten gebeuren. 

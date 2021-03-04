@@ -39,9 +39,34 @@ public class Gui extends JFrame {
 		setVisible(true);
 	}
 
+	public void setDefaultLookAndFeel() {
+		String uiClassName;
+		if (arguments.config.getOSId()==Config.OSId.WINDOWS) {
+			uiClassName = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel";
+		} else if (arguments.config.getOSId()==Config.OSId.OSX) {
+			uiClassName = "com.apple.laf.AquaLookAndFeel";
+		} else if (arguments.config.getOSId()==Config.OSId.UNIX) {
+			uiClassName = "javax.swing.plaf.metal.MetalLookAndFeel";
+		} else {
+			uiClassName = UIManager.getSystemLookAndFeelClassName();
+		}
+		if (uiClassName.equals(UIManager.getLookAndFeel().getClass().getName())) {
+			//Desired L&F is already set
+			return;
+		}
+		try {
+			UIManager.setLookAndFeel(uiClassName);
+		} catch (Exception ex) {
+			System.err.println("Cannot set L&F " + uiClassName);
+			System.err.println("Exception:" + ex.getMessage());
+			ex.printStackTrace();
+		}
+	}
+	
 	public void showGui() {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
+				setDefaultLookAndFeel();
 				//Turn off metal's use of bold fonts
 				UIManager.put("swing.boldMetal", Boolean.FALSE);
 				setUp();

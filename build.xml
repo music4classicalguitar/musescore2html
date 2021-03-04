@@ -10,7 +10,7 @@
 	</uptodate>
 	
     <property name="jar.filename" value="${prefix.filename}"/>
-    <property name="build.dist.sub.dir" value="${prefix.filename}_${major.version}.${minor.version}"/>
+    <property name="build.dist.sub.dir" value="${prefix.filename}_${version.major}.${version.minor}"/>
 
      <target name="updateversion" description="Update version in java sources" unless="source.version">
          <echo file="${src.dir}/musescore2html/Version.java">package musescore2html;
@@ -19,8 +19,9 @@ public class Version {
 	public static final String
 		NAME = "MuseScore2Html",
 		VENDOR_ID = NAME,
-		MAJOR_VERSION = "${major.version}",
-		MINOR_VERSION = "${minor.version}",
+		MAJOR_VERSION = "${version.major}",
+		MINOR_VERSION = "${version.minor}",
+		PATCH = "${patch}",
 		VERSION = MAJOR_VERSION+"."+MINOR_VERSION,
 		APPLICATION_ID = NAME+MAJOR_VERSION;
 }
@@ -90,12 +91,12 @@ public class Version {
 
      <target name="dist_bin" description="Create bin dist" depends="prepare_dist_bin">
          <mkdir dir="${dist.dir}"/>
-     	 <zip destfile="${dist.dir}/${prefix.filename}_${major.version}.${minor.version}_bin.zip" basedir="${build.dir}/dist/bin/${build.dist.sub.dir}"/>
+     	 <zip destfile="${dist.dir}/${prefix.filename}_${version.major}.${version.minor}_bin.zip" basedir="${build.dir}/dist/bin/${build.dist.sub.dir}"/>
     </target>
 
      <target name="dist_src" description="Create src dist" depends="prepare_dist_src">
          <mkdir dir="${dist.dir}"/>
-     	 <zip destfile="${dist.dir}/${prefix.filename}_${major.version}.${minor.version}_src.zip" basedir="${build.dir}/dist/src/${build.dist.sub.dir}"/>
+     	 <zip destfile="${dist.dir}/${prefix.filename}_${version.major}.${version.minor}_src.zip" basedir="${build.dir}/dist/src/${build.dist.sub.dir}"/>
     </target>
 
     <target name="dist" description="Create dist" depends="dist_bin, dist_src" >
@@ -157,7 +158,7 @@ public class Version {
 	</target>
 
 	<target name="test-gui" description="Test gui interface" depends="prepare_dist_bin">
-        <delete dir="${build.test.dir}"/>
+        <!--<delete dir="${build.test.dir}"/>-->
         <mkdir dir="${build.test.dir}"/>
   	 	<java jar="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.lib.dir}/${jar.filename}.jar" fork="true">
       		<arg value="-gui"/>

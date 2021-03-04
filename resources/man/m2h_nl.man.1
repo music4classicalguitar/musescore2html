@@ -1,5 +1,5 @@
 .\" Automatically generated from an mdoc input file.  Do not edit.
-.TH "PROGNAME" "1" "February 15, 2021" "Darwin 15.6.0" "General Commands Manual"
+.TH "PROGNAME" "1" "March 3, 2021" "Darwin 15.6.0" "General Commands Manual"
 .nh
 .if n .ad l
 .SH "NAME"
@@ -8,15 +8,22 @@
 .sp
 .SH "KORTE INHOUD"
 m2h
+[\fB\-V\fR]
 [\fB\-gui\fR | \fB\-cli\fR]
 [\fB\-C\fR \fI'configuratie-bestand'\fR]
 [\fB\-l\fR \fI'taal'\fR]
 [\fB\-m\fR \fI'musescore'\fR]
 [\fB\-o\fR \fI'uitvoermap'\fR]
+.sp
 [\fB\-i\fR \fI'index-bestandsnaam'\fR | \fB\-I\fR \fI'index-bestandsnaam'\fR]
+[\fB\-P\fR | \fB\-N\fR | \fB\-R\fR]
+[\fB\-a\fR]
+.sp
+[\fB\-x\fR]
 [\fB\-p\fR | \fB\-n\fR | \fB\-r\fR]
 [\fB\-v\fR | \fB\-q\fR | \fB\-s\fR]
 [\fB\-c\fR]
+.sp
 [partituur ...]
 .sp
 .SH "OMSCHRIJVING"
@@ -24,6 +31,10 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om 
 .sp
 .PP
 Opties:
+.TP 8n
+\fB\-V\fR
+Toon versie.
+.sp
 .TP 8n
 \fB\-gui\fR
 Gebruik de grafische gebruikersinterface (standaard).
@@ -63,11 +74,32 @@ Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt voor iedere part
 .PD
 .TP 8n
 \fB\-i\fR \fI'index-bestandsnaam'\fR
-Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
+  Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden ge\[u00EF]nstalleerd in map 'uitvoermap'.
 .TP 8n
 \fB\-I\fR \fI'index-bestandsnaam'\fR
-Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
- Er wordt GEEN html-bestand per partituur gegenereerd, wel de andere benodigde bestanden om de partituren te laten zien (via 'ShowScore.html').
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
+  Bestand 'css/ms_player_index.css' zal worden ge\[u00EF]nstalleerd in map 'uitvoermap'.
+.sp
+.sp
+.TP 8n
+\fB\-P\fR
+Bewaar het aanwezige indexbestand (standaard).
+.TP 8n
+\fB\-N\fR
+Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde bestanden nieuwer zijn dan het indexbestand.
+.TP 8n
+\fB\-R\fR
+Vervang het aanwezige indexbestand.
+.sp
+.TP 8n
+\fB\-a\fR
+Genereer een indexbestand voor alle gegenereerde bestanden, inclusief reeds aanwezige.
+.PP
+Voor bestanden die worden gegenereerd:
+.TP 8n
+\fB\-x\fR
+Genereer geen html-bestand.
 .sp
 .TP 8n
 \fB\-p\fR
@@ -87,22 +119,25 @@ Informatie over het verwerken van standaards naar informatie over gegenereerde/g
 Informatie over fouten wordt als diagnostische berichten naar standaardfout gestuurd.
 .PD 0
 .PP
-Standaard is 'normale' informatie.
  Opties
-[\fB\-v\fR | \fB\-q\fR | \fB\-s\fR]
+[\fB\-v\fR | \fB\-q\fR | \fB\-s\fR | \fB\-e\fR]
 kunnen worden gebruikt om de hoeveelheid informatie te wijzigen.
+ Standaard is 'normale' informatie (geen optie).
 .sp
 .PD
 .TP 8n
-\fB\-v\fR
-Uitgebreid, toon uitgebreide informatie over het verwerken van bestanden.
+\fB\-s\fR
+Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen.
 .TP 8n
 \fB\-q\fR
 Beperkt, toon geen gedetailleerde informatie over het verwerken van bestanden.
  Er wordt alleen een samenvatting getoond.
 .TP 8n
-\fB\-s\fR
-Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen.
+\fB\-v\fR
+Uitgebreid, toon informatie over het verwerken van bestanden.
+.TP 8n
+\fB\-e\fR
+Zeer uitgebreid, toon uitgebreide informatie over het verwerken van bestanden..
 .sp
 .TP 8n
 \fB\-c\fR

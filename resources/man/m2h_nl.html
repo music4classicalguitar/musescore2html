@@ -36,17 +36,22 @@
 <section class="Sh">
 <h1 class="Sh" id="KORTE_INHOUD"><a class="permalink" href="#KORTE_INHOUD">KORTE
   INHOUD</a></h1>
-m2h [<code class="Fl">-gui</code> | <code class="Fl">-cli</code>]
-  [<code class="Fl">-C</code> <var class="Ar">'configuratie-bestand'</var>]
-  [<code class="Fl">-l</code> <var class="Ar">'taal'</var>]
-  [<code class="Fl">-m</code> <var class="Ar">'musescore'</var>]
-  [<code class="Fl">-o</code> <var class="Ar">'uitvoermap'</var>]
-  [<code class="Fl">-i</code> <var class="Ar">'index-bestandsnaam'</var> |
-  <code class="Fl">-I</code> <var class="Ar">'index-bestandsnaam'</var>]
-  [<code class="Fl">-p</code> | <code class="Fl">-n</code> |
-  <code class="Fl">-r</code>] [<code class="Fl">-v</code> |
-  <code class="Fl">-q</code> | <code class="Fl">-s</code>]
-  [<code class="Fl">-c</code>] [partituur ...]
+m2h [<code class="Fl">-V</code>] [<code class="Fl">-gui</code> |
+  <code class="Fl">-cli</code>] [<code class="Fl">-C</code>
+  <var class="Ar">'configuratie-bestand'</var>] [<code class="Fl">-l</code>
+  <var class="Ar">'taal'</var>] [<code class="Fl">-m</code>
+  <var class="Ar">'musescore'</var>] [<code class="Fl">-o</code>
+  <var class="Ar">'uitvoermap'</var>]
+<p class="Pp">[<code class="Fl">-i</code>
+    <var class="Ar">'index-bestandsnaam'</var> | <code class="Fl">-I</code>
+    <var class="Ar">'index-bestandsnaam'</var>] [<code class="Fl">-P</code> |
+    <code class="Fl">-N</code> | <code class="Fl">-R</code>]
+    [<code class="Fl">-a</code>]</p>
+<p class="Pp">[<code class="Fl">-x</code>] [<code class="Fl">-p</code> |
+    <code class="Fl">-n</code> | <code class="Fl">-r</code>]
+    [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
+    <code class="Fl">-s</code>] [<code class="Fl">-c</code>]</p>
+<p class="Pp">[partituur ...]</p>
 <p class="Pp"></p>
 </section>
 <section class="Sh">
@@ -56,6 +61,10 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
 <p class="Pp"></p>
 <p class="Pp">Opties:</p>
 <dl class="Bl-tag">
+  <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
+  <dd>Toon versie.
+    <p class="Pp"></p>
+  </dd>
   <dt><a class="permalink" href="#gui"><code class="Fl" id="gui">-gui</code></a></dt>
   <dd>Gebruik de grafische gebruikersinterface (standaard).</dd>
   <dt><a class="permalink" href="#cli"><code class="Fl" id="cli">-cli</code></a></dt>
@@ -97,15 +106,38 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a>
     <var class="Ar">'index-bestandsnaam'</var></dt>
   <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
-      met een link naar de gegenereerde html-bestanden voor de partituren.</dd>
-  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
-    <var class="Ar">'index-bestandsnaam'</var></dt>
-  <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
       met een link naar html-bestand 'ShowScore.html' om de partituur te laten
       zien.
     <br/>
-     Er wordt GEEN html-bestand per partituur gegenereerd, wel de andere
-      benodigde bestanden om de partituren te laten zien (via 'ShowScore.html').
+     Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden
+      ge&#x00EF;nstalleerd in map 'uitvoermap'.</dd>
+  <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
+    <var class="Ar">'index-bestandsnaam'</var></dt>
+  <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
+      met een link naar de gegenereerde html-bestanden voor de partituren.
+    <br/>
+     Bestand 'css/ms_player_index.css' zal worden ge&#x00EF;nstalleerd in map
+      'uitvoermap'.
+    <p class="Pp"></p>
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#P"><code class="Fl" id="P">-P</code></a></dt>
+  <dd>Bewaar het aanwezige indexbestand (standaard).</dd>
+  <dt><a class="permalink" href="#N"><code class="Fl" id="N">-N</code></a></dt>
+  <dd>Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde
+      bestanden nieuwer zijn dan het indexbestand.</dd>
+  <dt><a class="permalink" href="#R"><code class="Fl" id="R">-R</code></a></dt>
+  <dd>Vervang het aanwezige indexbestand.
+    <p class="Pp"></p>
+  </dd>
+  <dt><a class="permalink" href="#a"><code class="Fl" id="a">-a</code></a></dt>
+  <dd>Genereer een indexbestand voor alle gegenereerde bestanden, inclusief
+      reeds aanwezige.</dd>
+</dl>
+<p class="Pp">Voor bestanden die worden gegenereerd:</p>
+<dl class="Bl-tag">
+  <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a></dt>
+  <dd>Genereer geen html-bestand.
     <p class="Pp"></p>
   </dd>
   <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a></dt>
@@ -127,24 +159,27 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dd>Informatie over fouten wordt als diagnostische berichten naar
       standaardfout gestuurd.</dd>
 </dl>
-Standaard is 'normale' informatie.
 <br/>
  Opties [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
-  <code class="Fl">-s</code>] kunnen worden gebruikt om de hoeveelheid
-  informatie te wijzigen.
+  <code class="Fl">-s</code> | <code class="Fl">-e</code>] kunnen worden
+  gebruikt om de hoeveelheid informatie te wijzigen.
+<br/>
+ Standaard is 'normale' informatie (geen optie).
 <p class="Pp"></p>
 <dl class="Bl-tag">
-  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
-  <dd>Uitgebreid, toon uitgebreide informatie over het verwerken van
-    bestanden.</dd>
+  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
+  <dd>Stil, (volkomen stil) toon geen informatie over het verwerken van
+      bestanden, zelfs geen foutmeldingen.</dd>
   <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
   <dd>Beperkt, toon geen gedetailleerde informatie over het verwerken van
       bestanden.
     <br/>
      Er wordt alleen een samenvatting getoond.</dd>
-  <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
-  <dd>Stil, (volkomen stil) toon geen informatie over het verwerken van
-      bestanden, zelfs geen foutmeldingen.
+  <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
+  <dd>Uitgebreid, toon informatie over het verwerken van bestanden.</dd>
+  <dt><a class="permalink" href="#e"><code class="Fl" id="e">-e</code></a></dt>
+  <dd>Zeer uitgebreid, toon uitgebreide informatie over het verwerken van
+      bestanden..
     <p class="Pp"></p>
   </dd>
   <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a></dt>
@@ -248,7 +283,7 @@ Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International See
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">February 15, 2021</td>
+    <td class="foot-date">March 3, 2021</td>
     <td class="foot-os">Darwin 15.6.0</td>
   </tr>
 </table>

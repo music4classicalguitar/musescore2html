@@ -150,8 +150,11 @@ public class Config {
 		lastUsedOutputDirectory = userHomeDirectory;
 		lastUsedScoreDirectory = defaultScoreDirectory;
 
-		translations = new Translations();
-		language = translations.getLanguage();
+		if (translations==null) {
+			translations = new Translations();
+			language = translations.getLanguage();
+		}
+		readConfigLastUsed();
 	}
 
 	public Translations getTranslations() {
@@ -212,6 +215,11 @@ public class Config {
 			fis = new FileInputStream(configFile);
 			prop = new Properties();
 			prop.load(fis);
+			value = prop.getProperty("language");
+			if (value!=null) {
+				language = value;
+				translations.setLanguage(language);
+			}
 			value = prop.getProperty("museScore");
 			if (value!=null) museScore = value;
 		} catch(Exception exc) {
@@ -236,7 +244,6 @@ public class Config {
 	public void getConfig() throws Exception {
 		setDefaults();
 		if (configFile.exists()) readConfig(configFile);
-		readConfigLastUsed();
 	}
 
 	public void writeConfig() throws Exception {
@@ -275,24 +282,22 @@ public class Config {
 	}
 
     public Config(String cfgPath) throws Exception {
-    	translations = new Translations();
-    	language = translations.getLanguage();
     	getConfig(cfgPath);
     }
 
     public Config(Translations translations, String cfgPath) throws Exception {
     	this.translations = translations;
-    	language = translations.getLanguage();
+    	this.language = this.translations.getLanguage();
     	getConfig(cfgPath);
     }
 
     public Config() throws Exception {
-    	translations = new Translations();
     	getConfig();
     }
 
     public Config(Translations translations) throws Exception {
     	this.translations = translations;
+    	this.language = this.translations.getLanguage();
     	getConfig();
     }
 

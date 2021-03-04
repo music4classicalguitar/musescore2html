@@ -1,9 +1,10 @@
-<html>
+<!DOCTYPE HTML><html>
    
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       
       <meta charset="utf-8">
+      
       <style>
     table.head, table.foot { width: 100%; }
     td.head-rtitle, td.foot-os { text-align: right; }
@@ -16,9 +17,9 @@
     code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
     code.Cd { font-weight: bold; font-family: inherit; }
   </style>
-      <title>PROGNAME(1)</title>
       
-   </head>
+      <title>PROGNAME(1)</title>
+      </head>
    
    <body>
       
@@ -31,10 +32,8 @@
             <td class="head-vol">General Commands Manual</td>
             
             <td class="head-rtitle">PROGNAME(1)</td>
-            
-         </tr>
-         
-      </table>
+            </tr>
+         </table>
       
       <div class="manual-text">
          
@@ -47,30 +46,35 @@
                partituur
                
                <p class="Pp"></p>
-               
-            </div>
-            
-         </section>
+               </div>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="KORTE_INHOUD"><a class="permalink" href="#KORTE_INHOUD">KORTE
                   INHOUD</a></h1>
-            m2h [<code><a href="#gui">-gui</a></code> | <code><a href="#cli">-cli</a></code>]
-            [<code><a href="#C">-C</a></code> <var class="Ar">'configuratie-bestand'</var>]
-            [<code><a href="#l">-l</a></code> <var class="Ar">'taal'</var>]
-            [<code><a href="#m">-m</a></code> <var class="Ar">'musescore'</var>]
-            [<code><a href="#o">-o</a></code> <var class="Ar">'uitvoermap'</var>]
-            [<code><a href="#i">-i</a></code> <var class="Ar">'index-bestandsnaam'</var> |
-            <code><a href="#I">-I</a></code> <var class="Ar">'index-bestandsnaam'</var>]
-            [<code><a href="#p">-p</a></code> | <code><a href="#n">-n</a></code> |
-            <code><a href="#r">-r</a></code>] [<code><a href="#v">-v</a></code> |
-            <code><a href="#q">-q</a></code> | <code><a href="#s">-s</a></code>]
-            [<code><a href="#c">-c</a></code>] [partituur ...]
+            m2h [<code><a href="#V">-V</a></code>] [<code><a href="#gui">-gui</a></code> |
+            <code><a href="#cli">-cli</a></code>] [<code><a href="#C">-C</a></code>
+            <var class="Ar">'configuratie-bestand'</var>] [<code><a href="#l">-l</a></code>
+            <var class="Ar">'taal'</var>] [<code><a href="#m">-m</a></code>
+            <var class="Ar">'musescore'</var>] [<code><a href="#o">-o</a></code>
+            <var class="Ar">'uitvoermap'</var>]
+            
+            <p class="Pp">[<code><a href="#i">-i</a></code>
+               <var class="Ar">'index-bestandsnaam'</var> | <code><a href="#I">-I</a></code>
+               <var class="Ar">'index-bestandsnaam'</var>] [<code><a href="#P">-P</a></code> |
+               <code><a href="#N">-N</a></code> | <code><a href="#R">-R</a></code>]
+               [<code><a href="#a">-a</a></code>]</p>
+            
+            <p class="Pp">[<code><a href="#x">-x</a></code>] [<code><a href="#p">-p</a></code> |
+               <code><a href="#n">-n</a></code> | <code><a href="#r">-r</a></code>]
+               [<code><a href="#v">-v</a></code> | <code><a href="#q">-q</a></code> |
+               <code><a href="#s">-s</a></code>] [<code><a href="#c">-c</a></code>]</p>
+            
+            <p class="Pp">[partituur ...]</p>
             
             <p class="Pp"></p>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
@@ -84,6 +88,13 @@
             
             <dl class="Bl-tag">
                
+               <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
+               
+               <dd>Toon versie.
+                  
+                  <p class="Pp"></p>
+                  </dd>
+               
                <dt><a class="permalink" href="#gui"><code class="Fl" id="gui">-gui</code></a></dt>
                
                <dd>Gebruik de grafische gebruikersinterface (standaard).</dd>
@@ -93,8 +104,7 @@
                <dd>Gebruik de opdrachtregelinterface.
                   
                   <p class="Pp"></p>
-                  
-               </dd>
+                  </dd>
                
                <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a>
                   <var class="Ar">'configuratie-bestand'</var></dt>
@@ -110,8 +120,7 @@
                   gebruikt).
                   
                   <p class="Pp"></p>
-                  
-               </dd>
+                  </dd>
                
                <dt><a class="permalink" href="#m"><code class="Fl" id="m">-m</code></a>
                   <var class="Ar">'mscore'</var></dt>
@@ -119,8 +128,7 @@
                <dd>Locatie van het MuseScore uitvoerbaar bestand.
                   
                   <p class="Pp"></p>
-                  
-               </dd>
+                  </dd>
                
                <dt><a class="permalink" href="#o"><code class="Fl" id="o">-o</code></a>
                   <var class="Ar">'uitvoermap'</var></dt>
@@ -138,16 +146,12 @@
                      <dt></dt>
                      
                      <dd>Grafische gebruikersinterface: gebruikersmap.</dd>
-                     
-                  </dl>
-                  
-               </dd>
-               
-            </dl>
+                     </dl>
+                  </dd>
+               </dl>
             
             <p class="Pp">Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt
-               voor iedere partituur een html-bestand gegenereerd.
-            </p>
+               voor iedere partituur een html-bestand gegenereerd.</p>
             
             <dl class="Bl-tag">
                
@@ -155,22 +159,58 @@
                   <var class="Ar">'index-bestandsnaam'</var></dt>
                
                <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
-                  met een link naar de gegenereerde html-bestanden voor de partituren.
-               </dd>
+                  met een link naar html-bestand 'ShowScore.html' om de partituur te laten
+                  zien.
+                  <br>
+                  Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden
+                  geïnstalleerd in map 'uitvoermap'.</dd>
                
                <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
                   <var class="Ar">'index-bestandsnaam'</var></dt>
                
                <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
-                  met een link naar html-bestand 'ShowScore.html' om de partituur te laten
-                  zien.
+                  met een link naar de gegenereerde html-bestanden voor de partituren.
                   <br>
-                  Er wordt GEEN html-bestand per partituur gegenereerd, wel de andere
-                  benodigde bestanden om de partituren te laten zien (via 'ShowScore.html').
+                  Bestand 'css/ms_player_index.css' zal worden geïnstalleerd in map
+                  'uitvoermap'.
                   
                   <p class="Pp"></p>
                   
-               </dd>
+                  <p class="Pp"></p>
+                  </dd>
+               
+               <dt><a class="permalink" href="#P"><code class="Fl" id="P">-P</code></a></dt>
+               
+               <dd>Bewaar het aanwezige indexbestand (standaard).</dd>
+               
+               <dt><a class="permalink" href="#N"><code class="Fl" id="N">-N</code></a></dt>
+               
+               <dd>Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde
+                  bestanden nieuwer zijn dan het indexbestand.</dd>
+               
+               <dt><a class="permalink" href="#R"><code class="Fl" id="R">-R</code></a></dt>
+               
+               <dd>Vervang het aanwezige indexbestand.
+                  
+                  <p class="Pp"></p>
+                  </dd>
+               
+               <dt><a class="permalink" href="#a"><code class="Fl" id="a">-a</code></a></dt>
+               
+               <dd>Genereer een indexbestand voor alle gegenereerde bestanden, inclusief
+                  reeds aanwezige.</dd>
+               </dl>
+            
+            <p class="Pp">Voor bestanden die worden gegenereerd:</p>
+            
+            <dl class="Bl-tag">
+               
+               <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a></dt>
+               
+               <dd>Genereer geen html-bestand.
+                  
+                  <p class="Pp"></p>
+                  </dd>
                
                <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a></dt>
                
@@ -179,14 +219,12 @@
                <dt><a class="permalink" href="#n"><code class="Fl" id="n">-n</code></a></dt>
                
                <dd>Overschrijf bestaande bestanden alleen als de partituur nieuwer is dan
-                  bestaande bestanden die moeten worden gegenereerd.
-               </dd>
+                  bestaande bestanden die moeten worden gegenereerd.</dd>
                
                <dt><a class="permalink" href="#r"><code class="Fl" id="r">-r</code></a></dt>
                
                <dd>Vervang bestaande bestanden.</dd>
-               
-            </dl>
+               </dl>
             
             <p class="Pp"></p>
             
@@ -198,60 +236,56 @@
                
                <dd>Informatie over het verwerken van standaards naar informatie over
                   gegenereerde/geïnstalleerde/vervangen/overgeslagen bestanden wordt
-                  naar standaarduitvoer gestuurd.
-               </dd>
+                  naar standaarduitvoer gestuurd.</dd>
                
                <dt></dt>
                
                <dd>Informatie over fouten wordt als diagnostische berichten naar
-                  standaardfout gestuurd.
-               </dd>
-               
-            </dl>
-            Standaard is 'normale' informatie.
+                  standaardfout gestuurd.</dd>
+               </dl>
             <br>
             Opties [<code><a href="#v">-v</a></code> | <code><a href="#q">-q</a></code> |
-            <code><a href="#s">-s</a></code>] kunnen worden gebruikt om de hoeveelheid
-            informatie te wijzigen.
+            <code><a href="#s">-s</a></code> | <code><a href="#e">-e</a></code>] kunnen worden
+            gebruikt om de hoeveelheid informatie te wijzigen.
+            <br>
+            Standaard is 'normale' informatie (geen optie).
             
             <p class="Pp"></p>
             
             <dl class="Bl-tag">
                
-               <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
+               <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
                
-               <dd>Uitgebreid, toon uitgebreide informatie over het verwerken van
-                  bestanden.
-               </dd>
+               <dd>Stil, (volkomen stil) toon geen informatie over het verwerken van
+                  bestanden, zelfs geen foutmeldingen.</dd>
                
                <dt><a class="permalink" href="#q"><code class="Fl" id="q">-q</code></a></dt>
                
                <dd>Beperkt, toon geen gedetailleerde informatie over het verwerken van
                   bestanden.
                   <br>
-                  Er wordt alleen een samenvatting getoond.
-               </dd>
+                  Er wordt alleen een samenvatting getoond.</dd>
                
-               <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
+               <dt><a class="permalink" href="#v"><code class="Fl" id="v">-v</code></a></dt>
                
-               <dd>Stil, (volkomen stil) toon geen informatie over het verwerken van
-                  bestanden, zelfs geen foutmeldingen.
+               <dd>Uitgebreid, toon informatie over het verwerken van bestanden.</dd>
+               
+               <dt><a class="permalink" href="#e"><code class="Fl" id="e">-e</code></a></dt>
+               
+               <dd>Zeer uitgebreid, toon uitgebreide informatie over het verwerken van
+                  bestanden..
                   
                   <p class="Pp"></p>
-                  
-               </dd>
+                  </dd>
                
                <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a></dt>
                
                <dd>Controleer alleen, droogloop die laten zien wat er had moeten
-                  gebeuren.
-               </dd>
-               
-            </dl>
+                  gebeuren.</dd>
+               </dl>
             
             <p class="Pp"></p>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
@@ -261,8 +295,7 @@
             Musescore dient te zijn geïnstalleerd (see https://musescore.org).
             
             <p class="Pp"></p>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
@@ -283,19 +316,16 @@
                <dt></dt>
                
                <dd>Apache Ant 1.10.9 (https://ant.apache.org)</dd>
-               
-            </dl>
+               </dl>
             
             <p class="Pp"></p>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
                   VALUES</a></h1>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
@@ -318,16 +348,14 @@
                <li>MyScore.ogg</li>
                
                <li>MyScore.mp3</li>
-               
-            </ul>
+               </ul>
             Als [<code><a href="#I">-I</a></code> <var class="Ar">'index-bestandsnaam'</var>] niet
             wordt gebruikt wordt tevens:
             
             <ul class="Bl-item">
                
                <li>MyScore.html</li>
-               
-            </ul>
+               </ul>
             gegenereerd.
             
             <p class="Pp">Creates subdirectories:</p>
@@ -339,8 +367,7 @@
                <li>css</li>
                
                <li>images</li>
-               
-            </ul>
+               </ul>
             and installs javascript, css-stylesheet en svg-images
             
             <ul class="Bl-item">
@@ -362,18 +389,15 @@
                <li>images/media-skip-forward.svg</li>
                
                <li>images/window-close.svg</li>
-               
-            </ul>
-            
-         </section>
+               </ul>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="EXIT_STATUS"><a class="permalink" href="#EXIT_STATUS">EXIT
                   STATUS</a></h1>
             If an error occurs return code will be non-zero.
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
@@ -384,53 +408,42 @@
             <ul class="Bl-item">
                
                <li>m2h -d Sites MyMusic/*.mscz</li>
-               
-            </ul>
+               </ul>
             To generate html-files for all scores in directory MyMusic and all
             subdirectories and place then in directory Sites :
             
             <ul class="Bl-item">
                
                <li>m2h -d Sites MyMusic/**/*.mscz</li>
-               
-            </ul>
-            
-         </section>
+               </ul>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="DIAGNOSTICS"><a class="permalink" href="#DIAGNOSTICS">DIAGNOSTICS</a></h1>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="ERRORS"><a class="permalink" href="#ERRORS">ERRORS</a></h1>
-            
-         </section>
+            </section>
          
          <section class="Sh">
             
             <h1 class="Sh" id="LICENSE"><a class="permalink" href="#LICENSE">LICENSE</a></h1>
             Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International See
             https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
-            
-         </section>
-         
-      </div>
+            </section>
+         </div>
       
       <table class="foot">
          
          <tr>
             
-            <td class="foot-date">February 15, 2021</td>
+            <td class="foot-date">March 3, 2021</td>
             
             <td class="foot-os">Darwin 15.6.0</td>
-            
-         </tr>
-         
-      </table>
-      
-   </body>
-   
-</html>
+            </tr>
+         </table>
+      </body>
+   </html>

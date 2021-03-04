@@ -22,10 +22,30 @@ public class MuseScore2Html {
 			rc = processScores.validateArguments();
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[]{"process.error.message", exc.getMessage()}));
-			else throw new RuntimeException(arguments.translations.translate("process.error"));
+			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[]{"scores.process.error.message", exc.getMessage()}));
+			else throw new RuntimeException(arguments.translations.translate("scores.process.error"));
 		}
 		return rc;
+	}
+
+	private	static Integer processScores(Arguments arguments) {
+		int code=0,errors=0;
+		try {
+			ProcessData processDataScores = new ProcessData();
+			ProcessInfo processInfoScores = new ProcessInfo(processDataScores, arguments.translations);
+			ProcessScores processScores = new ProcessScores(arguments, processDataScores);
+			ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+			Future<Integer> futureProcessInfoScores=executor.submit(processInfoScores);
+			Future<Integer> futureProcessScores=executor.submit(processScores);
+			errors=futureProcessScores.get();
+			code=futureProcessInfoScores.get();
+			executor.shutdown();
+		} catch(Exception exc) {
+			exc.printStackTrace();
+			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[]{"scores.process.error.message", exc.getMessage()}));
+			else throw new RuntimeException(arguments.translations.translate("scores.process.error"));
+		}
+		return code|errors;
 	}
 
 	private MuseScore2Html(String[] args)  {
@@ -36,12 +56,12 @@ public class MuseScore2Html {
 		if (arguments.showHelp) System.out.println("Help needed");
 		else {
 			if (arguments.errors==0) {
-				ProcessScores processScores = new ProcessScores(arguments, null);
+				ProcessScores processScoresValidate = new ProcessScores(arguments, null);
 				if (arguments.interfaceType==Arguments.INTERFACE_TYPE.GUI) {
-					processScores.validateArguments();
+					processScoresValidate.validateArguments();
 					new Gui(arguments);
 				} else {
-					errors=processScores.call();
+					errors=processScores(arguments);
 				}
 			}
 		}

@@ -44,7 +44,6 @@ OS=`uname -s`
 if [ "${OS}" = "Darwin" ]
 then
   READLINK_OPTION="-n"
-  #JAVA_OPTIONS="-Dapple.laf.useScreenMenuBar=true -Dapple.awt.brushMetal=true -Dapple.awt.showGrowBox=true -Dcom.apple.mrj.application.apple.menu.about.name=MuseScore2Html -Dapple.awt.textantialiasing=true"
 else
   READLINK_OPTION="-f"
 fi
@@ -82,8 +81,8 @@ then
 		else
 			LIB_DIR="${BASE_DIR}/resources/lib"
 		fi
-		echo java ${JAVA_OPTIONS} -jar "${LIB_DIR}/musescore2html.jar" "$@"
-		java ${JAVA_OPTIONS} -jar "${LIB_DIR}/musescore2html.jar" "$@"
+		echo java -jar "${LIB_DIR}/musescore2html.jar" "$@"
+		java -jar "${LIB_DIR}/musescore2html.jar" "$@"
 	else
 		echo "Use or install java ${REQ_JVER1}.${REQ_JVER2}.${REQ_JVER3}.${REQ_JVER4} or higher"
 	fi

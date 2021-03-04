@@ -4,6 +4,8 @@ import org.apache.tools.ant.MuseScore2HtmlUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Collections;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,7 @@ public class ProcessScores implements Callable<Integer>  {
 	private ProcessData processData;
 	private Translations translations;
 	private Arguments arguments;
+	private Comparator<Object> naturalOrderComparator = new NaturalOrderComparator(true);
 
 	private final String jarDirectory=this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 	private final String rscDirectory=(new File(jarDirectory)).getParentFile().getParent();
@@ -40,7 +43,7 @@ public class ProcessScores implements Callable<Integer>  {
 	private final String insDirectory=rscDirectory+File.separator+"install";
 
 	private static final String tempDirectory=System.getProperty("java.io.tmpdir");
-
+	private ArrayList<String[]> scoreParts;
    	String translateCheckOnly="";
    	private int scores_processed=0, scores_skipped=0, files_generated=0, files_installed=0, directories_created=0;
 
@@ -55,8 +58,8 @@ public class ProcessScores implements Callable<Integer>  {
 	private int imageExtension=2;
 
     private String files2copy[]={
-			"js"+File.separator+"ms_player.js",
 			"css"+File.separator+"ms_player.css",
+			"js"+File.separator+"ms_player.js",
 			"images"+File.separator+"media-playback-loop.svg",
 			"images"+File.separator+"media-playback-metronome.svg",
 			"images"+File.separator+"media-playback-pause.svg",
@@ -67,6 +70,7 @@ public class ProcessScores implements Callable<Integer>  {
     	};
 
 	private String files2copyForIndexFile[]={
+			"css"+File.separator+"ms_player_index.css",
 			"js"+File.separator+"ms_player_query.js",
 			"ShowScore.html"
 	};
@@ -78,8 +82,11 @@ public class ProcessScores implements Callable<Integer>  {
 		if (code != 0) errors++;
 		try {
 			if (logLevel.ordinal()<=arguments.logLevel.ordinal()) {
-				if (processData == null) arguments.logging.add(new Arguments.Logging(message, code));
-				else processData.addData(message,code);
+				if (processData == null) {
+					arguments.logging.add(new Arguments.Logging(message, code));
+				} else {
+					processData.addData(message,code);
+				}
 			}
 		} catch (InterruptedException iexc) {
 			iexc.printStackTrace();
@@ -288,68 +295,46 @@ public class ProcessScores implements Callable<Integer>  {
     	}
     }
 
-    private void generateIndexHtml(String fileName) throws IOException {
-    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-    	if (foundFiles.length==0) {
-    		processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.no.files", arguments.outputDirectory}),2048);
-    		return;
-    	}
-    	Arrays.sort(foundFiles);
+    private void generateIndexHtml(String fileName, String[] fileNames) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
-  		output.println("  <head>");
-  		output.println("    <meta charset=\"UTF-8\">");
-  		output.println("    <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
-  		output.println("    <title>"+translations.getKey("gui.scorestable.columntitle")+"</title>");
-  		output.println("  </head>");
-  		output.println("  <body>");
-  		output.println("    <ul>");
-  		for (int i=0;i<foundFiles.length;i++) {
-  			String nameParts[]=splitPath(foundFiles[i]);
-  			//String name=URLEncoder.encode(nameParts[2],"UTF-8").replace("+", "%20").replace("*", "%2A").replace("%7E", "~");
-  			output.println("      <li><a href=\"ShowScore.html?name="+encode(nameParts[2])+"\">"+nameParts[2]+"</a></li>");
+  		output.println("	<head>");
+  		output.println("		<meta charset=\"UTF-8\"/>");
+  		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
+  		output.println("		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/ms_player_index.css\"/>");
+  		output.println("		<title>"+translations.getKey("scores.label")+"</title>");
+  		output.println("	</head>");
+  		output.println("	<body>");
+  		output.println("		<table border=\"1\">");
+ 		output.println("			<tr><th>"+translations.getKey("scores.label")+"</th></tr>");
+ 		for (int i=0;i<fileNames.length;i++) {
+   			output.println("			<tr><td><a href=\"ShowScore.html?name="+encode(fileNames[i])+"\">"+fileNames[i]+"</a></td></tr>");
   		}
-   		//output.println("    <!-- link for this page <a href=\""+title+".html"+"\">"+title+"</a> -->");
-  		output.println("    </ul>");
-  		output.println("  </body>");
+   		output.println("		</table>");
+  		output.println("	</body>");
   		output.println("</html>");
 	    output.close();
 	    files_generated++;
     }
 
-    private void generateIndexHtmlLinks2HtmlFiles(String fileName) throws IOException {
-    	String foundFiles[]=MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-    	if (foundFiles.length==0) {
-    		processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.no.files", arguments.outputDirectory}),2048);
-    		return;
-    	}
-    	Arrays.sort(foundFiles);
-    	String s = arguments.outputDirectory;
-    	if (!s.endsWith(File.separator)) s = s+File.separator;
-    	int l = s.length();
-    	ArrayList<String> foundHtmlFiles = new ArrayList<String>();
-    	for (int i=0; i<foundFiles.length; i++) {
-    		String htmlFile = foundFiles[i].substring(0,foundFiles[i].length()-8)+"html";
-    		File f = new File(htmlFile);
-    		if (f.exists()) {
-    			foundHtmlFiles.add(htmlFile.substring(l));
-    		}
-    	}
+    private void generateIndexHtmlLinks2HtmlFiles(String fileName, String[] fileNames) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
-  		output.println("  <head>");
-  		output.println("    <meta charset=\"UTF-8\">");
-  		output.println("    <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
-  		output.println("    <title>"+translations.getKey("gui.scorestable.columntitle")+"</title>");
-  		output.println("  </head>");
-  		output.println("  <body>");
-  		output.println("    <ul>");
-  		for (int i=0;i<foundHtmlFiles.size();i++) {
-  			output.println("      <li><a href=\""+foundHtmlFiles.get(i)+"</a></li>");
+  		output.println("	<head>");
+  		output.println("    	<meta charset=\"UTF-8\"/>");
+  		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"/>");
+  		output.println("		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/ms_player_index.css\"/>");
+  		output.println("		<title>"+translations.getKey("scores.label")+"</title>");
+  		output.println("	</head>");
+  		output.println("	<body border=\"1\">");
+  		output.println("		<h1>"+translations.getKey("scores.label")+"</h1>");
+   		output.println("    	<table>");
+  		output.println("			<tr><th>"+translations.getKey("scores.label")+"</th></tr>");
+ 		for (int i=0;i<fileNames.length;i++) {
+  			output.println("			<tr><td><a href=\""+fileNames[i]+".html\">"+fileNames[i]+"</a></td></tr>");
   		}
-   		//output.println("    <!-- link for this page <a href=\""+title+".html"+"\">"+title+"</a> -->");
   		output.println("    </ul>");
   		output.println("  </body>");
   		output.println("</html>");
@@ -361,18 +346,17 @@ public class ProcessScores implements Callable<Integer>  {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
-  		output.println("  <head>");
-  		output.println("    <meta charset=\"UTF-8\">");
-  		output.println("    <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
-  		output.println("    <script type=\"text/javascript\" src=\"js/ms_player.js\"></script>");
-  		output.println("    <title>"+title+"</title>");
-  		output.println("  </head>");
-  		output.println("  <body>");
-   		//output.println("    <!-- link for this page <a href=\""+title+".html"+"\">"+title+"</a> -->");
-  		output.println("    <script type=\"text/javascript\">");
-  		output.println("      ms_player.load(\""+title+"\");");
-  		output.println("    </script>");
-  		output.println("  </body>");
+  		output.println("	<head>");
+  		output.println("		<meta charset=\"UTF-8\"/>");
+  		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"/>");
+  		output.println("		<script type=\"text/javascript\" src=\"js/ms_player.js\"></script>");
+  		output.println("		<title>"+title+"</title>");
+  		output.println("	</head>");
+  		output.println("	<body>");
+  		output.println("    	<script type=\"text/javascript\">");
+  		output.println("			ms_player.load(\""+title+"\");");
+  		output.println("		</script>");
+  		output.println("	</body>");
   		output.println("</html>");
 	    output.close();
 	    files_generated++;
@@ -382,7 +366,14 @@ public class ProcessScores implements Callable<Integer>  {
     	try {
     		String action=actionPart+".installed";
      		String lastSubdir="";
-    		for (int i=0; i<files2copy.length; i++) {
+     		int first=0, len=files2copy.length;
+     		if (actionPart.equals("indexfile")) {
+     			if (arguments.generateIndexFileOption == Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_TO_HTML) {
+     				first = 0;
+     				len = 1;
+     			}
+     		}
+    		for (int i=first; i<len; i++) {
     			String srcFile=insDirectory+File.separator+files2copy[i], tgtFile=outputDirectory+File.separator+files2copy[i];
     			File src = new File(srcFile), tgt = new File(tgtFile);
     			if (tgt.exists()) {
@@ -497,6 +488,7 @@ public class ProcessScores implements Callable<Integer>  {
 			//if (errors>0) { processData.setFinished(); return errors; }
 
 			validateIndexFile();
+			//if (errors>0) { processData.setFinished(); return errors; }
 
 			ArrayList<String> scores = new ArrayList<String>();
 			for (int i=0;i<arguments.scores.size();i++) {
@@ -520,7 +512,7 @@ public class ProcessScores implements Callable<Integer>  {
 			scores=uniqueScores;
 			arguments.scores = uniqueScores;
 
-			ArrayList<String[]> scoreParts = new ArrayList<String[]>();
+			scoreParts = new ArrayList<String[]>();
 			for (int i=0;i<scores.size();i++) {
 				scoreParts.add(splitPath(scores.get(i)));
 			}
@@ -543,68 +535,42 @@ public class ProcessScores implements Callable<Integer>  {
 		}
 		return errors;
 	}
+	
+	public void showArguments() {
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.getKey("info.arguments"),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.osid", String.valueOf(arguments.config.getOSId())}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.language", arguments.config.getLanguage()}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.interface", String.valueOf(arguments.interfaceType)}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.loglevel", String.valueOf(arguments.logLevel)}),0);
+		if (arguments.cfgPath!=null) processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.configuration.path", arguments.cfgPath}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.configuration", String.valueOf(arguments.config!=null)}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.musescore", arguments.museScore}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.outputdirectory", arguments.outputDirectory}),0);
+		if (arguments.indexFileName!=null) {
+			processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.indexfilename", arguments.indexFileName}),0);
+			processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.generatehtml", String.valueOf(arguments.generateHtml)}),0);
+		}
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.indexfileoption", String.valueOf(arguments.indexFileOption)}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.indexfile.all", String.valueOf(arguments.generateIndexAll)}),0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.fileoption", String.valueOf(arguments.fileOption)}),0);
+		for (int i=0;i<arguments.scores.size();i++) {
+			processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info.score", arguments.scores.get(i)}),0);
+		}
+	}
 
 	public Integer call() {
 		try {
+			if (arguments.logLevel==Arguments.LOG_LEVEL.EXTREME) showArguments();
+			
 			int validateErrors = validateArguments();
-			if (validateErrors>0) { processData.setFinished(); return validateErrors; }
+			if (validateErrors>0) {
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
+				processData.setFinished();
+				return validateErrors;
+			}
 			
    			translateCheckOnly = arguments.checkOnly?".checkonly":"";
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("info.generate.start"),0);
-			if (arguments.errors>0) {
-				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
-				processData.setFinished();
-				return errors;
-			}
-
-			arguments.museScore=validateMuseScore();
-			//if (errors>0) { processData.setFinished(); return errors; }
-
-			arguments.outputDirectory=validateOutputDirectory();
-			//if (errors>0) { processData.setFinished(); return errors; }
-
-			validateIndexFile();
-
-			ArrayList<String> scores = new ArrayList<String>();
-			for (int i=0;i<arguments.scores.size();i++) {
-				String result[] = MuseScore2HtmlUtils.findItems(arguments.scores.get(i), MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-				if (result.length==0) {
-					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.not.found",arguments.scores.get(i)}), 4);
-				} else {
-					scores.addAll(Arrays.asList(result));
-				}
-			}
-
-			/* Remove duplicate scores which may be caused by a caseinsensitive filesystem e.g. parameters : b*.mscz and B*.mscz */
-			ArrayList<String> uniqueScores = new ArrayList<String>();
-			for (int i=0;i<scores.size();i++) {
-				boolean found=false;
-				for (int j=0;j<uniqueScores.size(); j++) {
-					if (scores.get(i).equals(uniqueScores.get(j))) { found=true; break; }
-				}
-				if (!found) uniqueScores.add(scores.get(i));
-			}
-			scores=uniqueScores;
-
-			ArrayList<String[]> scoreParts = new ArrayList<String[]>();
-			for (int i=0;i<scores.size();i++) {
-				scoreParts.add(splitPath(scores.get(i)));
-			}
-
-			for (int i=0;i<scoreParts.size()-1;i++) {
-				for (int j=i+1;j<scoreParts.size();j++) {
-					if (scoreParts.get(i)[2].equals(scoreParts.get(j)[2])) {
-						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.duplicate.names", scoreParts.get(i)[0], scoreParts.get(j)[0]}), 5);
-					}
-				}
-			}
-			//if (errors>0) { processData.setFinished(); return errors; }
-
-			for (int i=0;i<scoreParts.size();i++) {
-				validateScore(scoreParts.get(i));
-			}
-			
-			if (errors>0) { processData.setFinished(); return errors; }
 
 			for (int i=0;i<scoreParts.size();i++) {
 				String score[]=scoreParts.get(i);
@@ -620,25 +586,10 @@ public class ProcessScores implements Callable<Integer>  {
 				}
 			}
 
-			String foundFiles[] = new String[0];;
-			if (arguments.generateIndexAll) {
-				foundFiles = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-			} else {
-				String metajsonFiles[] = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-				if (metajsonFiles.length>0) {
-					ArrayList<String> htmlFiles = new ArrayList<String>();
-					for (int i=0; i<metajsonFiles.length; i++) {
-						String htmlFile = metajsonFiles[i].replaceAll(".metajson", ".html");
-						File tgt = new File(htmlFile);
-						if (tgt.exists()) htmlFiles.add(htmlFile);
-					}
-					foundFiles = htmlFiles.toArray(new String[0]);
-				}
-			}
-
-			if (foundFiles.length>0) {
+			if (files_generated>0) {
 				try {
-					copyFiles(arguments.outputDirectory, files2copy, "file");
+					String metajsonFiles[] = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
+					if (metajsonFiles.length>0) copyFiles(arguments.outputDirectory, files2copy, "file");
 				} catch (Exception exc) {
 					exc.printStackTrace();
 					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message",exc.getMessage()}),99);
@@ -647,58 +598,92 @@ public class ProcessScores implements Callable<Integer>  {
 					return errors;
 				}
 			}
-
-			if (arguments.generateIndexFileOption!=Arguments.GENERATE_INDEX_FILE_OPTION.NONE&&arguments.indexFileName!=null) {
-				File src = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
-				String action = "indexfile.generated";
-				boolean createIndexFile = false;
-				if (src.exists()) {
-					if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEW) {
-						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.already.exists"+translateCheckOnly,arguments.indexFileName}),0);
-					} else if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEWER) {
-						long srcLastModified = src.lastModified();
-						if (foundFiles.length>0) {
-							for (int i=0; i<foundFiles.length; i++) {
-								File tgt = new File(foundFiles[i]);
-								long tgtLastModified = tgt.lastModified();
-								if (srcLastModified<tgtLastModified) {
-									action="indexfile.replaced";
-									createIndexFile = true;
-									break;
-								}
-							}
+			
+			if (arguments.generateIndexFileOption != Arguments.GENERATE_INDEX_FILE_OPTION.NONE) {
+				String foundFiles[] = new String[0] ;
+				String fileNames[] = new String[0];
+				if (arguments.generateIndexAll) {
+					foundFiles = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
+					if (arguments.generateIndexFileOption == Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_NO_HTML) {
+						fileNames = new String[foundFiles.length];
+						for (int i=0; i<foundFiles.length; i++) {
+							fileNames[i] = (new File(foundFiles[i])).getName().replaceAll(".metajson", "");
 						}
-						if (foundFiles.length>0&&!createIndexFile) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.is.newer"+translateCheckOnly,arguments.indexFileName}), 0);
-					} else if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_REPLACE) {
-						if (foundFiles.length>0) {
-							action="indexfile.replaced";
-							createIndexFile = true;
+					} else if (arguments.generateIndexFileOption == Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_TO_HTML) {
+						ArrayList<String> htmlFiles = new ArrayList<String>();
+						for (int i=0; i<foundFiles.length; i++) {
+							String htmlFile = foundFiles[i].replaceAll(".metajson", ".html");
+							File tgt = new File(htmlFile);
+							if (tgt.exists()) htmlFiles.add(htmlFile);
+						}
+						fileNames = new String[htmlFiles.size()];
+						for (int i=0; i<htmlFiles.size(); i++) {
+							fileNames[i] = (new File(htmlFiles.get(i))).getName().replaceAll(".html", "");
 						}
 					}
-				} else if (foundFiles.length>0) createIndexFile = true;
-
-				if (createIndexFile) {
-					if (!arguments.checkOnly) {
-						try {
-							switch (arguments.generateIndexFileOption) {
-								case INDEX_AND_HTML:
-									generateIndexHtmlLinks2HtmlFiles(arguments.outputDirectory+File.separator+arguments.indexFileName);
-									break;
-								case INDEX_NO_HTML:
-									generateIndexHtml(arguments.outputDirectory+File.separator+arguments.indexFileName);
-									copyFiles(arguments.outputDirectory, files2copyForIndexFile, "indexfile");
-									break;
-								default:
-									break;
+				} else {
+					foundFiles = new String[scoreParts.size()];
+					fileNames = new String[scoreParts.size()];
+					for (int i=0;i<scoreParts.size();i++) {
+						foundFiles[i] = arguments.outputDirectory + File.separator + scoreParts.get(i)[2] + ".metajson";
+						fileNames[i] = scoreParts.get(i)[2];
+					}
+				}
+				
+				boolean createIndexFile = false;
+				if (foundFiles.length>0) {
+					File src = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
+					String action = "indexfile.generated";
+					if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_REPLACE) createIndexFile = true;
+					else if (src.exists()) {
+						if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEW) {
+							processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.already.exists",arguments.indexFileName}),0);
+						} else if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEWER) {
+							long srcLastModified = src.lastModified();
+							if (foundFiles.length>0) {
+								for (int i=0; i<foundFiles.length; i++) {
+									File tgt = new File(foundFiles[i]);
+									long tgtLastModified = tgt.lastModified();
+									if (srcLastModified<tgtLastModified) {
+										action="indexfile.replaced";
+										createIndexFile = true;
+										break;
+									}
+								}
+								
 							}
-						} catch (Exception exc) {
-							exc.printStackTrace();
-							if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message",exc.getMessage()}),99);
-							else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error"}),99);
-							processData.setFinished();
-							return errors;
+							if (!createIndexFile) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"indexfile.is.newer"+translateCheckOnly,arguments.indexFileName}), 0);
 						}
-						processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {action+translateCheckOnly,arguments.indexFileName}),0);
+					} else createIndexFile = true;
+
+					processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"info",
+						 "indexfile '"+arguments.indexFileName+"' found files "+
+						 Integer.toString(foundFiles.length)+" create: "+String.valueOf(createIndexFile)+" "+String.valueOf(arguments.generateIndexFileOption)}),0);
+				 
+					if (createIndexFile) {
+						Arrays.sort(fileNames, naturalOrderComparator);
+						if (!arguments.checkOnly) {
+							try {
+								switch (arguments.generateIndexFileOption) {
+									case INDEX_TO_HTML:
+										generateIndexHtmlLinks2HtmlFiles(arguments.outputDirectory+File.separator+arguments.indexFileName, fileNames);
+										break;
+									case INDEX_NO_HTML:
+										generateIndexHtml(arguments.outputDirectory+File.separator+arguments.indexFileName, fileNames);
+										break;
+									default:
+										break;
+								}
+								copyFiles(arguments.outputDirectory, files2copyForIndexFile, "indexfile");
+							} catch (Exception exc) {
+								exc.printStackTrace();
+								if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message",exc.getMessage()}),99);
+								else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error"}),99);
+								processData.setFinished();
+								return errors;
+							}
+							processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {action+translateCheckOnly,arguments.indexFileName}),0);
+						}
 					}
 				}
 			}

@@ -63,7 +63,7 @@ import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
-//import javax.swing.table.DefaultTableModel;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
@@ -83,8 +83,9 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 	boolean processingScores = false;
 
 	private final String jarDirectory=this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
-	private final String helpDirectory=(new File(jarDirectory)).getParentFile().getParentFile().getParent()+File.separator+"resources"+File.separator+"help";
-	private String aboutLink, helpLink;
+	private final String helpDirectory=(new File(jarDirectory)).getParentFile().getParentFile().getParent()+
+		File.separator+"resources"+File.separator+"help";
+	private String helpLink;
 	public JMenuBar mainJMenuBar;
 	private JMenuItem
 		musescoreJMenuItem,
@@ -93,9 +94,11 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		helpJMenuItem;
 	private static final String newline = "\n";
 
-	private String[] languageOptions;
 	private Arguments.FILE_OPTION fileOption;
-	private String[] fileOptions;
+	private String[] languageOptions, fileOptions, generateIndexFileOptions, indexFileOptions, logLevelOptions;
+	private String museScore;
+	private String[] scores;
+	private String museScoreDirectory, lastUsedScoreDirectory, outputDirectory, lastUsedOutputDirectory;
 
 	private JButton
 		processScoresJButton,
@@ -104,7 +107,8 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 	private JComboBox<String>
 		languageOptionsJComboBox,
 		fileOptionsJComboBox,
-		indexFileNameOptionsJComboBox,
+		generateIndexFileOptionsJComboBox,
+		indexFileOptionsJComboBox,
 		logLevelOptionsJComboBox;
 	private JLabel
 		musescoreJLabel,
@@ -123,17 +127,10 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 	private DefaultTableModel museScoreTableModel, scoresTableModel, outputDirectoryTableModel;
 	private JTable musescoreJTable, scoresJTable, outputdirectoryJTable;
 	private JScrollPane scoresJScrollPane;
-	private String museScore;
-	private String[] scores;
-	private String museScoreDirectory, lastUsedScoreDirectory, outputDirectory, lastUsedOutputDirectory;
-	private boolean generateIndexFile;
-	private String indexFileNameOptions[], indexFileName;
-	private int indexFileNameOption = 0;
 	private Arguments.LOG_LEVEL logLevel = Arguments.LOG_LEVEL.NORMAL;
-	private String[] logLevelOptions;
 	private JTextArea logJTextArea;
-	private JCheckBox fileGenerateHtmlJCheckBox, indexFileNameGenerateAllJCheckBox;
-	
+	private JCheckBox fileGenerateHtmlJCheckBox, indexFileGenerateAllJCheckBox, checkOnlyJCheckBox;
+
 	private int errors=0;
 
 	public void setUp() {
@@ -147,7 +144,7 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		musescoreJMenuItem.addActionListener(this);
 		musescoreJMenuItem.addMenuKeyListener(this);
 		mainJMenuBar.add(musescoreJMenuItem);
-		
+
 		musescoreJLabel = new JLabel(arguments.translations.getKey("musescore.label"));
 		musescoreJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -175,11 +172,15 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 
 		languageJLabel = new JLabel(arguments.translations.getKey("language.label"));
 		languageOptions = arguments.translations.getLanguages();
-		languageOptionsJComboBox = new JComboBox<String>(languageOptions);				
-		languageOptionsJComboBox.setSelectedIndex(Arrays.asList(languageOptions).indexOf(arguments.language));
-		languageOptionsJComboBox.addActionListener(this);
+		languageOptionsJComboBox = new JComboBox<String>(languageOptions);
 		languageOptionsJComboBox.setMaximumSize(languageOptionsJComboBox.getPreferredSize());
 		languageOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		// adapt before setting addActionListener
+		languageOptionsJComboBox.setSelectedIndex(Arrays.asList(languageOptions).indexOf(arguments.language));
+		languageOptionsJComboBox.addActionListener(this);
+
+		fileGenerateHtmlJCheckBox = new JCheckBox(arguments.translations.getKey("file.generatehtml.label"), arguments.generateHtml);
 
 		fileOptions = new String[] {
 			arguments.translations.getKey("file.option.new"),
@@ -189,26 +190,39 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		fileOptionsJComboBox = new JComboBox<String>(fileOptions);
 		fileOptionsJComboBox.addActionListener(this);
 		fileOptionsJComboBox.setMaximumSize(fileOptionsJComboBox.getPreferredSize());
-		fileOptionsJComboBox.setSelectedIndex(arguments.fileOption.ordinal());
 		fileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		
-		fileGenerateHtmlJCheckBox = new JCheckBox(arguments.translations.getKey("file.generatehtml.label"), false);
+		fileOptionsJComboBox.setSelectedIndex(arguments.fileOption.ordinal());
 
 		indexFileNameJLabel = new JLabel(arguments.translations.getKey("indexfilename.label"));
-		indexFileNameOptions = new String[] {
-			arguments.translations.getKey("indexfilename.option.none"),
-			arguments.translations.getKey("indexfilename.option.html.no"),
-			arguments.translations.getKey("indexfilename.option.html.yes")
+		generateIndexFileOptions = new String[] {
+			arguments.translations.getKey("generateindexfile.option.none"),
+			arguments.translations.getKey("generateindexfile.option.html.no"),
+			arguments.translations.getKey("generateindexfile.option.html.yes")
 		};
-		indexFileNameOptionsJComboBox = new JComboBox<String>(indexFileNameOptions);
-		indexFileNameOptionsJComboBox.addActionListener(this);
-		indexFileNameOptionsJComboBox.setMaximumSize(indexFileNameOptionsJComboBox.getPreferredSize());
-		indexFileNameOptionsJComboBox.setSelectedIndex(indexFileNameOption);
-		indexFileNameOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		generateIndexFileOptionsJComboBox = new JComboBox<String>(generateIndexFileOptions);
+		generateIndexFileOptionsJComboBox.addActionListener(this);
+		generateIndexFileOptionsJComboBox.setMaximumSize(generateIndexFileOptionsJComboBox.getPreferredSize());
+		generateIndexFileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		indexFileNameJTextField=new JTextField("");
+		generateIndexFileOptionsJComboBox.setSelectedIndex(arguments.generateIndexFileOption.ordinal());
+
+		indexFileNameJTextField=new JTextField(arguments.indexFileName!=null?arguments.indexFileName:"");
 		indexFileNameJTextField.addActionListener(this);
-		indexFileNameGenerateAllJCheckBox = new JCheckBox(arguments.translations.getKey("indexfile.generateall.label"), false);
+
+		indexFileOptions = new String[] {
+			arguments.translations.getKey("indexfile.option.new"),
+			arguments.translations.getKey("indexfile.option.newer"),
+			arguments.translations.getKey("indexfile.option.replace")
+		};
+		indexFileOptionsJComboBox = new JComboBox<String>(indexFileOptions);
+		indexFileOptionsJComboBox.addActionListener(this);
+		indexFileOptionsJComboBox.setMaximumSize(indexFileOptionsJComboBox.getPreferredSize());
+		indexFileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+		
+		indexFileOptionsJComboBox.setSelectedIndex(arguments.indexFileOption.ordinal());
+
+		indexFileGenerateAllJCheckBox = new JCheckBox(arguments.translations.getKey("generateindexfile.generateall.label"), arguments.generateIndexAll);
 
 		logLevelOptions = new String[] {
 			arguments.translations.getKey("loglevel.option.silent"),
@@ -220,8 +234,9 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		logLevelOptionsJComboBox = new JComboBox<String>(logLevelOptions);
 		logLevelOptionsJComboBox.addActionListener(this);
 		logLevelOptionsJComboBox.setMaximumSize(logLevelOptionsJComboBox.getPreferredSize());
-		logLevelOptionsJComboBox.setSelectedIndex(arguments.logLevel.ordinal());
 		logLevelOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		logLevelOptionsJComboBox.setSelectedIndex(arguments.logLevel.ordinal());
 
 		museScore = arguments.config.getMuseScore();
 		museScoreDirectory = arguments.config.getLastUsedMuseScoreDirectory();
@@ -294,7 +309,6 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		scoresJFileChooser.setCurrentDirectory(new File(lastUsedScoreDirectory));
 
 		for (int i=0; i<arguments.scores.size(); i++) {
-			System.out.println(arguments.scores.get(i));
 			scoresTableModel.addRow(new String[]{arguments.scores.get(i)});
 		}
 		scores=arguments.scores.toArray(new String[0]);
@@ -302,6 +316,8 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		processScoresJButton = new JButton(arguments.translations.getKey("scores.process"));
 		processScoresJButton.setAlignmentX(Component.LEFT_ALIGNMENT);
 		processScoresJButton.addActionListener(this);
+
+		checkOnlyJCheckBox = new JCheckBox(arguments.translations.getKey("checkonly.label"), arguments.checkOnly);
 
 		logJLabel = new JLabel(arguments.translations.getKey("logging.label"));
 		logJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -328,29 +344,28 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 
 		add(outputdirectoryJLabel);
 		add(outputdirectoryJTable);
-		
+
 		add(scoresJLabel);
 		add(scoresJScrollPane);
-		add(fileOptionsJComboBox);
 		add(fileGenerateHtmlJCheckBox);
-				
+		add(fileOptionsJComboBox);
+
 		add(indexFileNameJLabel);
 		add(indexFileNameJTextField);
-		add(indexFileNameOptionsJComboBox);
-		add(indexFileNameGenerateAllJCheckBox);
-		
-		add(processScoresJButton);
-		
-		add(logJLabel);
-		add(logLevelOptionsJComboBox);
-		add(logScrollPane);
-		
-		add(clearLogJButton);
-		
-		add(closeJButton);
+		add(indexFileGenerateAllJCheckBox);
+		add(generateIndexFileOptionsJComboBox);
+		add(indexFileOptionsJComboBox);
 
-		if (arguments.indexFileName!=null) indexFileNameJTextField.setText(arguments.indexFileName);
-		indexFileNameOptionsJComboBox.setSelectedIndex(arguments.indexFileOption.ordinal());
+		add(logJLabel);
+		add(logScrollPane);
+		add(logLevelOptionsJComboBox);
+
+		add(clearLogJButton);
+
+		add(processScoresJButton);
+		add(checkOnlyJCheckBox);
+
+		add(closeJButton);
 		
 		for (int i=0; i<arguments.logging.size(); i++) {
 			logJTextArea.append(arguments.logging.get(i).logMessage + newline);
@@ -364,16 +379,23 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 
 	public void changeLanguage(String language) {
 		arguments.translations.setLanguage(language);
-		
+		arguments.language = language;
+
 		musescoreJMenuItem.setText(arguments.translations.getKey("musescore.select"));
 		outputdirectoryJMenuItem.setText(arguments.translations.getKey("outputdirectory.select"));
 		scoresJMenuItem.setText(arguments.translations.getKey("scores.select"));
-		
 		helpJMenuItem.setText(arguments.translations.getKey("help.label"));
 		
+		helpLink = "file:"+helpDirectory+File.separator+Version.NAME+"_"+language+".html";
+
 		languageJLabel.setText(arguments.translations.getKey("language.label"));
-		
 		musescoreJLabel.setText(arguments.translations.getKey("musescore.label"));
+		outputdirectoryJLabel.setText(arguments.translations.getKey("outputdirectory.label"));
+		indexFileNameJLabel.setText(arguments.translations.getKey("indexfilename.label"));
+	
+		scoresTableModel.setColumnIdentifiers(new String[]{arguments.translations.getKey("scores.label")});
+		
+		fileGenerateHtmlJCheckBox.setText(arguments.translations.getKey("file.generatehtml.label"));
 
 		int previous = fileOptionsJComboBox.getSelectedIndex();
 		fileOptions = new String[] {
@@ -387,19 +409,36 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		}
 		fileOptionsJComboBox.setMaximumSize(fileOptionsJComboBox.getPreferredSize());
 		fileOptionsJComboBox.setSelectedIndex(previous);
-		
-		previous = indexFileNameOptionsJComboBox.getSelectedIndex();
-		indexFileNameOptions = new String[] {
-			arguments.translations.getKey("indexfilename.option.none"),
-			arguments.translations.getKey("indexfilename.option.html.no"),
-			arguments.translations.getKey("indexfilename.option.html.yes")
+
+		indexFileGenerateAllJCheckBox.setText(arguments.translations.getKey("generateindexfile.generateall.label"));
+
+		previous = generateIndexFileOptionsJComboBox.getSelectedIndex();
+		generateIndexFileOptions = new String[] {
+			arguments.translations.getKey("generateindexfile.option.none"),
+			arguments.translations.getKey("generateindexfile.option.html.no"),
+			arguments.translations.getKey("generateindexfile.option.html.yes")
 		};
-		indexFileNameOptionsJComboBox.removeAllItems();
-		for (int i=0;i<indexFileNameOptions.length; i++) {
-			 indexFileNameOptionsJComboBox.addItem(indexFileNameOptions[i]);
+		generateIndexFileOptionsJComboBox.removeAllItems();
+		for (int i=0;i<generateIndexFileOptions.length; i++) {
+			 generateIndexFileOptionsJComboBox.addItem(generateIndexFileOptions[i]);
 		}
-		indexFileNameOptionsJComboBox.setMaximumSize(indexFileNameOptionsJComboBox.getPreferredSize());
-		indexFileNameOptionsJComboBox.setSelectedIndex(previous);
+		generateIndexFileOptionsJComboBox.setMaximumSize(generateIndexFileOptionsJComboBox.getPreferredSize());
+		generateIndexFileOptionsJComboBox.setSelectedIndex(previous);
+
+		previous = indexFileOptionsJComboBox.getSelectedIndex();
+		indexFileOptions = new String[] {
+			arguments.translations.getKey("indexfile.option.new"),
+			arguments.translations.getKey("indexfile.option.newer"),
+			arguments.translations.getKey("indexfile.option.replace")
+		};
+		indexFileOptionsJComboBox.removeAllItems();
+		for (int i=0;i<indexFileOptions.length; i++) {
+			 indexFileOptionsJComboBox.addItem(indexFileOptions[i]);
+		}
+		indexFileOptionsJComboBox.setMaximumSize(indexFileOptionsJComboBox.getPreferredSize());
+		indexFileOptionsJComboBox.setSelectedIndex(previous);
+
+		checkOnlyJCheckBox.setText(arguments.translations.getKey("checkonly.label"));
 
 		previous = logLevelOptionsJComboBox.getSelectedIndex();
 		logLevelOptions = new String[] {
@@ -415,7 +454,7 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		}
 		logLevelOptionsJComboBox.setMaximumSize(logLevelOptionsJComboBox.getPreferredSize());
 		logLevelOptionsJComboBox.setSelectedIndex(previous);
-		
+
 		scoreFileFilter = new FileNameExtensionFilter(arguments.translations.getKey("scores.label"), "mscz", "mscx");
 		scoresJFileChooser.setFileFilter(scoreFileFilter);
 
@@ -424,9 +463,6 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		clearLogJButton.setText(arguments.translations.getKey("logging.clear"));
 		closeJButton.setText(arguments.translations.getKey("close.label"));
 
-		helpJMenuItem.setText(arguments.translations.getKey("help.label"));
-		helpLink = "file:"+helpDirectory+File.separator+Version.NAME+"_"+language+".html";
-		
 		JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
 		parent.revalidate();
 		parent.repaint();
@@ -434,7 +470,7 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 		//Handle open file(s) button action.
 		if (e.getSource() == scoresJMenuItem) {
 			scoresJFileChooser.setCurrentDirectory(new File(lastUsedScoreDirectory));
@@ -502,85 +538,71 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 			} else {
 				processingScores = true;
 				processScoresJButton.setText(arguments.translations.getKey("scores.process.cancel"));
+				arguments.language = languageOptions[languageOptionsJComboBox.getSelectedIndex()];
+				arguments.translations.setLanguage(arguments.language);
 				arguments.museScore = museScore;
 				arguments.outputDirectory = outputDirectory;
 				arguments.scores = new ArrayList<String>();
 				arguments.scores.addAll(Arrays.asList(scores));
 				arguments.fileOption = getFileOption();
-				indexFileName = indexFileNameJTextField.getText().equals("")?null:indexFileNameJTextField.getText();
-				arguments.indexFileName = indexFileName;
-				arguments.generateHtml = indexFileNameOptionsJComboBox.getSelectedIndex()<2;
+				arguments.indexFileName = indexFileNameJTextField.getText().equals("")?null:indexFileNameJTextField.getText();
+				arguments.indexFileOption = getIndexFileOption();
+				arguments.generateHtml = fileGenerateHtmlJCheckBox.isSelected();
+				arguments.generateIndexFileOption = getGenerateIndexFileOption();
+				arguments.generateIndexAll = indexFileGenerateAllJCheckBox.isSelected();
+				arguments.checkOnly = checkOnlyJCheckBox.isSelected();
 				arguments.logLevel = getLogLevel();
 				processScoresTask = new ProcessScoresTask(arguments);
 				processScoresTask.execute();
 			}
-		} else if (e.getSource() == fileOptionsJComboBox) {
-			String s = (String) fileOptionsJComboBox.getSelectedItem();
-			for (Arguments.FILE_OPTION opt : Arguments.FILE_OPTION.values()) {
-				if (opt.ordinal()==fileOptionsJComboBox.getSelectedIndex()) {
-					fileOption=opt;
-					break ;
-				}
-			}
-		} else if (e.getSource() == logLevelOptionsJComboBox) {
-			String s = (String) logLevelOptionsJComboBox.getSelectedItem();
-			for (Arguments.LOG_LEVEL level : Arguments.LOG_LEVEL.values()) {
-				if (level.ordinal()==logLevelOptionsJComboBox.getSelectedIndex()) {
-					logLevel=level;
-					break ;
-				}
-			}
-		} else if (e.getSource() == indexFileNameOptionsJComboBox) {
-			generateIndexFile=indexFileNameOptionsJComboBox.getSelectedIndex()==1?true:false;
+		//} else if (e.getSource() == fileOptionsJComboBox) {
+		//} else if (e.getSource() == logLevelOptionsJComboBox) {
+		//} else if (e.getSource() == indexFileOptionsJComboBox) {
 		} else if (e.getSource() == languageOptionsJComboBox) {
 			String s = (String) languageOptionsJComboBox.getSelectedItem();
 			changeLanguage(s);
 		} else if (e.getSource() == clearLogJButton) {
 			logJTextArea.selectAll();
 			logJTextArea.replaceSelection("");
-			/*
-		} else if (e.getSource() == aboutJMenuItem) {
-			showHelp(aboutLink);
-			*/
 		} else if (e.getSource() == helpJMenuItem) {
 			showHelp(helpLink);
 		}
 	}
-	
+
 	public void menuKeyPressed(MenuKeyEvent e) {
 		System.out.println("keyPressed "+e.getKeyCode());
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_M:
 				break;
 		}
- MenuElement[] path = e.getPath();
-      JMenuItem item = (JMenuItem) path[path.length-1];
-      System.out.println("Key typed: "+e.getKeyChar()
-         + ", "+e.getKeyText(e.getKeyCode())
-         + " on "+item.getText());	}
-	
+		MenuElement[] path = e.getPath();
+ 		JMenuItem item = (JMenuItem) path[path.length-1];
+		System.out.println("Key typed: "+e.getKeyChar()
+		 + ", "+e.getKeyText(e.getKeyCode())
+		 + " on "+item.getText());	}
+
 	public void menuKeyReleased(MenuKeyEvent e) {
-      MenuElement[] path = e.getPath();
-      JMenuItem item = (JMenuItem) path[path.length-1];
-      System.out.println("Key pressed: "+e.getKeyChar()
-         + ", "+e.getKeyText(e.getKeyCode())
-         + " on "+item.getText());
+		MenuElement[] path = e.getPath();
+		JMenuItem item = (JMenuItem) path[path.length-1];
+		System.out.println("Key pressed: "+e.getKeyChar()
+			+ ", "+e.getKeyText(e.getKeyCode())
+			+ " on "+item.getText());
 		System.out.println("keyReleased "+e.getKeyCode());
 	}
-	
+
 	public void menuKeyTyped(MenuKeyEvent e) {
 		System.out.println("keyTyped "+e.getKeyCode());
 		switch (e.getKeyCode()) {
 			case KeyEvent.VK_M:
 				break;
 		}
-      MenuElement[] path = e.getPath();
-      JMenuItem item = (JMenuItem) path[path.length-1];
-      System.out.println("Key released: "+e.getKeyChar()
-         + ", "+e.getKeyText(e.getKeyCode())
-         + " on "+item.getText());
+	  MenuElement[] path = e.getPath();
+	  JMenuItem item = (JMenuItem) path[path.length-1];
+	  System.out.println("Key released: "+e.getKeyChar()
+		 + ", "+e.getKeyText(e.getKeyCode())
+		 + " on "+item.getText());
 	}
-	
+
 	private Arguments.FILE_OPTION getFileOption() {
 		for (Arguments.FILE_OPTION opt : Arguments.FILE_OPTION.values()) {
 			if (opt.ordinal()==fileOptionsJComboBox.getSelectedIndex()) {
@@ -588,6 +610,24 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 			}
 		}
 		return Arguments.FILE_OPTION.ONLY_IF_NEW;
+	}
+
+	private Arguments.INDEX_FILE_OPTION getIndexFileOption() {
+		for (Arguments.INDEX_FILE_OPTION opt : Arguments.INDEX_FILE_OPTION.values()) {
+			if (opt.ordinal()==indexFileOptionsJComboBox.getSelectedIndex()) {
+				return opt;
+			}
+		}
+		return Arguments.INDEX_FILE_OPTION.INDEX_ONLY_IF_NEW;
+	}
+
+	private Arguments.GENERATE_INDEX_FILE_OPTION getGenerateIndexFileOption() {
+		for (Arguments.GENERATE_INDEX_FILE_OPTION opt : Arguments.GENERATE_INDEX_FILE_OPTION.values()) {
+			if (opt.ordinal()==generateIndexFileOptionsJComboBox.getSelectedIndex()) {
+				return opt;
+			}
+		}
+		return Arguments.GENERATE_INDEX_FILE_OPTION.NONE;
 	}
 
 	private Arguments.LOG_LEVEL getLogLevel() {
@@ -649,8 +689,8 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 			this.arguments = arguments;
 		}
 
-        @Override
-        protected Void doInBackground() {
+		@Override
+		protected Void doInBackground() {
 			try {
 				ProcessData processData = new ProcessData();
 				ProcessScores processScores = new ProcessScores(arguments, processData);
@@ -684,19 +724,19 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 			return null;
 		}
 
-        @Override
-        protected void process(List<ProcessData.Data> data) {
-        	for (int i=0; i<data.size(); i++) {
-        		logJTextArea.append(data.get(i).message+newline);
-        	}
-        }
+		@Override
+		protected void process(List<ProcessData.Data> data) {
+			for (int i=0; i<data.size(); i++) {
+				logJTextArea.append(data.get(i).message+newline);
+			}
+		}
 
-        @Override
-        protected void done() {
-        	logJTextArea.append(arguments.translations.getKey("scores.process.ready")+newline+newline);
+		@Override
+		protected void done() {
+			logJTextArea.append(arguments.translations.getKey("scores.process.ready")+newline+newline);
 			processingScores = false;
 			processScoresJButton.setText(arguments.translations.getKey("scores.process"));
-        }
+		}
 	}
 
 	public MainPanel() {
