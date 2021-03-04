@@ -275,8 +275,6 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		outputdirectoryJFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		scoresJTable = new JTable(scoresTableModel);
-		//scoresTableModel = new DefaultTableModel(new String[]{arguments.translations.getKey("scores")},1);
-		//scoresJTable = new JTable(scoresTableModel);
 		scoresJTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scoresJScrollPane = new JScrollPane(scoresJTable);
 		scoresJScrollPane.setPreferredSize(new Dimension(100, 100));
@@ -371,7 +369,7 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 			logJTextArea.append(arguments.logging.get(i).logMessage + newline);
 			if (arguments.logging.get(i).logCode>0) errors++;
 		}
-		if (errors>0) logJTextArea.append(arguments.translations.translate(new String[]{"errors", Integer.toString(errors)}) + newline);
+		if (errors>0) logJTextArea.append(arguments.translations.translate(new String[] {"errors", Integer.toString(errors)}) + newline);
 
 		setVisible(true);
 		setEnabled(true);
@@ -712,11 +710,11 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 				errors = futureProcessScores.get();
 			} catch (InterruptedException iexc) {
 				iexc.printStackTrace();
-				if (iexc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[]{"scores.process.error.message", iexc.getMessage()}));
+				if (iexc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[] {"scores.process.error.message", iexc.getMessage()}));
 				else System.err.println(arguments.translations.translate("scores.process.error"));
 			} catch (Exception exc) {
 				exc.printStackTrace();
-				if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[]{"scores.process.error.message", exc.getMessage()}));
+				if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[] {"scores.process.error.message", exc.getMessage()}));
 				else System.err.println(arguments.translations.translate("scores.process.error"));
 			}
 			processingScores = false;

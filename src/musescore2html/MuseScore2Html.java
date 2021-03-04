@@ -22,7 +22,7 @@ public class MuseScore2Html {
 			rc = processScores.validateArguments();
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[]{"scores.process.error.message", exc.getMessage()}));
+			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[] {"scores.process.error.message", exc.getMessage()}));
 			else throw new RuntimeException(arguments.translations.translate("scores.process.error"));
 		}
 		return rc;
@@ -42,8 +42,8 @@ public class MuseScore2Html {
 			executor.shutdown();
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[]{"scores.process.error.message", exc.getMessage()}));
-			else throw new RuntimeException(arguments.translations.translate("scores.process.error"));
+			if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[] {"scores.process.error.message", exc.getMessage()}));
+			else System.err.println(arguments.translations.translate("scores.process.error"));
 		}
 		return code|errors;
 	}

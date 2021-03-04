@@ -90,7 +90,9 @@ public class ProcessScores implements Callable<Integer>  {
 			}
 		} catch (InterruptedException iexc) {
 			iexc.printStackTrace();
-			System.err.println(translations.getKey("Error")+": '"+iexc.getMessage());
+			if (iexc.getMessage()!=null) System.err.println(translations.translate(new String[] {"exception.error.message", iexc.getMessage()}));
+			else System.err.println(translations.getKey("exception.error"));
+
 		}
 	}
 
@@ -111,7 +113,7 @@ public class ProcessScores implements Callable<Integer>  {
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"musescore.not.readable",arguments.museScore}),2048);
 			return foundMuseScore[0];
 		} else if (!f.canExecute()) {
-			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"musescore.not.excutable",arguments.museScore}),2048);
+			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"musescore.not.executable",arguments.museScore}),2048);
 			return foundMuseScore[0];
 		}
 		if (arguments.config.getOSId()==Config.OSId.OSX) {
@@ -301,7 +303,7 @@ public class ProcessScores implements Callable<Integer>  {
   		output.println("<html lang=\"en\">");
   		output.println("	<head>");
   		output.println("		<meta charset=\"UTF-8\"/>");
-  		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\" />");
+  		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"/>");
   		output.println("		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/ms_player_index.css\"/>");
   		output.println("		<title>"+translations.getKey("scores.label")+"</title>");
   		output.println("	</head>");
@@ -409,7 +411,7 @@ public class ProcessScores implements Callable<Integer>  {
     		}
     	} catch (Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message", exc.getMessage()}),99);
+			if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error.message", exc.getMessage()}),99);
 			else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.getKey("exception.error"),99);
     	}
     }
@@ -476,7 +478,6 @@ public class ProcessScores implements Callable<Integer>  {
 		try {
    			translateCheckOnly = arguments.checkOnly?".checkonly":"";
 			if (arguments.errors>0) {
-				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
 				processData.setFinished();
 				return errors;
 			}
@@ -564,7 +565,7 @@ public class ProcessScores implements Callable<Integer>  {
 			
 			int validateErrors = validateArguments();
 			if (validateErrors>0) {
-				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("process.error.arguments"),0);
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate("exception.error"),0);
 				processData.setFinished();
 				return validateErrors;
 			}
@@ -579,8 +580,8 @@ public class ProcessScores implements Callable<Integer>  {
 					if (errors>0) break;
 				} catch (Exception exc) {
 					exc.printStackTrace();
-					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"score.error.generate.message", score[2],exc.getMessage()}),99);
-					else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"score.error.generate", score[2]}),99);
+					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.error.generate.message", score[2],exc.getMessage()}),99);
+					else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.error.generate", score[2]}),99);
 					processData.setFinished();
 					return errors;
 				}
@@ -592,8 +593,8 @@ public class ProcessScores implements Callable<Integer>  {
 					if (metajsonFiles.length>0) copyFiles(arguments.outputDirectory, files2copy, "file");
 				} catch (Exception exc) {
 					exc.printStackTrace();
-					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message",exc.getMessage()}),99);
-					else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error"}),99);
+					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error.message",exc.getMessage()}),99);
+					else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error"}),99);
 					processData.setFinished();
 					return errors;
 				}
@@ -677,8 +678,8 @@ public class ProcessScores implements Callable<Integer>  {
 								copyFiles(arguments.outputDirectory, files2copyForIndexFile, "indexfile");
 							} catch (Exception exc) {
 								exc.printStackTrace();
-								if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error.message",exc.getMessage()}),99);
-								else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[]{"exception.error"}),99);
+								if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error.message",exc.getMessage()}),99);
+								else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error"}),99);
 								processData.setFinished();
 								return errors;
 							}
@@ -688,7 +689,7 @@ public class ProcessScores implements Callable<Integer>  {
 				}
 			}
 			
-			processInfo(Arguments.LOG_LEVEL.QUIET, translations.translate(new String[]{"summary"+translateCheckOnly,
+			processInfo(Arguments.LOG_LEVEL.QUIET, translations.translate(new String[] {"summary"+translateCheckOnly,
 				Integer.toString(scores_processed),
 				Integer.toString(scores_skipped),
 				Integer.toString(files_generated),

@@ -115,8 +115,8 @@ public class ProcessArguments {
 			}
 		} catch (Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[]{"exception.config.error.message", exc.getMessage()}));
-			else System.err.println(arguments.translations.translate(new String[]{"exception.config.error"}));
+			if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[] {"exception.config.error.message", exc.getMessage()}));
+			else System.err.println(arguments.translations.translate(new String[] {"exception.config.error"}));
 			processInfo(Arguments.LOG_LEVEL.QUIET, arguments.translations.translate(new String[] {"info",exc.getMessage()}),0);
 		}
 	}

@@ -132,8 +132,8 @@ public class Config {
 
 		if (defaultMuseScore.equals("")) throw new Exception(translations.translate("musescore.not.specified"));
 		File exec = new File(defaultMuseScore);
-		if (!exec.exists()) throw new Exception(translations.translate(new String[]{"musescore.not.found", defaultMuseScore}));
-		if (!exec.canExecute()) throw new Exception(translations.translate(new String[]{"musescore.not.executable", defaultMuseScore}));
+		if (!exec.exists()) throw new Exception(translations.translate(new String[] {"musescore.not.found", defaultMuseScore}));
+		if (!exec.canExecute()) throw new Exception(translations.translate(new String[] {"musescore.not.executable", defaultMuseScore}));
 		museScore = defaultMuseScore;
 
 		configDirectory = defaultConfigDirectory;
@@ -207,7 +207,7 @@ public class Config {
 
 	public void readConfig(File configFile) throws Exception {
 		if (configFile==null) throw new Exception(translations.translate("configfile.error.null"));
-		if (!configFile.exists()) throw new Exception(translations.translate(new String[]{"configfile.not.exists", configFile.toString()}));
+		if (!configFile.exists()) throw new Exception(translations.translate(new String[] {"configfile.not.exists", configFile.toString()}));
 		FileInputStream fis = null;
 		Properties prop = null;
 		String value;
@@ -224,8 +224,8 @@ public class Config {
 			if (value!=null) museScore = value;
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configfile.error.read.message", configFile.toString(),exc.getMessage()}));
-			else throw new Exception(translations.translate(new String[]{"configfile.error.read", configFile.toString()}));
+			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configfile.error.read.message", configFile.toString(),exc.getMessage()}));
+			else throw new Exception(translations.translate(new String[] {"configfile.error.read", configFile.toString()}));
 		} finally {
 			if (fis!=null) fis.close();
 		}
@@ -253,14 +253,14 @@ public class Config {
 				if (!configDir.exists()) {
 					if (!configDir.mkdirs()) {
 						if (!configDir.exists()) {
-							throw new Exception(translations.translate(new String[]{"configfile.error.createdirectory", configDirectory}));
+							throw new Exception(translations.translate(new String[] {"configfile.error.creatingdirectory", configDirectory}));
 						}
 					}
 				}
 			} catch (Exception exc) {
 				exc.printStackTrace();
-				if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configfile.error.createdirectory.message", configDirectory,exc.getMessage()}));
-				else throw new Exception(translations.translate(new String[]{"configfile.error.createdirectory", configDirectory}));
+				if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configfile.error.creatingdirectory.message", configDirectory,exc.getMessage()}));
+				else throw new Exception(translations.translate(new String[] {"configfile.error.creatingdirectory", configDirectory}));
 			}
 		}
 		FileOutputStream fos = null;
@@ -274,8 +274,8 @@ public class Config {
 			props.storeToXML(fos,translations.translate("configuration"),"UTF-8");
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configfile.error.write", configFile.toString(),exc.getMessage()}));
-			else throw new Exception(translations.translate(new String[]{"configfile.error.write", configFile.toString()}));
+			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configfile.error.write.message", configFile.toString(),exc.getMessage()}));
+			else throw new Exception(translations.translate(new String[] {"configfile.error.write", configFile.toString()}));
 		} finally {
 			if (fos!=null) fos.close();
 		}
@@ -316,8 +316,8 @@ public class Config {
 			if (value!=null) lastUsedScoreDirectory = value;
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configlastusedfile.error.read.message", configLastUsedFile.toString(),exc.getMessage()}));
-			else throw new Exception(translations.translate(new String[]{"configlastusedfile.error.read", configLastUsedFile.toString()}));
+			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configlastusedfile.error.read.message", configLastUsedFile.toString(),exc.getMessage()}));
+			else throw new Exception(translations.translate(new String[] {"configlastusedfile.error.read", configLastUsedFile.toString()}));
 		} finally {
 			if (fis!=null) fis.close();
 		}
@@ -362,14 +362,14 @@ public class Config {
 				if (!configDir.exists()) {
 					if (!configDir.mkdirs()) {
 						if (!configDir.exists()) {
-							throw new Exception(translations.translate(new String[]{"configlastusedfile.error.createdirectory", configDirectory}));
+							throw new Exception(translations.translate(new String[] {"configlastusedfile.error.creatingdirectory", configDirectory}));
 						}
 					}
 				}
 			} catch (Exception exc) {
 				exc.printStackTrace();
-				if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configlastusedfile.error.createdirectory.message", configLastUsedFile.toString(),exc.getMessage()}));
-				else throw new Exception(translations.translate(new String[]{"configlastusedfile.error.createdirectory", configLastUsedFile.toString()}));
+				if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configlastusedfile.error.creatingdirectory.message", configLastUsedFile.toString(),exc.getMessage()}));
+				else throw new Exception(translations.translate(new String[] {"configlastusedfile.error.creatingdirectory", configLastUsedFile.toString()}));
 			}
 		}
 		FileOutputStream fos = null;
@@ -384,8 +384,8 @@ public class Config {
 			props.storeToXML(fos,"last used values","UTF-8");
 		} catch(Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[]{"configlastusedfile.error.write", configLastUsedFile.toString(),exc.getMessage()}));
-			else throw new Exception(translations.translate(new String[]{"configlastusedfile.error.write", configLastUsedFile.toString()}));
+			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configlastusedfile.error.write.message", configLastUsedFile.toString(),exc.getMessage()}));
+			else throw new Exception(translations.translate(new String[] {"configlastusedfile.error.write", configLastUsedFile.toString()}));
 		} finally {
 			if (fos!=null) fos.close();
 		}

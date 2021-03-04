@@ -27,11 +27,11 @@ class ProcessInfo implements Callable<Integer> {
 			}
 		} catch (InterruptedException iexc) {
 			iexc.printStackTrace();
-			if (iexc.getMessage()!=null) System.err.println(translations.translate(new String[]{"processinfo.error.message", iexc.getMessage()}));
+			if (iexc.getMessage()!=null) System.err.println(translations.translate(new String[] {"processinfo.error.message", iexc.getMessage()}));
 			else System.err.println(translations.translate("processinfo.error"));
 		} catch (Exception exc) {
 			exc.printStackTrace();
-			if (exc.getMessage()!=null) System.err.println(translations.translate(new String[]{"processinfo.error.message", exc.getMessage()}));
+			if (exc.getMessage()!=null) System.err.println(translations.translate(new String[] {"processinfo.error.message", exc.getMessage()}));
 			else System.err.println(translations.translate("processinfo.error"));
 		}
 		return code;
