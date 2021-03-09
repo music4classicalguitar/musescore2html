@@ -1,7 +1,5 @@
 package musescore2html;
 
-import java.util.ArrayList;
-
 public class ProcessArguments {
 
 	private static Arguments.LOG_LEVEL logLevel = Arguments.LOG_LEVEL.NORMAL;

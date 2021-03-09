@@ -1,7 +1,9 @@
 package musescore2html;
 
 import java.util.Comparator;
-import java.util.*;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Collections;
 import java.text.Normalizer;
 
 import java.io.Serializable;
@@ -95,19 +97,16 @@ public class NaturalOrderComparator implements Comparator <Object>, Serializable
 		while (true) {
 			ca = charAt(a, ai);
 			cb = charAt(b, bi);
-			//System.out.println(ai+" "+ca+" "+bi+" "+cb);
 			
 			// skip over leading spaces or zeros
 			while (Character.isWhitespace(ca)) ca = charAt(a, ++ai);
 			while (Character.isWhitespace(cb)) cb = charAt(b, ++bi);
 
-			//System.out.println("After skipping "+ai+" "+ca+" "+bi+" "+cb);
 			// Process run of digits
 			if (isDigit(ca) && isDigit(cb)) {
 				fractional = (ca == '0' | cb == '0');
 				
 				if (fractional) {
-			//System.out.println("Fractional "+ai+" "+ca+" "+bi+" "+cb);
 					if ((result = compareLeft()) != 0) return result;
 				} else {
 					if ((result = compareRight()) != 0) return result;

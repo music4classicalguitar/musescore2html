@@ -1,56 +1,36 @@
 package musescore2html.gui;
 
 import musescore2html.Arguments;
-import musescore2html.Translations;
-import musescore2html.Config;
 import musescore2html.Version;
 
 import musescore2html.ProcessData;
 import musescore2html.ProcessScores;
 
-import java.util.Date;
-
-import java.util.Vector;
-import java.util.concurrent.ExecutionException;
-
-import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.concurrent.ExecutionException;
 
 import java.lang.InterruptedException;
 
 import java.io.File;
-import java.io.IOException;
-
-import java.net.URL;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
-import java.awt.Container;
-
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Component;
-
-import java.awt.Toolkit;
 import java.awt.Dimension;
 
 import java.util.List;
 import java.util.Arrays;
 import java.util.ArrayList;
 
-import javax.swing.MenuElement;
-import javax.swing.event.MenuKeyListener;
-import javax.swing.event.MenuKeyEvent;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
@@ -76,7 +56,7 @@ import javax.swing.filechooser.FileSystemView;
 import javax.swing.SwingWorker;
 import javax.swing.JFrame;
 
-public class MainPanel extends JPanel implements ActionListener, MenuKeyListener {
+public class MainPanel extends JPanel implements ActionListener {
 
 	private Arguments arguments;
 	ProcessScoresTask processScoresTask;
@@ -139,28 +119,22 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 
 		mainJMenuBar = new JMenuBar();
 
-		musescoreJMenuItem = new JMenuItem(arguments.translations.getKey("musescore.select"));
-		musescoreJMenuItem.setMnemonic(KeyEvent.VK_M);
+		musescoreJMenuItem = new JMenuItem(arguments.translations.getKey("musescore.select"),KeyEvent.VK_M);
 		musescoreJMenuItem.addActionListener(this);
-		musescoreJMenuItem.addMenuKeyListener(this);
 		mainJMenuBar.add(musescoreJMenuItem);
 
 		musescoreJLabel = new JLabel(arguments.translations.getKey("musescore.label"));
 		musescoreJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		outputdirectoryJMenuItem = new JMenuItem(arguments.translations.getKey("outputdirectory.select"));
-		outputdirectoryJMenuItem.setMnemonic(KeyEvent.VK_O);
+		outputdirectoryJMenuItem = new JMenuItem(arguments.translations.getKey("outputdirectory.select"),KeyEvent.VK_O);
 		outputdirectoryJMenuItem.addActionListener(this);
-		outputdirectoryJMenuItem.addMenuKeyListener(this);
 		mainJMenuBar.add(outputdirectoryJMenuItem);
 
 		outputdirectoryJLabel = new JLabel(arguments.translations.getKey("outputdirectory.label"));
 		outputdirectoryJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		scoresJMenuItem = new JMenuItem(arguments.translations.getKey("scores.select"));
-		scoresJMenuItem.setMnemonic(KeyEvent.VK_S);
+		scoresJMenuItem = new JMenuItem(arguments.translations.getKey("scores.select"),KeyEvent.VK_S);
 		scoresJMenuItem.addActionListener(this);
-		scoresJMenuItem.addMenuKeyListener(this);
 		mainJMenuBar.add(scoresJMenuItem);
 		scoresJLabel = new JLabel(arguments.translations.getKey("scores.label"));
 		scoresJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -565,40 +539,6 @@ public class MainPanel extends JPanel implements ActionListener, MenuKeyListener
 		} else if (e.getSource() == helpJMenuItem) {
 			showHelp(helpLink);
 		}
-	}
-
-	public void menuKeyPressed(MenuKeyEvent e) {
-		System.out.println("keyPressed "+e.getKeyCode());
-		switch (e.getKeyCode()) {
-			case KeyEvent.VK_M:
-				break;
-		}
-		MenuElement[] path = e.getPath();
- 		JMenuItem item = (JMenuItem) path[path.length-1];
-		System.out.println("Key typed: "+e.getKeyChar()
-		 + ", "+e.getKeyText(e.getKeyCode())
-		 + " on "+item.getText());	}
-
-	public void menuKeyReleased(MenuKeyEvent e) {
-		MenuElement[] path = e.getPath();
-		JMenuItem item = (JMenuItem) path[path.length-1];
-		System.out.println("Key pressed: "+e.getKeyChar()
-			+ ", "+e.getKeyText(e.getKeyCode())
-			+ " on "+item.getText());
-		System.out.println("keyReleased "+e.getKeyCode());
-	}
-
-	public void menuKeyTyped(MenuKeyEvent e) {
-		System.out.println("keyTyped "+e.getKeyCode());
-		switch (e.getKeyCode()) {
-			case KeyEvent.VK_M:
-				break;
-		}
-	  MenuElement[] path = e.getPath();
-	  JMenuItem item = (JMenuItem) path[path.length-1];
-	  System.out.println("Key released: "+e.getKeyChar()
-		 + ", "+e.getKeyText(e.getKeyCode())
-		 + " on "+item.getText());
 	}
 
 	private Arguments.FILE_OPTION getFileOption() {

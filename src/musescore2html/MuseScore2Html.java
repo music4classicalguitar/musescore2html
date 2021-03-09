@@ -20,7 +20,7 @@ public class MuseScore2Html {
 		try {
 			ProcessScores processScores = new ProcessScores(arguments, null);
 			rc = processScores.validateArguments();
-		} catch(Exception exc) {
+		} catch (Exception exc) {
 			exc.printStackTrace();
 			if (exc.getMessage()!=null) throw new RuntimeException(arguments.translations.translate(new String[] {"scores.process.error.message", exc.getMessage()}));
 			else throw new RuntimeException(arguments.translations.translate("scores.process.error"));
@@ -40,7 +40,7 @@ public class MuseScore2Html {
 			errors=futureProcessScores.get();
 			code=futureProcessInfoScores.get();
 			executor.shutdown();
-		} catch(Exception exc) {
+		} catch (Exception exc) {
 			exc.printStackTrace();
 			if (exc.getMessage()!=null) System.err.println(arguments.translations.translate(new String[] {"scores.process.error.message", exc.getMessage()}));
 			else System.err.println(arguments.translations.translate("scores.process.error"));

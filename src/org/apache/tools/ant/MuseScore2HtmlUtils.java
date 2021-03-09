@@ -9,16 +9,8 @@ import java.nio.file.NoSuchFileException;
 import java.io.IOException;
 import java.io.File;
 
-import java.util.ArrayList;
-
 import org.apache.tools.ant.DirectoryScanner;
 import org.apache.tools.ant.util.FileUtils;
-
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.taskdefs.Copy;
-import org.apache.tools.ant.types.FileSet;
-import org.apache.tools.ant.DefaultLogger;
-import org.apache.tools.ant.taskdefs.Copy;
 
 public class MuseScore2HtmlUtils {
 	

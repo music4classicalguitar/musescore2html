@@ -5,7 +5,6 @@ import org.apache.tools.ant.MuseScore2HtmlUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.Collections;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,11 +23,6 @@ import java.nio.file.StandardCopyOption;
 
 import java.lang.Runtime;
 import java.util.concurrent.Callable;
-
-import java.net.URLEncoder;
-import java.util.Map;
-import java.util.HashMap;
-import java.io.UnsupportedEncodingException;
 
 public class ProcessScores implements Callable<Integer>  {
 
@@ -277,26 +271,6 @@ public class ProcessScores implements Callable<Integer>  {
 		} else files_generated++;
 	}
 
-    private String encode(String component) {
-    	try {
-    		String encodedComponent = URLEncoder.encode(component, "UTF-8");
-    		Map<String, String> nonEncodedChars = new HashMap<String, String>();
-    		nonEncodedChars.put("~", "%7E");
-    		nonEncodedChars.put("!","%21");
-    		nonEncodedChars.put("(","%28");
-    		nonEncodedChars.put(")","%29");
-    		nonEncodedChars.put("\'","%27");
-    		//Map.of("~", "%7E", "!","%21","(","%28",")","%29","\'","%27");
-    		for (Map.Entry<String, String> c : nonEncodedChars.entrySet()) {
-    			encodedComponent = encodedComponent.replaceAll(c.getValue(), c.getKey());
-    		}
-    		encodedComponent = encodedComponent.replaceAll("\\+","%20");
-    		return encodedComponent;
-    	} catch (UnsupportedEncodingException e) {
-    		return component;
-    	}
-    }
-
     private void generateIndexHtml(String fileName, String[] fileNames) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
@@ -311,7 +285,7 @@ public class ProcessScores implements Callable<Integer>  {
   		output.println("		<table border=\"1\">");
  		output.println("			<tr><th>"+translations.getKey("scores.label")+"</th></tr>");
  		for (int i=0;i<fileNames.length;i++) {
-   			output.println("			<tr><td><a href=\"ShowScore.html?name="+encode(fileNames[i])+"\">"+fileNames[i]+"</a></td></tr>");
+   			output.println("			<tr><td><a href=\"ShowScore.html?name="+fileNames[i]+"\">"+fileNames[i]+"</a></td></tr>");
   		}
    		output.println("		</table>");
   		output.println("	</body>");
@@ -633,6 +607,13 @@ public class ProcessScores implements Callable<Integer>  {
 				
 				boolean createIndexFile = false;
 				if (foundFiles.length>0) {
+					/*
+					if (arguments.config.getOSId()==Config.OSId.OSX) {
+						for (int i=0; i<fileNames.length; i++) {
+							fileNames[i]=Normalizer.normalize(fileNames[i], Normalizer.Form.NFC);
+						}
+					}
+					*/
 					File src = new File(arguments.outputDirectory+File.separator+arguments.indexFileName);
 					String action = "indexfile.generated";
 					if (arguments.indexFileOption==Arguments.INDEX_FILE_OPTION.INDEX_REPLACE) createIndexFile = true;

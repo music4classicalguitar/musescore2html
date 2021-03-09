@@ -133,16 +133,11 @@ if (!("ms_player" in window)) {
 		}
 		
 		MuseScorePlayer.prototype.isScrolledIntoView=function(_this, elem) {
-			if (_this.ms_player_parent_is_body) {
-				pw = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-				ph = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			} else {
-				var s=window.getComputedStyle(_this.ms_player_parent);
-				pw=parseFloat(s.width);						
-				ph=parseFloat(s.height);
-			}
+			var s=window.getComputedStyle(_this.ms_score_div);
+			var pw=parseFloat(s.width);						
+			var ph=parseFloat(s.height);
 			var rect = elem.getBoundingClientRect();
-			return (0<rect.left && rect.left+rect.width<pw && 0<rect.top-200 && rect.top+rect.height<ph);
+			return (0<rect.left && rect.left+rect.width<pw && 0<rect.top-100 && rect.top+rect.height<ph);
 		}
 		
 		MuseScorePlayer.prototype.getMeasureElement=function(_this, m) {
@@ -286,8 +281,7 @@ if (!("ms_player" in window)) {
 					_this.ms_player_parent = document.getElementById(_this.score_options.tagId);
 					if (_this.ms_player_parent===null) window.alert("Element with id '"+_this.score_options.tagId+"' not found.");
 					if (_this.ms_player_parent.nodeName.toLowerCase()==="body") _this.ms_player_parent_is_body=true;
-					else  _this.ms_player_parent_is_body=false;
-					return;
+					else _this.ms_player_parent_is_body=false;
 				}
 				if (_this.score_options.path) {
 					_this.score_path = _this.score_options.path;
@@ -512,7 +506,7 @@ if (!("ms_player" in window)) {
 			});
 
 			document.addEventListener("keydown" , function(e) {
-				if ((e || window.event).code === "Escape") {
+				if ((e || window.event).code === "Escape" || (e || window.event).code === "Space") {
 				_this.togglePlay(_this);
 				}
 			});
@@ -630,7 +624,7 @@ if (!("ms_player" in window)) {
 			}
 
 			if (!_this.audioReady) {
-				if (_this.score_audio.readyState === 4 && _this.score_audio.duration !== Infinity) {
+				if (_this.score_audio.readyState >= 1 && _this.score_audio.duration !== Infinity) {
 					_this.audioReady = true;
 					_this.loaded++;
 				}
@@ -675,7 +669,7 @@ if (!("ms_player" in window)) {
 						_this.setMeasureDivs(_this, true);
 						_this.setMeasure(_this, 0);
 						_this.resize(_this);
-						console.log("Ready to play "+_this.score_name);
+						console.log("Ready to play '"+_this.score_name+"'");
 						return;
 					}
 					_this.loadRaf = requestAnimationFrame(function(timeStamp) {
@@ -748,10 +742,10 @@ if (!("ms_player" in window)) {
 				_this.ms_player.innerHTML=_this.scriptName+": Score name not defined/specified";
 				return;
 			}
-			console.log("Load "+name);
 			_this.score_name = name;
 			_this.score_options = options;
 			_this.init(_this);
+			console.log("Load '"+_this.score_path+name+"'");
 
 			var source_ogg=document.createElement("source");
 			source_ogg.src=_this.score_path+name+".mp3";

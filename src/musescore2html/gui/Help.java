@@ -1,7 +1,6 @@
 package musescore2html.gui;
 
 import musescore2html.Arguments;
-import musescore2html.Config;
 
 import java.util.ArrayList;
 
@@ -20,7 +19,6 @@ import java.awt.LayoutManager;
 import java.awt.Rectangle;
 import java.awt.Desktop;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
