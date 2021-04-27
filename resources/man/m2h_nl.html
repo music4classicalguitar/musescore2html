@@ -14,24 +14,22 @@
     code.Nm, code.Fl, code.Cm, code.Ic, code.In, code.Fd, code.Fn,
     code.Cd { font-weight: bold; font-family: inherit; }
   </style>
-  <title>PROGNAME(1)</title>
+  <title>PROGRAMMA(1)</title>
 </head>
 <body>
 <table class="head">
   <tr>
-    <td class="head-ltitle">PROGNAME(1)</td>
+    <td class="head-ltitle">PROGRAMMA(1)</td>
     <td class="head-vol">General Commands Manual</td>
-    <td class="head-rtitle">PROGNAME(1)</td>
+    <td class="head-rtitle">PROGRAMMA(1)</td>
   </tr>
 </table>
 <div class="manual-text">
 <section class="Sh">
-<h1 class="Sh" id="NAME"><a class="permalink" href="#NAME">NAME</a></h1>
+<h1 class="Sh" id="NAAM"><a class="permalink" href="#NAAM">NAAM</a></h1>
 <code class="Nm">m2h</code> &#x2014;
 <div class="Nd">(musescore2html) genereert html-bestanden voor een musescore
-  partituur
-<p class="Pp"></p>
-</div>
+  partituur</div>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="KORTE_INHOUD"><a class="permalink" href="#KORTE_INHOUD">KORTE
@@ -42,51 +40,54 @@ m2h [<code class="Fl">-V</code>] [<code class="Fl">-gui</code> |
   <var class="Ar">'taal'</var>] [<code class="Fl">-m</code>
   <var class="Ar">'musescore'</var>] [<code class="Fl">-o</code>
   <var class="Ar">'uitvoermap'</var>]
-<p class="Pp">[<code class="Fl">-i</code>
-    <var class="Ar">'index-bestandsnaam'</var> | <code class="Fl">-I</code>
-    <var class="Ar">'index-bestandsnaam'</var>] [<code class="Fl">-P</code> |
-    <code class="Fl">-N</code> | <code class="Fl">-R</code>]
-    [<code class="Fl">-a</code>]</p>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+[<code class="Fl">-i</code> <var class="Ar">'index-bestandsnaam'</var> |
+  <code class="Fl">-I</code> <var class="Ar">'index-bestandsnaam'</var>]
+  [<code class="Fl">-P</code> | <code class="Fl">-N</code> |
+  <code class="Fl">-R</code>] [<code class="Fl">-a</code>]
 <p class="Pp">[<code class="Fl">-x</code>] [<code class="Fl">-p</code> |
     <code class="Fl">-n</code> | <code class="Fl">-r</code>]
     [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
     <code class="Fl">-s</code>] [<code class="Fl">-c</code>]</p>
-<p class="Pp">[partituur ...]</p>
-<p class="Pp"></p>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+[partituur ...]
 </section>
 <section class="Sh">
 <h1 class="Sh" id="OMSCHRIJVING"><a class="permalink" href="#OMSCHRIJVING">OMSCHRIJVING</a></h1>
 Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   een MuseScore partituur als html-bestand te laten zien.
-<p class="Pp"></p>
-<p class="Pp">Opties:</p>
+<p class="Pp">De argumenten zijn als volgt:</p>
 <dl class="Bl-tag">
   <dt><a class="permalink" href="#V"><code class="Fl" id="V">-V</code></a></dt>
-  <dd>Toon versie.
-    <p class="Pp"></p>
-  </dd>
+  <dd>Toon versie.</dd>
   <dt><a class="permalink" href="#gui"><code class="Fl" id="gui">-gui</code></a></dt>
   <dd>Gebruik de grafische gebruikersinterface (standaard).</dd>
   <dt><a class="permalink" href="#cli"><code class="Fl" id="cli">-cli</code></a></dt>
-  <dd>Gebruik de opdrachtregelinterface.
-    <p class="Pp"></p>
-  </dd>
+  <dd>Gebruik de opdrachtregelinterface.</dd>
   <dt><a class="permalink" href="#C"><code class="Fl" id="C">-C</code></a>
     <var class="Ar">'configuratie-bestand'</var></dt>
   <dd>Lees configuratie in 'configuratie-bestand'.</dd>
   <dt><a class="permalink" href="#l"><code class="Fl" id="l">-l</code></a>
     <var class="Ar">taal</var></dt>
-  <dd>Specificeer de te gebruiken taal.
-    <br/>
-     Overstemt de taal gespecificeerd in 'configuratie-bestand' (indien
-      gebruikt).
-    <p class="Pp"></p>
+  <dd>
+    <div class="Bd Pp">
+    <pre>
+Specificeer de te gebruiken taal.
+Overstemt de taal gespecificeerd in 'configuratie-bestand' (indien gebruikt).
+    </pre>
+    </div>
   </dd>
   <dt><a class="permalink" href="#m"><code class="Fl" id="m">-m</code></a>
     <var class="Ar">'mscore'</var></dt>
-  <dd>Locatie van het MuseScore uitvoerbaar bestand.
-    <p class="Pp"></p>
-  </dd>
+  <dd>Locatie van het MuseScore uitvoerbaar bestand.</dd>
   <dt><a class="permalink" href="#o"><code class="Fl" id="o">-o</code></a>
     <var class="Ar">'uitvoermap'</var></dt>
   <dd>Specificeerd waar de genenereerde bestanden dienen te worden geplaatst.
@@ -100,26 +101,34 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
     </dl>
   </dd>
 </dl>
-<p class="Pp">Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt
-    voor iedere partituur een html-bestand gegenereerd.</p>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt voor iedere
+  partituur een html-bestand gegenereerd. Voor het genereren van een
+  index-bestand:
 <dl class="Bl-tag">
   <dt><a class="permalink" href="#i"><code class="Fl" id="i">-i</code></a>
     <var class="Ar">'index-bestandsnaam'</var></dt>
-  <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
-      met een link naar html-bestand 'ShowScore.html' om de partituur te laten
-      zien.
-    <br/>
-     Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden
-      ge&#x00EF;nstalleerd in map 'uitvoermap'.</dd>
+  <dd>
+    <div class="Bd Pp">
+    <pre>
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
+Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden ge&#x00EF;nstalleerd in map 'uitvoermap'.
+    </pre>
+    </div>
+  </dd>
   <dt><a class="permalink" href="#I"><code class="Fl" id="I">-I</code></a>
     <var class="Ar">'index-bestandsnaam'</var></dt>
-  <dd>Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap'
-      met een link naar de gegenereerde html-bestanden voor de partituren.
-    <br/>
-     Bestand 'css/ms_player_index.css' zal worden ge&#x00EF;nstalleerd in map
-      'uitvoermap'.
-    <p class="Pp"></p>
-    <p class="Pp"></p>
+  <dd>
+    <div class="Bd Pp">
+    <pre>
+Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
+Bestand 'css/ms_player_index.css' zal worden ge&#x00EF;nstalleerd in map 'uitvoermap'.
+    </pre>
+    </div>
   </dd>
   <dt><a class="permalink" href="#P"><code class="Fl" id="P">-P</code></a></dt>
   <dd>Bewaar het aanwezige indexbestand (standaard).</dd>
@@ -127,19 +136,20 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dd>Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde
       bestanden nieuwer zijn dan het indexbestand.</dd>
   <dt><a class="permalink" href="#R"><code class="Fl" id="R">-R</code></a></dt>
-  <dd>Vervang het aanwezige indexbestand.
-    <p class="Pp"></p>
-  </dd>
+  <dd>Vervang het aanwezige indexbestand.</dd>
   <dt><a class="permalink" href="#a"><code class="Fl" id="a">-a</code></a></dt>
   <dd>Genereer een indexbestand voor alle gegenereerde bestanden, inclusief
       reeds aanwezige.</dd>
 </dl>
-<p class="Pp">Voor bestanden die worden gegenereerd:</p>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+Voor bestanden die worden gegenereerd:
 <dl class="Bl-tag">
   <dt><a class="permalink" href="#x"><code class="Fl" id="x">-x</code></a></dt>
-  <dd>Genereer geen html-bestand.
-    <p class="Pp"></p>
-  </dd>
+  <dd>Genereer geen html-bestand.</dd>
   <dt><a class="permalink" href="#p"><code class="Fl" id="p">-p</code></a></dt>
   <dd>Bewaar bestaande bestanden (standaard).</dd>
   <dt><a class="permalink" href="#n"><code class="Fl" id="n">-n</code></a></dt>
@@ -148,8 +158,12 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dt><a class="permalink" href="#r"><code class="Fl" id="r">-r</code></a></dt>
   <dd>Vervang bestaande bestanden.</dd>
 </dl>
-<p class="Pp"></p>
-<p class="Pp">In het geval de opdrachtregelinterface wordt gebruikt:</p>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+In het geval de opdrachtregelinterface wordt gebruikt:
 <dl class="Bl-tag">
   <dt></dt>
   <dd>Informatie over het verwerken van standaards naar informatie over
@@ -159,13 +173,19 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dd>Informatie over fouten wordt als diagnostische berichten naar
       standaardfout gestuurd.</dd>
 </dl>
-<br/>
- Opties [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+Opties [<code class="Fl">-v</code> | <code class="Fl">-q</code> |
   <code class="Fl">-s</code> | <code class="Fl">-e</code>] kunnen worden
   gebruikt om de hoeveelheid informatie te wijzigen.
-<br/>
- Standaard is 'normale' informatie (geen optie).
-<p class="Pp"></p>
+<div class="Bd Pp">
+<pre>
+Standaard is 'normale' informatie (geen optie).
+</pre>
+</div>
 <dl class="Bl-tag">
   <dt><a class="permalink" href="#s"><code class="Fl" id="s">-s</code></a></dt>
   <dd>Stil, (volkomen stil) toon geen informatie over het verwerken van
@@ -180,110 +200,172 @@ Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om
   <dt><a class="permalink" href="#e"><code class="Fl" id="e">-e</code></a></dt>
   <dd>Zeer uitgebreid, toon uitgebreide informatie over het verwerken van
       bestanden..
-    <p class="Pp"></p>
+    <div class="Bd Pp">
+    <pre>
+
+    </pre>
+    </div>
   </dd>
   <dt><a class="permalink" href="#c"><code class="Fl" id="c">-c</code></a></dt>
   <dd>Controleer alleen, droogloop die laten zien wat er had moeten
     gebeuren.</dd>
 </dl>
-<p class="Pp"></p>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="CONTEXT"><a class="permalink" href="#CONTEXT">CONTEXT</a></h1>
+<div class="Bd">
+<pre>
 Java 8+ dient te zijn ge&#x00EF;nstalleerd.
-<br/>
- Musescore dient te zijn ge&#x00EF;nstalleerd (see https://musescore.org).
-<p class="Pp"></p>
+Musescore dient te zijn ge&#x00EF;nstalleerd (see https://musescore.org).
+</pre>
+</div>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="OPMERKINGEN_T.A.V._DE_IMPLEMENTATIE"><a class="permalink" href="#OPMERKINGEN_T.A.V._DE_IMPLEMENTATIE">OPMERKINGEN
   T.A.V. DE IMPLEMENTATIE</a></h1>
 Gebruikte bibliotheken:
-<dl class="Bl-tag">
-  <dt></dt>
-  <dd>Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)</dd>
-  <dt></dt>
-  <dd>Saxon-EE 10 (http://saxon.sourceforge.net)</dd>
-  <dt></dt>
-  <dd>Apache Ant 1.10.9 (https://ant.apache.org)</dd>
-</dl>
-<p class="Pp"></p>
-</section>
-<section class="Sh">
-<h1 class="Sh" id="RETURN_VALUES"><a class="permalink" href="#RETURN_VALUES">RETURN
-  VALUES</a></h1>
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)</li>
+  <li>
+    <br/>
+     Saxon-HE 10.3 (http://saxon.sourceforge.net)</li>
+  <li>
+    <br/>
+     Apache Ant 1.10.9 (https://ant.apache.org)</li>
+</ul>
 </section>
 <section class="Sh">
 <h1 class="Sh" id="BESTANDEN"><a class="permalink" href="#BESTANDEN">BESTANDEN</a></h1>
 Voor iedere partituur 'MyScore.mscz' (of 'MyScore.mscx') worden onderstaande
   bestanden gegenereerd:
-<ul class="Bl-item">
-  <li>MyScore.metajson</li>
-  <li>MyScore_space.json</li>
-  <li>MyScore-1.png</li>
-  <li>MyScore-2.png</li>
-  <li></li>
-  <li>MyScore.ogg</li>
-  <li>MyScore.mp3</li>
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     MyScore.metajson</li>
+  <li>
+    <br/>
+     MyScore_space.json</li>
+  <li>
+    <br/>
+     MyScore-1.png</li>
+  <li>
+    <br/>
+     MyScore-2.png</li>
+  <li>
+    <br/>
+     ...</li>
+  <li>
+    <br/>
+     MyScore.ogg</li>
+  <li>
+    <br/>
+     MyScore.mp3</li>
 </ul>
-Als [<code class="Fl">-I</code> <var class="Ar">'index-bestandsnaam'</var>] niet
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+Als <code class="Fl">-I</code> <var class="Ar">'index-bestandsnaam'</var> niet
   wordt gebruikt wordt tevens:
-<ul class="Bl-item">
-  <li>MyScore.html</li>
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     MyScore.html</li>
 </ul>
 gegenereerd.
-<p class="Pp">Creates subdirectories:</p>
-<ul class="Bl-item">
-  <li>js,</li>
-  <li>css</li>
-  <li>images</li>
+<div class="Bd Pp">
+<pre>
+
+</pre>
+</div>
+Aangemaakt worden submappen:
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     js</li>
+  <li>
+    <br/>
+     css</li>
+  <li>
+    <br/>
+     images</li>
 </ul>
 and installs javascript, css-stylesheet en svg-images
-<ul class="Bl-item">
-  <li>js/ms_player.js</li>
-  <li>css/ms_player.css</li>
-  <li>images/media-playback-loop.svg</li>
-  <li>images/media-playback-metronome.svg</li>
-  <li>images/media-playback-pause.svg</li>
-  <li>images/media-playback-start.svg</li>
-  <li>images/media-skip-backward.svg</li>
-  <li>images/media-skip-forward.svg</li>
-  <li>images/window-close.svg</li>
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     js/ms_player.js</li>
+  <li>
+    <br/>
+     css/ms_player.css</li>
+  <li>
+    <br/>
+     images/media-playback-loop.svg</li>
+  <li>
+    <br/>
+     images/media-playback-metronome.svg</li>
+  <li>
+    <br/>
+     images/media-playback-pause.svg</li>
+  <li>
+    <br/>
+     images/media-playback-start.svg</li>
+  <li>
+    <br/>
+     images/media-skip-backward.svg</li>
+  <li>
+    <br/>
+     images/media-skip-forward.svg</li>
+  <li>
+    <br/>
+     images/window-close.svg</li>
 </ul>
+Als <code class="Fl">-I</code> <var class="Ar">'index-bestandsnaam'</var> wordt
+  gebruikt worden:
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     js/ms_player_query.js</li>
+  <li>
+    <br/>
+     ShowScore.html</li>
+</ul>
+geinstalleerd.
 </section>
 <section class="Sh">
 <h1 class="Sh" id="EXIT_STATUS"><a class="permalink" href="#EXIT_STATUS">EXIT
   STATUS</a></h1>
-If an error occurs return code will be non-zero.
+Als er een fout optreed is de return code ongelijk aan nul.
 </section>
 <section class="Sh">
-<h1 class="Sh" id="EXAMPLES"><a class="permalink" href="#EXAMPLES">EXAMPLES</a></h1>
-To generate html-files for all scores in directory MyMusic and place then in
-  directory Sites :
-<ul class="Bl-item">
-  <li>m2h -d Sites MyMusic/*.mscz</li>
+<h1 class="Sh" id="VOORBEELDEN"><a class="permalink" href="#VOORBEELDEN">VOORBEELDEN</a></h1>
+Om html-bestanden voor alle partituren in map MyMusic te genereren en in map
+  Sites te plaatsen :
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     m2h -d Sites MyMusic/*.mscz</li>
 </ul>
-To generate html-files for all scores in directory MyMusic and all
-  subdirectories and place then in directory Sites :
-<ul class="Bl-item">
-  <li>m2h -d Sites MyMusic/**/*.mscz</li>
+Om html-bestanden voor alle partituren in map MyMusic te genereren en alle
+  submappen en in map Sites te plaatsen :
+<ul class="Bl-item Bl-compact">
+  <li>
+    <br/>
+     m2h -d Sites MyMusic/**/*.mscz</li>
 </ul>
 </section>
 <section class="Sh">
-<h1 class="Sh" id="DIAGNOSTICS"><a class="permalink" href="#DIAGNOSTICS">DIAGNOSTICS</a></h1>
-</section>
-<section class="Sh">
-<h1 class="Sh" id="ERRORS"><a class="permalink" href="#ERRORS">ERRORS</a></h1>
-</section>
-<section class="Sh">
-<h1 class="Sh" id="LICENSE"><a class="permalink" href="#LICENSE">LICENSE</a></h1>
+<h1 class="Sh" id="LICENTIE"><a class="permalink" href="#LICENTIE">LICENTIE</a></h1>
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International See
   https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 </section>
 </div>
 <table class="foot">
   <tr>
-    <td class="foot-date">March 3, 2021</td>
+    <td class="foot-date">April 5, 2021</td>
     <td class="foot-os">Darwin 15.6.0</td>
   </tr>
 </table>

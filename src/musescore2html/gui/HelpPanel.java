@@ -13,7 +13,6 @@ import java.net.URL;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.LayoutManager;
 import java.awt.Rectangle;
@@ -33,23 +32,24 @@ import javax.swing.text.BadLocationException;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 
-public class Help extends JPanel implements ActionListener {
+public class HelpPanel extends JPanel implements ActionListener {
 	private final String jarDirectory=this.getClass().getProtectionDomain().getCodeSource().getLocation().getPath();
 	private final String helpDirectory=(new File(jarDirectory)).getParentFile().getParentFile().getParent()+File.separator+"resources"+File.separator+"help";
 
-	private JPanel jpanel;
 	private JScrollPane jScrollPane;
 	private JEditorPane jEditorPane;
 	private JMenuBar helpJMenuBar;
 	private JMenuItem backJMenuItem, forwardJMenuItem;
 	private URL url;
 	private ArrayList<String> links = new ArrayList<String>();
-	private int linkIndex = 0;
+	private int linkIndex = 0, linkLast = 0;
 	private Arguments arguments;
 
-	public Help(Arguments arguments) {
+	public HelpPanel(Arguments arguments) {
 		this.arguments = arguments;
-		jpanel = new JPanel(new BorderLayout());
+		LayoutManager layout = new BoxLayout(this, BoxLayout.Y_AXIS);
+		setLayout(layout);
+		setName("HelpPanel");
 
 		helpJMenuBar = new JMenuBar();
 		
@@ -80,10 +80,7 @@ public class Help extends JPanel implements ActionListener {
 		jEditorPane.addHyperlinkListener(new HelpHyperlinkListener());
 		jScrollPane = new JScrollPane(jEditorPane);
 		jScrollPane.setPreferredSize(new Dimension(540,400));
-		
-		LayoutManager layout = new BoxLayout(this, BoxLayout.PAGE_AXIS);
-		setLayout(layout);
-		
+				
 		add(helpJMenuBar);
 		add(jScrollPane);
  	}
@@ -97,22 +94,24 @@ public class Help extends JPanel implements ActionListener {
 				setURL(links.get(linkIndex));
 			}
 		} else if (e.getSource() == forwardJMenuItem) {
-			if (linkIndex<links.size()-1) {
+			if (linkIndex<linkLast) {
 				linkIndex++;
 				setURL(links.get(linkIndex));				
 			}
 		}
 		if (linkIndex>0) backJMenuItem.setEnabled(true);
 		else backJMenuItem.setEnabled(false);
-		if (linkIndex==links.size()-1) forwardJMenuItem.setEnabled(false);
-		else forwardJMenuItem.setEnabled(true);
+		if (linkIndex<linkLast) forwardJMenuItem.setEnabled(true);
+		else forwardJMenuItem.setEnabled(false);
 	}
 	
 	private void setURL(String link) {
 		try {
-			URL url = new URL(link);
-			jEditorPane.setPage(url);
-			String ref = url.getRef();
+			HTMLDocument doc = (HTMLDocument)jEditorPane.getDocument();
+			doc.putProperty(HTMLDocument.StreamDescriptionProperty, null);
+			//URL url = new URL(link.substring(0, link.indexOf("?")));
+			jEditorPane.setPage(link);
+			String ref = (new URL(link)).getRef();
 			if (ref != null) scrollToReference(ref);
 		} catch (Exception exc) {
 			exc.printStackTrace();
@@ -122,7 +121,6 @@ public class Help extends JPanel implements ActionListener {
 	}
  	
  	private void scrollToReference(String reference) {
- 		System.out.println("ref "+reference);
  		HTMLDocument doc = (HTMLDocument)jEditorPane.getDocument();
  		Element elementById = doc.getElement(reference);
  		if (elementById != null) {
@@ -150,8 +148,7 @@ public class Help extends JPanel implements ActionListener {
  			if (e.getEventType() == HyperlinkEvent.EventType.ACTIVATED) {
   				JEditorPane pane = (JEditorPane) e.getSource();
  				if (e instanceof HTMLFrameHyperlinkEvent) {
- 					System.out.println("target "+e.getURL().toString());
- 					HTMLFrameHyperlinkEvent evt = (HTMLFrameHyperlinkEvent)e;
+  					HTMLFrameHyperlinkEvent evt = (HTMLFrameHyperlinkEvent)e;
  					HTMLDocument doc = (HTMLDocument)pane.getDocument();
  					doc.processHTMLFrameHyperlinkEvent(evt);
  					ref = e.getURL().getRef();
@@ -160,13 +157,11 @@ public class Help extends JPanel implements ActionListener {
  						useDesktop(e.getURL());
  						return;
  					}
- 					System.out.println("  ref"+ref);
 					try {
  						link = new URL(evt.getTarget());
   						if (link.getPath().equals(url.getPath())) {
+  							setLink(link.toString());
  							scrollToReference(ref);
- 						//URL url = new URL(evt.getTarget())
- 						//doc.getParent().scrollToReference(new URL(evt.getTarget()).getRef());
  						}
 					} catch (MalformedURLException exc) {}
   				} else {
@@ -178,22 +173,15 @@ public class Help extends JPanel implements ActionListener {
  						}
  						link = e.getURL();
  						ref = e.getURL().getRef();
- 						System.out.println("Target "+e.getURL().toString());
- 						System.out.println("Ref "+ref);
  						
  						if (link.getProtocol().equals("")) link = new URL("file:"+e.getURL());
- 						System.out.println("  Link: "+link.getPath()+"=?"+url.getPath());
- 						links.add(link.toString());
- 						linkIndex++;
- 						backJMenuItem.setEnabled(true);
+ 						setLink(link.toString());
  						if (link.getPath().equals(url.getPath())) {
  							scrollToReference(ref);
  						} else {
-  							System.out.println("setPage "+e.getURL());
 							pane.setPage(link);
 							scrollToReference(ref);
- 							System.out.println("  link "+link.getPath());
- 							url = new URL(link.getProtocol()+":"+link.getPath());
+  							url = new URL(link.getProtocol()+":"+link.getPath());
  						}
  					} catch (Throwable t) {
  						t.printStackTrace();
@@ -201,6 +189,19 @@ public class Help extends JPanel implements ActionListener {
  				}
  			}
  		}
+ 	}
+ 	
+ 	private void setLink(String link) {
+ 		if (link.equals(links.get(linkIndex))) return;
+ 		linkIndex++;
+		if (linkIndex<links.size()) {
+			links.set(linkIndex,link);
+		} else {
+			links.add(link);
+		}
+		backJMenuItem.setEnabled(true);
+		if (linkIndex>=linkLast) forwardJMenuItem.setEnabled(false);
+		linkLast = linkIndex;
  	}
  	
  	private void useDesktop(URL url) {
@@ -213,5 +214,12 @@ public class Help extends JPanel implements ActionListener {
 			}
 		}
  	}
+	
+	public void changeLanguage(String language) {
+		for (int i=0; i<links.size(); i++) {
+			links.set(i,links.get(i).replaceAll("_[^._]+[.]html","_"+language+".html"));
+		}
+		setURL(links.get(linkIndex));
+	}
 
 }

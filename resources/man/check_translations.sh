@@ -77,7 +77,7 @@ echo "Duplicate keys in '${FILE0}':"
 uniq -d "${TMP_FILE0}"
 echo
 
-cat "${DIR}/${FILE0}" | sed 's/ = .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort -u > "${TMP_FILE0}"
+cat "${DIR}/${FILE0}" | sed 's/ [=] .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort -u > "${TMP_FILE0}"
 
 N=`echo "${FILES}" | wc -l`
 N=`expr ${N} + 0`
@@ -86,9 +86,9 @@ while [ ${I} -le ${N} ]
   do
   FILE=`echo "${FILES}" | head -n ${I} | tail -n 1`
   TMP_FILE="/tmp/Translations.properties.${I}"
-  cat "${DIR}/${FILE}" | sed 's/ = .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort -u > "${TMP_FILE}"
+  cat "${DIR}/${FILE}" | sed 's/ [=] .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort -u > "${TMP_FILE}"
   echo "Duplicate keys in '${FILE}':"
-  cat "${DIR}/${FILE}" | sed 's/ = .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort | uniq -d
+  cat "${DIR}/${FILE}" | sed 's/ [=] .*//g' | grep -v "^[ 	]*#" | grep -v "^$" | sort | uniq -d
   echo
   echo "Missing keys in '${FILE}':"
   comm -23 "${TMP_FILE0}" "${TMP_FILE}"
@@ -113,6 +113,8 @@ echo
 echo "Unused keys in '${FILE0}':"
 comm -13 "${TMP_KEYS_USED_FILE}" "${TMP_FILE0}"
 
+echo
+echo "Missing keys"
 MISSING_KEYS=`comm -23 "${TMP_KEYS_USED_FILE}" "${TMP_FILE0}"`
 N=`echo "${MISSING_KEYS}" | wc -l`
 N=`expr ${N} + 0`
@@ -128,6 +130,8 @@ while [ ${I} -le ${N} ]
 echo
 echo
 
+echo
+echo "Unused keys"
 UNUSED_KEYS=`comm -13 "${TMP_KEYS_USED_FILE}" "${TMP_FILE0}"`
 N=`echo "${UNUSED_KEYS}" | wc -l`
 N=`expr ${N} + 0`

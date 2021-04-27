@@ -29,6 +29,8 @@ for LANG in ${LANGUAGES}
 	ls -l "${FILENAME}.html"
 	mandoc -K utf-8 -T pdf -mdoc  "${FILENAME}.mdoc" >  "${FILENAME}.pdf"
 	ls -l "${FILENAME}.pdf"
+	mandoc -K utf-8 -mdoc  "${FILENAME}.mdoc" | col -b >  "${FILENAME}.txt"
+	ls -l "${FILENAME}.txt"
 	java '-Djavax.xml.parsers.DocumentBuilderFactory=org.apache.xerces.jaxp.DocumentBuilderFactoryImpl' '-Djavax.xml.parsers.SAXParserFactory=org.apache.xerces.jaxp.SAXParserFactoryImpl' -cp "${LIB_DIR}/xml-apis.jar:${LIB_DIR}/xercesImpl.jar:${LIB_DIR}/saxon-he-10.3.jar"  "net.sf.saxon.Transform" "-s:${FILENAME}.html" "-xsl:m2h.xsl" "-o:../help/MuseScore2Html_Commandline_${LANG}.html"
 	ls -l ../help/MuseScore2Html_Commandline_${LANG}.html
 	done

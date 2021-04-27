@@ -18,8 +18,6 @@ import java.io.OutputStream;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.SourceLocator;
 
-import javax.xml.transform.sax.SAXSource;
-
 public class XmlXslTransformer {
 
 	static Transformer transformer = null ;

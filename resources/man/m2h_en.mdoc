@@ -4,7 +4,6 @@
 .Sh NAME
 .Nm m2h
 .Nd (musescore2html) generate html-files from a musescore score
-
 .Sh SYNOPSIS
 m2h
 .Op Fl V
@@ -13,43 +12,46 @@ m2h
 .Op Fl l Ar 'language'
 .Op Fl m Ar 'musescore'
 .Op Fl o Ar 'output-directory'
- 
+.Bd -literal
+
+.Ed 
 .Op Fl i Ar 'index-filename' | Fl I Ar 'index-filename'
 .Op Fl P | N | R
 .Op Fl a
- 
+.Bd -literal
+
+.Ed
 .Op Fl x
 .Op Fl p | n | r
- 
+.Bd -literal
+
+.Ed
 .Op Fl s | q | v | e
 .Op Fl c
- 
-.Op score ...
+.Bd -literal
 
+.Ed
+.Op score ...
 .Sh DESCRIPTION
 The musescore2html utility is used to generate files from a musescore score to show it as a html-file.
- 
 .Pp
-Options:
+The arguments are as follows:
 .Bl -tag -width Ds
 .It Fl V
 Show version.
- 
 .It Fl gui
 Use graphical user interface (default).
 .It Fl cli
 Use commandline interface.
- 
 .It Fl C Ar 'configuration-file'
 Read configuration from 'configuration-file'.
- 
 .It Fl l Ar language
+.Bd -literal
 Specify the language to be used.
- Overrules the language specified in 'configuration-file' (if used).
- 
+Overrules the language specified in 'configuration-file' (if used).
+.Ed
 .It Fl m Ar 'mscore'
 Location of MuseScore executable.
- 
 .It Fl o Ar 'output-directory'
 Specify where to place files generated.
  Default:
@@ -60,32 +62,37 @@ Commandline interface: the current directory.
 Graphical user interface: user-directory.
 .El
 .El
- 
-For indexfile to be generated:
+.Bd -literal
+
+.Ed
+For an indexfile to be generated:
 .Bl -tag -width Ds
 .It Fl i Ar 'index-filename'
+.Bd -literal
 Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the html-file 'ShowScore.html' to show the scores.
-  Files 'ShowScore.html' and 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+Files 'ShowScore.html' and 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+.Ed
 .It Fl I Ar 'index-filename'
+.Bd -literal
 Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the generated html-files for the scores.
-  File 'css/ms_player_index.css' will be installed in directory 'output-directory'.
- 
+File 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+.Ed
 .It Fl P
 Preserve an existing indexfile (default).
 .It Fl N
 Overwrite an existing indexfile only if generated files are newer than the indexfile.
 .It Fl R
 Replace an existing indexfile.
- 
 .It Fl a
 Generate an indexfile for all files, including already present.
 .El
- 
+.Bd -literal
+
+.Ed
 For files to be generated:
 .Bl -tag -width Ds
 .It Fl x
 Don't generate a html-file.
- 
 .It Fl p
 Preserve existing files (default).
 .It Fl n
@@ -93,20 +100,26 @@ Overwrite existing files only if score is newer than existing files to be genera
 .It Fl r
 Replace existing files.
 .El
- 
- 
+.Bd -literal
+
+.Ed
 In case of commandline usage :
-.Bl -tag -width Ds
+.Bl -compact
 .It
 Information about processing defaults to information about files generated/installed/replaced/skipped and will be send to standard output.
 .It
 Information about errors will be send as diagnostic messages to standard error.
 .El
- Options
+.Bd -literal
+
+.Ed
+Options 
 .Op Fl s | q | v | e
 can be used to change the amount of information.
- Default is 'normal' information (no option).
+.Bd -literal
 
+.Ed
+Default is 'normal' information (no option).
 .Bl -tag -width Ds
 .It Fl s
 Silent, (utterly silent) don't show any information about processing files, even error messages.
@@ -117,18 +130,20 @@ Quiet, don't show detailed information about processing files.
 Verbose, show information about processing files.
 .It Fl e
 Extreme verbose, show extensive information about processing files.
- 
+.Bd -literal
+
+.Ed
 .It Fl c
 Check only, dry run which shows what should have happened.
 .El
-
 .Sh CONTEXT
+.Bd -literal
 Java 8+ should be installed.
- Musescore should be installed (see https://musescore.org).
-
+Musescore should be installed (see https://musescore.org).
+.Ed
 .Sh IMPLEMENTATION NOTES
 Uses :
-.Bl -tag -width Ds
+.Bl -compact
 .It
 Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
 .It
@@ -136,93 +151,94 @@ Saxon-HE 10.3 (http://saxon.sourceforge.net)
 .It
 Apache Ant 1.10.9 (https://ant.apache.org)
 .El
-
-.Sh RETURN VALUES
-
+.\" .Sh RETURN VALUES
 .Sh FILES
 For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
-.Bl
+.Bl -compact
 .It
-MyScore.metajson
+  MyScore.metajson
 .It
-MyScore_space.json
+  MyScore_space.json
 .It
-MyScore-1.png
+  MyScore-1.png
 .It
-MyScore-2.png
+  MyScore-2.png
 .It
-\...
+ ...
 .It
-MyScore.ogg
+  MyScore.ogg
 .It
-MyScore.mp3
+  MyScore.mp3
 .El
+.Bd -literal
+
+.Ed
 If
-.It Fl I Ar 'index-bestandsnaam'
+.Fl I Ar 'index-bestandsnaam'
 is not used:
-.Bl
+.Bd -compact
 .It
-MyScore.html
-.El
+  MyScore.html
+.Ed
 will be generated.
- 
+.Bd -literal
+
+.Ed
 Creates subdirectories:
-.Bl
+.Bl -compact
 .It
-js, 
+  js
 .It
-css
+  css
 .It
-images
+  images
 .El
 and installs javascript, css-stylesheet en svg-images
-.Bl
+.Bl -compact
 .It
-js/ms_player.js
+  js/ms_player.js
 .It
-css/ms_player.css
+  css/ms_player.css
 .It
-images/media-playback-loop.svg
+  images/media-playback-loop.svg
 .It
-images/media-playback-metronome.svg
+  images/media-playback-metronome.svg
 .It
-images/media-playback-pause.svg
+  images/media-playback-pause.svg
 .It
-images/media-playback-start.svg
+  images/media-playback-start.svg
 .It
-images/media-skip-backward.svg
+  images/media-skip-backward.svg
 .It
-images/media-skip-forward.svg
+  images/media-skip-forward.svg
 .It
-images/window-close.svg
+  images/window-close.svg
 .El
-
 If
-.It Fl I Ar 'index-bestandsnaam'
+.Fl I Ar 'index-filename'
 is used:
-.Bl
+.Bl -compact
 .It
-js/ms_player_query.js
+  js/ms_player_query.js
 .It
-ShowScore.html
+  ShowScore.html
 .El
-wille be installed.
-
+will be installed.
 .Sh EXIT STATUS
 If an error occurs return code will be non-zero.
 .Sh EXAMPLES
 To generate html-files for all scores in directory MyMusic and place then in directory Sites :
-.Bl
+.Bl -compact
 .It
-m2h -d Sites MyMusic/*.mscz
+  m2h -d Sites MyMusic/*.mscz
 .El
 To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
-.Bl
+.Bl -compact
 .It
-m2h -d Sites MyMusic/**/*.mscz
+  m2h -d Sites MyMusic/**/*.mscz
 .El
-.Sh DIAGNOSTICS
-.Sh ERRORS
+.\" .Sh DIAGNOSTICS
+.\" .Sh ERRORS
 .Sh LICENSE
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode

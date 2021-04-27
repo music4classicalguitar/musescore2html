@@ -1,0 +1,176 @@
+PROGNAME(1)		    General Commands Manual		   PROGNAME(1)
+
+NAME
+     m2h – (musescore2html) generate html-files from a musescore score
+
+SYNOPSIS
+     m2h [-V] [-gui | -cli] [-C 'configuration-file'] [-l 'language'] [-m
+     'musescore'] [-o 'output-directory']
+
+
+     [-i 'index-filename' | -I 'index-filename'] [-P | -N | -R] [-a]
+
+
+     [-x] [-p | -n | -r]
+
+
+     [-s | -q | -v | -e] [-c]
+
+
+     [score ...]
+
+DESCRIPTION
+     The musescore2html utility is used to generate files from a musescore
+     score to show it as a html-file.
+
+     The arguments are as follows:
+
+     -V      Show version.
+
+     -gui    Use graphical user interface (default).
+
+     -cli    Use commandline interface.
+
+     -C 'configuration-file'
+	     Read configuration from 'configuration-file'.
+
+     -l language
+
+	     Specify the language to be used.
+	     Overrules the language specified in 'configuration-file' (if used).
+
+     -m 'mscore'
+	     Location of MuseScore executable.
+
+     -o 'output-directory'
+	     Specify where to place files generated.
+	      Default:
+
+		     Commandline interface: the current directory.
+
+		     Graphical user interface: user-directory.
+
+
+     For an indexfile to be generated:
+
+     -i 'index-filename'
+
+	     Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the html-file 'ShowScore.html' to show the scores.
+	     Files 'ShowScore.html' and 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+
+     -I 'index-filename'
+
+	     Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the generated html-files for the scores.
+	     File 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+
+     -P      Preserve an existing indexfile (default).
+
+     -N      Overwrite an existing indexfile only if generated files are newer
+	     than the indexfile.
+
+     -R      Replace an existing indexfile.
+
+     -a      Generate an indexfile for all files, including already present.
+
+
+     For files to be generated:
+
+     -x      Don't generate a html-file.
+
+     -p      Preserve existing files (default).
+
+     -n      Overwrite existing files only if score is newer than existing
+	     files to be generated.
+
+     -r      Replace existing files.
+
+
+     In case of commandline usage :
+     Information about processing defaults to information about files
+     generated/installed/replaced/skipped and will be send to standard output.
+     Information about errors will be send as diagnostic messages to standard
+     error.
+
+
+     Options [-s | -q | -v | -e] can be used to change the amount of
+     information.
+
+
+     Default is 'normal' information (no option).
+
+     -s      Silent, (utterly silent) don't show any information about
+	     processing files, even error messages.
+
+     -q      Quiet, don't show detailed information about processing files.
+	      Only a summary will be displayed.
+
+     -v      Verbose, show information about processing files.
+
+     -e      Extreme verbose, show extensive information about processing
+	     files.
+
+
+
+     -c      Check only, dry run which shows what should have happened.
+
+CONTEXT
+     Java 8+ should be installed.
+     Musescore should be installed (see https://musescore.org).
+
+IMPLEMENTATION NOTES
+     Uses :
+     Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+     Saxon-HE 10.3 (http://saxon.sourceforge.net)
+     Apache Ant 1.10.9 (https://ant.apache.org)
+
+FILES
+     For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
+       MyScore.metajson
+       MyScore_space.json
+       MyScore-1.png
+       MyScore-2.png
+      ...
+       MyScore.ogg
+       MyScore.mp3
+
+
+     If -I 'index-bestandsnaam' is not used:
+       MyScore.html
+     will be generated.
+
+
+     Creates subdirectories:
+       js
+       css
+       images
+     and installs javascript, css-stylesheet en svg-images
+       js/ms_player.js
+       css/ms_player.css
+       images/media-playback-loop.svg
+       images/media-playback-metronome.svg
+       images/media-playback-pause.svg
+       images/media-playback-start.svg
+       images/media-skip-backward.svg
+       images/media-skip-forward.svg
+       images/window-close.svg
+     If -I 'index-filename' is used:
+       js/ms_player_query.js
+       ShowScore.html
+     will be installed.
+
+EXIT STATUS
+     If an error occurs return code will be non-zero.
+
+EXAMPLES
+     To generate html-files for all scores in directory MyMusic and place then
+     in directory Sites :
+       m2h -d Sites MyMusic/*.mscz
+     To generate html-files for all scores in directory MyMusic and all
+     subdirectories and place then in directory Sites :
+       m2h -d Sites MyMusic/**/*.mscz
+
+LICENSE
+     Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+     See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
+
+Darwin 15.6.0			 April 5, 2021			 Darwin 15.6.0

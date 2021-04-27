@@ -13,7 +13,6 @@ import java.util.List;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -23,8 +22,8 @@ public class Translations {
    	private static final String defaultLanguage = languages[0];
    
 	private PropertyResourceBundle resourceBundle;
-	private String className = this.getClass().getName();
-	private Locale currentLocale = Locale.getDefault(); //, locale = currentLocale;
+	private String resource;
+	private Locale currentLocale = Locale.getDefault();
 	private String currentLanguage = currentLocale.getLanguage(), language = currentLanguage;
 
 	public String getKey(String key) {
@@ -63,7 +62,7 @@ public class Translations {
 
 	public PropertyResourceBundle getPropertyResourceBundle(String language) {
 		try {
-			String resource = "musescore2html/Translations"+(language.equals("")?"":"_"+language)+".properties";
+			resource = "musescore2html/Translations"+(language.equals("")?"":"_"+language)+".properties";
 			InputStream inputStream = getClass().getClassLoader().getResourceAsStream(resource);
 			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "UTF-8");
 			return new PropertyResourceBundle(inputStreamReader);
@@ -90,8 +89,6 @@ public class Translations {
 			}
 		}
 		language = languages[(index==-1)?0:index];
-		//locale = new Locale(language);
-		//resourceBundle = (PropertyResourceBundle) ResourceBundle.getBundle(className, locale);
 		resourceBundle = getPropertyResourceBundle(language);
 		if (index==-1) {
 			System.err.println(translate(new String[] {"translations.not.supported",otherLanguage,defaultLanguage}));
@@ -108,13 +105,11 @@ public class Translations {
 	}
 
 	public void checkLanguage(String otherLanguage) {
-		//resourceBundle = (PropertyResourceBundle) ResourceBundle.getBundle(className);
 		resourceBundle = getPropertyResourceBundle("");
-		//PropertyResourceBundle otherResourceBundle = (PropertyResourceBundle) ResourceBundle.getBundle(className, new Locale(otherLanguage));
-		PropertyResourceBundle otherResourceBundle = getPropertyResourceBundle(otherLanguage);
 		System.out.println("Comparing resources :");
-		System.out.println(resourceBundle.getBaseBundleName());
-		System.out.println(otherResourceBundle.getBaseBundleName()+" language '"+otherLanguage+"'");
+		System.out.println(resource);
+		PropertyResourceBundle otherResourceBundle = getPropertyResourceBundle(otherLanguage);
+		System.out.println(resource+" language '"+otherLanguage+"'");
 
 		System.out.println();
 		System.out.println("Missing keys in '"+otherLanguage+"':");

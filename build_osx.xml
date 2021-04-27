@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="MuseScore2Html" basedir="." default="create-dmg">
+	<description>Builds project MuseScore2Html</description>	
+
+	<loadproperties srcfile="build.properties" />
+	<loadproperties srcfile="build_version.properties"/>
+	<loadproperties srcfile="build_osx.properties" />
+	<property name="build.dist.sub.dir" value="${prefix.filename}_${version.major}.${version.minor}"/>
+
+	<target name="osx-app-bundle">
+		<ant antfile="build.xml" target="dist_bin"/>
+
+		<mkdir dir="${app.bundle.dir}/${app.name}.app/Contents/MacOS"/>
+
+		<property name="app.info.plist" value="${app.bundle.dir}/${app.name}.app/Contents/Info.plist"/>
+		<echo file="${app.info.plist}"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CFBundleDisplayName</key>
+	<string>${app.name}</string>
+	<key>CFBundleExecutable</key>
+	<string>m2h</string>
+	<key>CFBundleIconFile</key>
+	<string>${app.name}.icns</string>
+	<key>CFBundleIdentifier</key>
+	<string>${app.package}</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>${mac.bundle}</string>
+	<key>CFBundlePackageType</key>
+	<string>APPL</string>
+	<key>CFBundleShortVersionString</key>
+	<string>${version.major}.${version.minor}</string>
+	<key>CFBundleVersion</key>
+	<string>${version.major}.${version.minor}</string>
+	<key>LSApplicationCategoryType</key>
+	<string>${mac.category.type}</string>
+	<key>NSHumanReadableCopyright</key>
+	<string>${mac.copyright}</string>
+</dict>
+</plist>]]></echo>
+
+		<copy todir="${app.bundle.dir}/${app.name}.app/Contents/MacOS" file="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.script.unix}" preservelastmodified="true"/>
+		<chmod file="${app.bundle.dir}/${app.name}.app/Contents/MacOS/${rsc.script.unix}" perm="ugo+rx"/>
+
+		<mkdir dir="${app.bundle.dir}/${app.name}.app/Contents/Resources"/>
+	
+		<copy todir="${app.bundle.dir}/${app.name}.app/Contents/Resources/" preservelastmodified="true">
+			<fileset dir="${build.dist.bin.dir}/${build.dist.sub.dir}/${rsc.dir}" />
+		</copy>
+	</target>
+	
+	<target name="create-dmg" depends="osx-app-bundle">		
+		<delete file="${app.bundle.dir}/${app.name}_uncompressed.dmg"/>		
+		<exec executable="hdiutil">
+			<arg value="create"/>
+			<arg value="-srcfolder"/>
+			<arg value="${app.bundle.dir}/${app.name}.app"/>
+			<arg value="${app.bundle.dir}/${app.name}_uncompressed.dmg"/>
+		</exec>
+		<delete file="${dist.dir}/${app.name}.dmg"/>		
+		<exec executable="hdiutil">
+			<arg value="convert"/>
+			<arg value="-imagekey"/>
+			<arg value="zlib-level=9"/>
+			<arg value="-format"/>
+			<arg value="UDZO"/>
+			<arg value="-o"/>
+			<arg value="${dist.dir}/${app.name}.dmg"/>
+			<arg value="${app.bundle.dir}/${app.name}_uncompressed.dmg"/>
+		</exec>
+	</target>
+
+</project>

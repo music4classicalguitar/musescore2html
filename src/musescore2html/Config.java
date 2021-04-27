@@ -2,6 +2,9 @@ package musescore2html;
 
 import org.apache.tools.ant.MuseScore2HtmlUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -11,6 +14,8 @@ import java.io.IOException;
 
 import java.nio.file.Path;
 import java.nio.file.FileSystems;
+
+import javax.swing.UIManager;
 
 public class Config {
 
@@ -26,10 +31,13 @@ public class Config {
 
 	private String defaultConfigDirectory, configDirectory;
 	private String configFileName = Version.APPLICATION_ID+".xml", configPath, configLastUsedFileName = Version.APPLICATION_ID+".LastUsed.xml", configLastUsedPath;
-	private File configFile, configLastUsedFile;
+	private File configFile, defaultConfigFile, configLastUsedFile;
 
 	private String museScore1="", museScore2="",museScore3="", scoreDirectory1="", scoreDirectory2="", scoreDirectory3="";
-	private String defaultMuseScore="", museScore, lastUsedMuseScore, lastUsedMuseScoreDirectory, defaultScoreDirectory, lastUsedScoreDirectory, outputDirectory, lastUsedOutputDirectory;
+	private String defaultMuseScore="", museScore, lastUsedMuseScore, scoreDirectory, lastUsedScoreDirectory, outputDirectory, lastUsedOutputDirectory;
+	private String[] museScoresFound ;
+	private String lookandfeel = UIManager.getSystemLookAndFeelClassName();
+	private ArrayList<String> temp;
 
 	public static String getVendorId() {
 		return Version.VENDOR_ID;
@@ -56,11 +64,46 @@ public class Config {
 		return osId;
 	}
 
+	private void setDefaultMuseScoreSettingsWindows() {
+		String[] dirs, foundFiles;
+		dirs=MuseScore2HtmlUtils.findItems("C:\\Program Files*", MuseScore2HtmlUtils.TYPE.DIRECTORY, false);
+		if (dirs.length>0) {
+			temp = new ArrayList<String>();
+			for (int i=0; i<dirs.length; i++) {
+				foundFiles=MuseScore2HtmlUtils.findItems(dirs[i]+"\\MuseScore*", MuseScore2HtmlUtils.TYPE.DIRECTORY, false);
+				temp.addAll(Arrays.asList(foundFiles));
+			}
+			if (temp.size()>0) {
+				dirs=temp.toArray(new String[] {});
+				temp = new ArrayList<String>();
+				for (int i=0; i<dirs.length; i++) {
+					foundFiles=MuseScore2HtmlUtils.findItems(dirs[i]+"\\bin\\M*Score*.exe", MuseScore2HtmlUtils.TYPE.FILE, false);
+					for (int j=0; j<foundFiles.length; j++) {
+						if (!foundFiles[j].toLowerCase().endsWith("-crash-reporter.exe")) temp.add(foundFiles[j]);
+					}
+				}
+				if (temp.size()>0) {
+					foundFiles=temp.toArray(new String[] {});
+					if (foundFiles.length>0) {
+						for (int i=0;i<foundFiles.length;i++) {
+							if (foundFiles[i].indexOf("MuseScore 3")>=0) museScore3 = foundFiles[i];
+							else if (foundFiles[i].indexOf("MuseScore 2")>=0) museScore2 = foundFiles[i];
+							else museScore1 = foundFiles[i];
+						}
+					}
+				}
+			}
+		}
+	}
+
 	private void setDefaultMuseScoreSettings() {
 		String foundFiles[];
 		switch (osId) {
 			case WINDOWS:
 				// MuseScore 1 : mscore.exe, 2 : MuseScore.exe, 3 : MuseScore3.exe
+				/*
+				dir "C:\\Program Files*\\MuseScore*\\bin\\M*Score.exe"
+				gives error : The filename, directory name, or volume label syntax is incorrect.
 				foundFiles=MuseScore2HtmlUtils.findItems("C:\\Program Files*\\MuseScore*\\bin\\M*Score.exe", MuseScore2HtmlUtils.TYPE.FILE, false);
 				if (foundFiles.length>0) {
 					for (int i=0;i<foundFiles.length;i++) {
@@ -69,6 +112,8 @@ public class Config {
 						else museScore1 = foundFiles[i];
 					}
 				}
+				*/
+				setDefaultMuseScoreSettingsWindows();
 				foundFiles=MuseScore2HtmlUtils.findItems(userHomeDirectory+File.separator+"Documents"+File.separator+"MuseScore*", MuseScore2HtmlUtils.TYPE.FILE, false);
 				if (foundFiles.length>0) {
 					for (int i=0;i<foundFiles.length;i++) {
@@ -76,7 +121,7 @@ public class Config {
 						else if (foundFiles[i].indexOf("MuseScore2")>=0) scoreDirectory2 = foundFiles[i];
 						else scoreDirectory1 = foundFiles[i];
 					}
-				} else defaultScoreDirectory = userHomeDirectory+File.separator+"Documents";
+				} else scoreDirectory = userHomeDirectory+File.separator+"Documents";
 				defaultConfigDirectory = userHomeDirectory + File.separator + "Application Data" + 
 					File.separator + Version.VENDOR_ID  + File.separator + Version.APPLICATION_ID  + File.separator;
 				break;
@@ -91,13 +136,13 @@ public class Config {
 				}
 				foundFiles=MuseScore2HtmlUtils.findItems(userHomeDirectory+File.separator+"Documents"+File.separator+"MuseScore*", MuseScore2HtmlUtils.TYPE.FILE, false);
 				if (foundFiles.length>0) {
-					defaultScoreDirectory = foundFiles[foundFiles.length-1];
+					scoreDirectory = foundFiles[foundFiles.length-1];
 					for (int i=0;i<foundFiles.length;i++) {
 						if (foundFiles[i].indexOf("MuseScore3")>=0) scoreDirectory3 = foundFiles[i];
 						else if (foundFiles[i].indexOf("MuseScore2")>=0) scoreDirectory2 = foundFiles[i];
 						else scoreDirectory1 = foundFiles[i];
 					}
-				} else defaultScoreDirectory = userHomeDirectory+File.separator+"Documents";
+				} else scoreDirectory = userHomeDirectory+File.separator+"Documents";
 				defaultConfigDirectory = userHomeDirectory + File.separator + "Library" + File.separator + "Application Support" +
 					File.separator + Version.VENDOR_ID  + File.separator + Version.APPLICATION_ID  + File.separator;
 				break;
@@ -115,20 +160,26 @@ public class Config {
 					File.separator + Version.VENDOR_ID  + File.separator + Version.APPLICATION_ID  + File.separator;
 				break;
 		}
+		defaultConfigFile = new File(defaultConfigDirectory+configFileName);
 	}
 
 	public void setDefaults() throws Exception {
 		osId = getOSId();
 
 		setDefaultMuseScoreSettings();
-
 		if (!museScore3.equals("")) defaultMuseScore=museScore3;
 		else if (!museScore2.equals("")) defaultMuseScore=museScore2;
 		else if (!museScore1.equals("")) defaultMuseScore=museScore1;
+		temp = new ArrayList<String>();
+		if (!museScore3.equals("")) temp.add(museScore3);
+		if (!museScore2.equals("")) temp.add(museScore2);
+		if (!museScore1.equals("")) temp.add(museScore1);
+		museScoresFound = temp.toArray(new String[] {});
 
-		if (!scoreDirectory3.equals("")) defaultScoreDirectory=scoreDirectory3;
-		else if (!scoreDirectory2.equals("")) defaultScoreDirectory=scoreDirectory2;
-		else if (!scoreDirectory1.equals("")) defaultScoreDirectory=scoreDirectory1;
+		if (!scoreDirectory3.equals("")) scoreDirectory=scoreDirectory3;
+		else if (!scoreDirectory2.equals("")) scoreDirectory=scoreDirectory2;
+		else if (!scoreDirectory1.equals("")) scoreDirectory=scoreDirectory1;
+		temp = new ArrayList<String>();
 
 		if (defaultMuseScore.equals("")) throw new Exception(translations.translate("musescore.not.specified"));
 		File exec = new File(defaultMuseScore);
@@ -143,18 +194,22 @@ public class Config {
 		configLastUsedPath = configDirectory+File.separator+configLastUsedFileName;
 		configLastUsedFile = new File(configLastUsedPath);
 
-		outputDirectory = System.getProperty("user.dir");
+		outputDirectory = System.getProperty("user.home");
 
 		lastUsedMuseScore = museScore;
-		lastUsedMuseScoreDirectory = FileSystems.getDefault().getPath(museScore).toString();
 		lastUsedOutputDirectory = userHomeDirectory;
-		lastUsedScoreDirectory = defaultScoreDirectory;
+		lastUsedScoreDirectory = scoreDirectory;
 
 		if (translations==null) {
 			translations = new Translations();
 			language = translations.getLanguage();
 		}
+		
 		readConfigLastUsed();
+
+		museScore = lastUsedMuseScore;
+		outputDirectory = lastUsedOutputDirectory;
+		scoreDirectory = lastUsedScoreDirectory;
 	}
 
 	public Translations getTranslations() {
@@ -169,6 +224,10 @@ public class Config {
 		return language;
 	}
 
+	public void setLanguage(String value) {
+		language = value;
+	}
+
 	public String getUserName() {
 		return userName;
 	}
@@ -177,12 +236,24 @@ public class Config {
 		return defaultMuseScore;
 	}
 
+	public String getLookAndFeel() {
+		return lookandfeel;
+	}
+
+	public void setLookAndFeel(String value) {
+		lookandfeel = value;
+	}
+
 	public String getMuseScore() {
 		return museScore;
 	}
 
-	public void setMuseScore(String mscore) {
-		museScore = mscore;
+	public void setMuseScore(String value) {
+		museScore = value;
+	}
+
+	public String[] getMuseScoresFound() {
+		return museScoresFound.clone();
 	}
 
 	public String getOutputDirectory() {
@@ -201,6 +272,10 @@ public class Config {
 		return configFileName;
 	}
 
+	public String getDefaultConfigFile() {
+		return defaultConfigFile.toString();
+	}
+
 	public String getConfigFile() {
 		return configFile.toString();
 	}
@@ -214,7 +289,9 @@ public class Config {
 		try {
 			fis = new FileInputStream(configFile);
 			prop = new Properties();
-			prop.load(fis);
+			prop.loadFromXML(fis);
+			value = prop.getProperty("lookandfeel");
+			if (value!=null) lookandfeel = value;
 			value = prop.getProperty("language");
 			if (value!=null) {
 				language = value;
@@ -222,12 +299,31 @@ public class Config {
 			}
 			value = prop.getProperty("museScore");
 			if (value!=null) museScore = value;
-		} catch(Exception exc) {
+		} catch(FileNotFoundException exc) {
+			exc.printStackTrace();
+			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configfile.error.read.message", configFile.toString(),exc.getMessage()}));
+			else throw new Exception(translations.translate(new String[] {"configfile.error.read", configFile.toString()}));
+		} catch(IOException exc) {
 			exc.printStackTrace();
 			if (exc.getMessage()!=null) throw new Exception(translations.translate(new String[] {"configfile.error.read.message", configFile.toString(),exc.getMessage()}));
 			else throw new Exception(translations.translate(new String[] {"configfile.error.read", configFile.toString()}));
 		} finally {
 			if (fis!=null) fis.close();
+		}
+		boolean found = false;
+		for (int i=0; i<museScoresFound.length; i++) {
+			if (museScore.equals(museScoresFound[i])) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) {
+			temp = new ArrayList<String>();
+			temp.add(museScore);
+			for (int i=0; i<museScoresFound.length; i++) {
+				temp.add(museScoresFound[i]);
+			}
+			museScoresFound = temp.toArray(new String[] {});
 		}
 	}
 
@@ -246,6 +342,21 @@ public class Config {
 		if (configFile.exists()) readConfig(configFile);
 	}
 
+	public void writeDefaultConfig() throws Exception {
+		configDirectory = defaultConfigDirectory;
+		configPath = configDirectory+File.separator+configFileName;
+		configFile = new File(configPath);
+		writeConfig();
+	}
+
+	public void writeConfig(String configPath) throws Exception {
+		this.configPath = configPath;
+		configFile = new File(configPath);
+		configDirectory = configFile.getParent();
+		configFileName = configFile.getName();
+		writeConfig();
+	}
+	
 	public void writeConfig() throws Exception {
 		if (!configFile.exists()) {
 			try {
@@ -265,11 +376,11 @@ public class Config {
 		}
 		FileOutputStream fos = null;
 		Properties props = null;
-		String value;
 		try {
 			fos = new FileOutputStream(configFile);
 			props = new Properties();
 			if (language!=null) props.setProperty("language", language);
+			if (lookandfeel!=null) props.setProperty("lookandfeel", lookandfeel);
 			if (museScore!=null) props.setProperty("museScore", museScore);
 			props.storeToXML(fos,translations.translate("configuration"),"UTF-8");
 		} catch(Exception exc) {
@@ -292,6 +403,8 @@ public class Config {
     }
 
     public Config() throws Exception {
+    	this.translations = new Translations();
+    	this.language = this.translations.getLanguage();
     	getConfig();
     }
 
@@ -309,7 +422,9 @@ public class Config {
 		try {
 			fis = new FileInputStream(configLastUsedFile);
 			prop = new Properties();
-			prop.load(fis);
+			prop.loadFromXML(fis);
+			value = prop.getProperty("lastUsedMuseScore");
+			if (value!=null) lastUsedMuseScore = value;
 			value = prop.getProperty("lastUsedOutputDirectory");
 			if (value!=null) lastUsedOutputDirectory = value;
 			value = prop.getProperty("lastUsedScoreDirectory");
@@ -321,14 +436,6 @@ public class Config {
 		} finally {
 			if (fis!=null) fis.close();
 		}
-	}
-
-	public String getLastUsedMuseScoreDirectory() {
-		return lastUsedMuseScoreDirectory;
-	}
-
-	public void setLastUsedMuseScoreDirectory(String mscoreDir) {
-		lastUsedMuseScoreDirectory = mscoreDir;
 	}
 
 	public String getLastUsedMuseScore() {
@@ -379,8 +486,8 @@ public class Config {
 			fos = new FileOutputStream(configLastUsedFile);
 			props = new Properties();
 			if (lastUsedMuseScore!=null) props.setProperty("lastUsedMuseScore", lastUsedMuseScore);
-			if (lastUsedOutputDirectory!=null) props.setProperty("lastUsedOutputDirectory", lastUsedOutputDirectory);
 			if (lastUsedScoreDirectory!=null) props.setProperty("lastUsedScoreDirectory", lastUsedScoreDirectory);
+			if (lastUsedOutputDirectory!=null) props.setProperty("lastUsedOutputDirectory", lastUsedOutputDirectory);
 			props.storeToXML(fos,"last used values","UTF-8");
 		} catch(Exception exc) {
 			exc.printStackTrace();
@@ -389,5 +496,10 @@ public class Config {
 		} finally {
 			if (fos!=null) fos.close();
 		}
+	}
+	
+	private void showSystemProperties() {
+		Properties properties = System.getProperties();
+		properties.forEach((k, v) -> System.out.println(k + ": '" + v +"'"));
 	}
 }

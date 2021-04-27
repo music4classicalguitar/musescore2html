@@ -1,11 +1,10 @@
 .\" Automatically generated from an mdoc input file.  Do not edit.
-.TH "PROGNAME" "1" "March 3, 2021" "Darwin 15.6.0" "General Commands Manual"
+.TH "PROGNAME" "1" "April 5, 2021" "Darwin 15.6.0" "General Commands Manual"
 .nh
 .if n .ad l
 .SH "NAME"
 \fBm2h\fR
 \- (musescore2html) generate html-files from a musescore score
-.sp
 .SH "SYNOPSIS"
 m2h
 [\fB\-V\fR]
@@ -14,48 +13,65 @@ m2h
 [\fB\-l\fR \fI'language'\fR]
 [\fB\-m\fR \fI'musescore'\fR]
 [\fB\-o\fR \fI'output-directory'\fR]
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
 [\fB\-i\fR \fI'index-filename'\fR | \fB\-I\fR \fI'index-filename'\fR]
 [\fB\-P\fR | \fB\-N\fR | \fB\-R\fR]
 [\fB\-a\fR]
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
 [\fB\-x\fR]
 [\fB\-p\fR | \fB\-n\fR | \fB\-r\fR]
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
 [\fB\-s\fR | \fB\-q\fR | \fB\-v\fR | \fB\-e\fR]
 [\fB\-c\fR]
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
 [score ...]
-.sp
 .SH "DESCRIPTION"
 The musescore2html utility is used to generate files from a musescore score to show it as a html-file.
-.sp
 .PP
-Options:
+The arguments are as follows:
 .TP 8n
 \fB\-V\fR
 Show version.
-.sp
 .TP 8n
 \fB\-gui\fR
 Use graphical user interface (default).
 .TP 8n
 \fB\-cli\fR
 Use commandline interface.
-.sp
 .TP 8n
 \fB\-C\fR \fI'configuration-file'\fR
 Read configuration from 'configuration-file'.
-.sp
 .TP 8n
 \fB\-l\fR \fIlanguage\fR
+.nf
+.RS 8n
 Specify the language to be used.
- Overrules the language specified in 'configuration-file' (if used).
-.sp
+Overrules the language specified in 'configuration-file' (if used).
+.RE
+.fi
 .TP 8n
 \fB\-m\fR \fI'mscore'\fR
 Location of MuseScore executable.
-.sp
 .TP 8n
 \fB\-o\fR \fI'output-directory'\fR
 Specify where to place files generated.
@@ -71,18 +87,30 @@ Graphical user interface: user-directory.
 .PD 0
 .PP
 .RE
-.PP
-For indexfile to be generated:
+.nf
+.sp
+.RS 0n
+
+.RE
+.fi
+For an indexfile to be generated:
 .PD
 .TP 8n
 \fB\-i\fR \fI'index-filename'\fR
+.nf
+.RS 8n
 Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the html-file 'ShowScore.html' to show the scores.
-  Files 'ShowScore.html' and 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+Files 'ShowScore.html' and 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+.RE
+.fi
 .TP 8n
 \fB\-I\fR \fI'index-filename'\fR
+.nf
+.RS 8n
 Create an indexfile with name 'index-filename' in directory 'output-directory' with a link to the generated html-files for the scores.
-  File 'css/ms_player_index.css' will be installed in directory 'output-directory'.
-.sp
+File 'css/ms_player_index.css' will be installed in directory 'output-directory'.
+.RE
+.fi
 .TP 8n
 \fB\-P\fR
 Preserve an existing indexfile (default).
@@ -92,16 +120,19 @@ Overwrite an existing indexfile only if generated files are newer than the index
 .TP 8n
 \fB\-R\fR
 Replace an existing indexfile.
-.sp
 .TP 8n
 \fB\-a\fR
 Generate an indexfile for all files, including already present.
-.PP
+.nf
+.sp
+.RS 0n
+
+.RE
+.fi
 For files to be generated:
 .TP 8n
 \fB\-x\fR
 Don't generate a html-file.
-.sp
 .TP 8n
 \fB\-p\fR
 Preserve existing files (default).
@@ -111,20 +142,34 @@ Overwrite existing files only if score is newer than existing files to be genera
 .TP 8n
 \fB\-r\fR
 Replace existing files.
-.PP
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
 In case of commandline usage :
-.TP 8n
-Information about processing defaults to information about files generated/installed/replaced/skipped and will be send to standard output.
-.TP 8n
-Information about errors will be send as diagnostic messages to standard error.
 .PD 0
 .PP
- Options
+Information about processing defaults to information about files generated/installed/replaced/skipped and will be send to standard output.
+.PP
+Information about errors will be send as diagnostic messages to standard error.
+.nf
+.sp
+.RS 0n
+
+.RE
+.fi
+Options
 [\fB\-s\fR | \fB\-q\fR | \fB\-v\fR | \fB\-e\fR]
 can be used to change the amount of information.
- Default is 'normal' information (no option).
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
+Default is 'normal' information (no option).
 .PD
 .TP 8n
 \fB\-s\fR
@@ -139,108 +184,118 @@ Verbose, show information about processing files.
 .TP 8n
 \fB\-e\fR
 Extreme verbose, show extensive information about processing files.
+.nf
 .sp
+.RS 8n
+
+.RE
+.fi
 .TP 8n
 \fB\-c\fR
 Check only, dry run which shows what should have happened.
-.PP
 .SH "CONTEXT"
+.nf
+.RS 0n
 Java 8+ should be installed.
- Musescore should be installed (see https://musescore.org).
-.sp
+Musescore should be installed (see https://musescore.org).
+.RE
+.fi
 .SH "IMPLEMENTATION NOTES"
 Uses :
-.TP 8n
-Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
-.TP 8n
-Saxon-EE 10 (http://saxon.sourceforge.net)
-.TP 8n
-Apache Ant 1.10.9 (https://ant.apache.org)
+.PD 0
 .PP
-.SH "RETURN VALUES"
+Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+.PP
+Saxon-HE 10.3 (http://saxon.sourceforge.net)
+.PP
+Apache Ant 1.10.9 (https://ant.apache.org)
+.PD
 .SH "FILES"
 For each score 'MyScore.mscz' (or 'MyScore.mscx') it will create files
-.PP
-MyScore.metajson
-.PP
-MyScore_space.json
-.PP
-MyScore-1.png
-.PP
-MyScore-2.png
-.PP
-MyScore.ogg
-.PP
-MyScore.mp3
 .PD 0
 .PP
-If
-.br
-is not used:
-.PD
+  MyScore.metajson
 .PP
-MyScore.html
-.PD 0
+  MyScore_space.json
 .PP
-will be generated.
+  MyScore-1.png
+.PP
+  MyScore-2.png
+.PP
+ ...
+.PP
+  MyScore.ogg
+.PP
+  MyScore.mp3
+.nf
 .sp
+.RS 0n
+
+.RE
+.fi
+If
+\fB\-I\fR \fI'index-bestandsnaam'\fR
+is not used:
+.RS 0n
+  MyScore.html
+.RE
+will be generated.
+.nf
+.sp
+.RS 0n
+
+.RE
+.fi
 Creates subdirectories:
-.PD
 .PP
-js,
+  js
 .PP
-css
+  css
 .PP
-images
-.PD 0
+  images
 .PP
 and installs javascript, css-stylesheet en svg-images
-.PD
 .PP
-js/ms_player.js
+  js/ms_player.js
 .PP
-css/ms_player.css
+  css/ms_player.css
 .PP
-images/media-playback-loop.svg
+  images/media-playback-loop.svg
 .PP
-images/media-playback-metronome.svg
+  images/media-playback-metronome.svg
 .PP
-images/media-playback-pause.svg
+  images/media-playback-pause.svg
 .PP
-images/media-playback-start.svg
+  images/media-playback-start.svg
 .PP
-images/media-skip-backward.svg
+  images/media-skip-backward.svg
 .PP
-images/media-skip-forward.svg
+  images/media-skip-forward.svg
 .PP
-images/window-close.svg
+  images/window-close.svg
 .PP
 If
-.br
+\fB\-I\fR \fI'index-filename'\fR
 is used:
 .PP
-js/ms_player_query.js
+  js/ms_player_query.js
 .PP
-ShowScore.html
-.PD 0
+  ShowScore.html
 .PP
-wille be installed.
-.sp
+will be installed.
 .PD
 .SH "EXIT STATUS"
 If an error occurs return code will be non-zero.
 .SH "EXAMPLES"
 To generate html-files for all scores in directory MyMusic and place then in directory Sites :
-.PP
-m2h -d Sites MyMusic/*.mscz
 .PD 0
 .PP
-To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
-.PD
+  m2h -d Sites MyMusic/*.mscz
 .PP
-m2h -d Sites MyMusic/**/*.mscz
-.SH "DIAGNOSTICS"
-.SH "ERRORS"
+To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
+.PP
+  m2h -d Sites MyMusic/**/*.mscz
+.PD
 .SH "LICENSE"
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode

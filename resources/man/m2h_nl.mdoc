@@ -1,10 +1,9 @@
 .Dd $Mdocdate$
-.Dt PROGNAME 1
+.Dt PROGRAMMA 1
 .Os
-.Sh NAME
+.Sh NAAM
 .Nm m2h
 .Nd (musescore2html) genereert html-bestanden voor een musescore partituur
-
 .Sh KORTE INHOUD
 m2h
 .Op Fl V
@@ -13,7 +12,9 @@ m2h
 .Op Fl l Ar 'taal'
 .Op Fl m Ar 'musescore'
 .Op Fl o Ar 'uitvoermap'
- 
+.Bd -literal
+
+.Ed 
 .Op Fl i Ar 'index-bestandsnaam' | Fl I Ar 'index-bestandsnaam'
 .Op Fl P | N | R
 .Op Fl a
@@ -22,32 +23,30 @@ m2h
 .Op Fl p | n | r
 .Op Fl v | q | s
 .Op Fl c
- 
-.Op partituur ...
+.Bd -literal
 
+.Ed 
+.Op partituur ...
 .Sh OMSCHRIJVING
-Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om een MuseScore partituur als html-bestand te laten zien.
- 
+Het programma m2h (musescore2html) is te gebruiken om bestanden te genereren om een MuseScore partituur als html-bestand te laten zien. 
 .Pp
-Opties:
+De argumenten zijn als volgt:
 .Bl -tag -width Ds
 .It Fl V
 Toon versie.
- 
 .It Fl gui
 Gebruik de grafische gebruikersinterface (standaard).
 .It Fl cli
-Gebruik de opdrachtregelinterface.
- 
+Gebruik de opdrachtregelinterface. 
 .It Fl C Ar 'configuratie-bestand'
 Lees configuratie in 'configuratie-bestand'.
 .It Fl l Ar taal
+.Bd -literal
 Specificeer de te gebruiken taal.
- Overstemt de taal gespecificeerd in 'configuratie-bestand' (indien gebruikt).
- 
+Overstemt de taal gespecificeerd in 'configuratie-bestand' (indien gebruikt).
+.Ed
 .It Fl m Ar 'mscore'
 Locatie van het MuseScore uitvoerbaar bestand.
- 
 .It Fl o Ar 'uitvoermap'
 Specificeerd waar de genenereerde bestanden dienen te worden geplaatst.
  Standaard:
@@ -58,33 +57,38 @@ Opdrachtregelinterface: de huidige map.
 Grafische gebruikersinterface: gebruikersmap.
 .El
 .El
- 
+.Bd -literal
+
+.Ed
 Behalve als optie -I 'index-bestandsnaam' wordt gebruikt, wordt voor iedere partituur een html-bestand gegenereerd.
+Voor het genereren van een index-bestand: 
 .Bl -tag -width Ds
 .It Fl i Ar 'index-bestandsnaam'
+.Bd -literal
 Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar html-bestand 'ShowScore.html' om de partituur te laten zien.
-  Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden geïnstalleerd in map 'uitvoermap'.
+Bestanden 'ShowScore.html' en 'css/ms_player_index.css' zullen worden geïnstalleerd in map 'uitvoermap'.
+.Ed
 .It Fl I Ar 'index-bestandsnaam'
+.Bd -literal
 Maak een index-bestand met naam 'index-bestandsnaam' in map 'uitvoermap' met een link naar de gegenereerde html-bestanden voor de partituren.
-  Bestand 'css/ms_player_index.css' zal worden geïnstalleerd in map 'uitvoermap'.
-
- 
+Bestand 'css/ms_player_index.css' zal worden geïnstalleerd in map 'uitvoermap'.
+.Ed
 .It Fl P
 Bewaar het aanwezige indexbestand (standaard).
 .It Fl N
 Overschrijf een reeds aanwezig indexbestand alleen als de gegeneerde bestanden nieuwer zijn dan het indexbestand.
 .It Fl R
-Vervang het aanwezige indexbestand.
- 
+Vervang het aanwezige indexbestand. 
 .It Fl a
 Genereer een indexbestand voor alle gegenereerde bestanden, inclusief reeds aanwezige.
 .El
- 
-.Bl -tag -width Ds
+.Bd -literal
+
+.Ed
 Voor bestanden die worden gegenereerd:
+.Bl -tag -width Ds
 .It Fl x
 Genereer geen html-bestand.
- 
 .It Fl p
 Bewaar bestaande bestanden  (standaard).
 .It Fl n
@@ -92,8 +96,9 @@ Overschrijf bestaande bestanden alleen als de partituur nieuwer is dan bestaande
 .It Fl r
 Vervang bestaande bestanden.
 .El
- 
- 
+.Bd -literal
+
+.Ed
 In het geval de opdrachtregelinterface wordt gebruikt:
 .Bl -tag -width Ds
 .It
@@ -101,11 +106,15 @@ Informatie over het verwerken van standaards naar informatie over gegenereerde/g
 .It
 Informatie over fouten wordt als diagnostische berichten naar standaardfout gestuurd.
 .El
- Opties
+.Bd -literal
+
+.Ed
+Opties
 .Op Fl v | q | s | e
 kunnen worden gebruikt om de hoeveelheid informatie te wijzigen.
- Standaard is 'normale' informatie (geen optie). 
-
+.Bd -literal
+Standaard is 'normale' informatie (geen optie). 
+.Ed
 .Bl -tag -width Ds
 .It Fl s
 Stil, (volkomen stil) toon geen informatie over het verwerken van bestanden, zelfs geen foutmeldingen. 
@@ -116,101 +125,116 @@ Beperkt, toon geen gedetailleerde informatie over het verwerken van bestanden.
 Uitgebreid, toon informatie over het verwerken van bestanden.
 .It Fl e
 Zeer uitgebreid, toon uitgebreide informatie over het verwerken van bestanden..
- 
+.Bd -literal
+
+.Ed
 .It Fl c
 Controleer alleen, droogloop die laten zien wat er had moeten gebeuren. 
 .El
-
 .Sh CONTEXT
+.Bd -literal
 Java 8+ dient te zijn geïnstalleerd.
- Musescore dient te zijn geïnstalleerd (see https://musescore.org).
-
+Musescore dient te zijn geïnstalleerd (see https://musescore.org).
+.Ed
 .Sh OPMERKINGEN T.A.V. DE IMPLEMENTATIE
 Gebruikte bibliotheken:
-.Bl -tag -width Ds
+.Bl -compact
 .It
-Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
+  Xerces2 Java 2.12.1 (http://xerces.apache.org/xerces2-j/)
 .It
-Saxon-HE 10.3 (http://saxon.sourceforge.net)
+  Saxon-HE 10.3 (http://saxon.sourceforge.net)
 .It
-Apache Ant 1.10.9 (https://ant.apache.org)
+  Apache Ant 1.10.9 (https://ant.apache.org)
 .El
-
-.Sh RETURN VALUES
-
+.\" .Sh RETURN VALUES
 .Sh BESTANDEN
 Voor iedere partituur 'MyScore.mscz' (of 'MyScore.mscx') worden onderstaande bestanden gegenereerd:
-.Bl
+.Bl -compact
 .It
-MyScore.metajson
+  MyScore.metajson
 .It
-MyScore_space.json
+  MyScore_space.json
 .It
-MyScore-1.png
+  MyScore-1.png
 .It
-MyScore-2.png
+  MyScore-2.png
 .It
-\...
+  ...
 .It
-MyScore.ogg
+  MyScore.ogg
 .It
-MyScore.mp3
+  MyScore.mp3
 .El
+.Bd -literal
+
+.Ed
 Als
-.Op Fl I Ar 'index-bestandsnaam'
+.Fl I Ar 'index-bestandsnaam'
 niet wordt gebruikt wordt tevens:
-.Bl
+.Bl -compact
 .It
-MyScore.html
+  MyScore.html
 .El
 gegenereerd.
- 
-Creates subdirectories:
-.Bl
+.Bd -literal
+
+.Ed
+Aangemaakt worden submappen:
+.Bl -compact
 .It
-js, 
+  js
 .It
-css
+  css
 .It
-images
+  images
 .El
 and installs javascript, css-stylesheet en svg-images
-.Bl
+.Bl -compact
 .It
-js/ms_player.js
+  js/ms_player.js
 .It
-css/ms_player.css
+  css/ms_player.css
 .It
-images/media-playback-loop.svg
+  images/media-playback-loop.svg
 .It
-images/media-playback-metronome.svg
+  images/media-playback-metronome.svg
 .It
-images/media-playback-pause.svg
+  images/media-playback-pause.svg
 .It
-images/media-playback-start.svg
+  images/media-playback-start.svg
 .It
-images/media-skip-backward.svg
+  images/media-skip-backward.svg
 .It
-images/media-skip-forward.svg
+  images/media-skip-forward.svg
 .It
-images/window-close.svg
+  images/window-close.svg
 .El
+Als
+.Fl I Ar 'index-bestandsnaam'
+wordt gebruikt worden:
+.Bl -compact
+.It
+  js/ms_player_query.js
+.It
+  ShowScore.html
+.El
+geinstalleerd.
 .Sh EXIT STATUS
-If an error occurs return code will be non-zero.
-.Sh EXAMPLES
-To generate html-files for all scores in directory MyMusic and place then in directory Sites :
-.Bl
+Als er een fout optreed is de return code ongelijk aan nul.
+.Sh VOORBEELDEN
+Om html-bestanden voor alle partituren in map MyMusic te genereren en in map Sites te plaatsen :
+.Bl -compact
 .It
-m2h -d Sites MyMusic/*.mscz
+  m2h -d Sites MyMusic/*.mscz
 .El
-To generate html-files for all scores in directory MyMusic and all subdirectories and place then in directory Sites :
-.Bl
+Om html-bestanden voor alle partituren in map MyMusic te genereren en alle submappen en in map Sites te plaatsen :
+.Bl -compact
 .It
-m2h -d Sites MyMusic/**/*.mscz
+  m2h -d Sites MyMusic/**/*.mscz
 .El
-.Sh DIAGNOSTICS
-.Sh ERRORS
-.Sh LICENSE
+.\" .Sh DIAGNOSTIEK
+.\" .Sh FOUTEN
+.Sh LICENTIE
 Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
 See https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 .\" .Sh SEE ALSO

@@ -1,0 +1,57 @@
+#!/bin/bash
+
+PROGRAM=`basename $0`
+BASE_DIR=`dirname $0`
+CUR_DIR=`pwd`
+cd "${BASE_DIR}"
+BASE_DIR=`pwd`
+cd "${CUR_DIR}"
+case "${BASE_DIR}" in
+  "/") SCRIPT="/${PROGRAM}" ;;
+    *) SCRIPT="${BASE_DIR}/${PROGRAM}" ;;
+esac
+
+#-------------------------------------------------------------------------------
+CheckFile()
+{
+CLASS_NAMES=`cat "${JAVA_FILE}" | awk '
+/^import / { match($0,"[.][^.;]*;"); if (RSTART) printf("%s\n",substr($0,RSTART+1,RLENGTH-2)); }
+' | grep -v "\*" | sort`
+H=`echo "${CLASS_NAMES}" | uniq -d`
+if [ -n "${H}" ]
+then
+  echo "${JAVA_FILE} duplicate imports:"
+  echo "${H}"
+  echo
+fi
+CLASS_NAMES=`echo "${CLASS_NAMES}" | sort -u`
+M=`echo "${CLASS_NAMES}" | wc -l`
+J=1
+while [ ${J} -le ${M} ]
+  do
+  CLASS_NAME=`echo "${CLASS_NAMES}" | head -n ${J} | tail -n 1`
+  FOUND=`fgrep "${CLASS_NAME}" "${JAVA_FILE}" | grep -v "^import"`
+  if [ -z "${FOUND}" ]
+  then
+    echo "${JAVA_FILE} unused ${CLASS_NAME}"
+  #else
+  #  echo "${JAVA_FILE} used ${CLASS_NAME}"  
+  fi
+  J=`expr ${J} + 1`
+  done
+}
+
+#-------------------------------------------------------------------------------
+
+cd "${BASE_DIR}"
+
+JAVA_FILES=`find src -name "*.java"`
+N=`echo "${JAVA_FILES}" | wc -l`
+N=`expr ${N} + 0`
+I=1
+while [ ${I} -le ${N} ]
+  do
+  JAVA_FILE=`echo "${JAVA_FILES}" | head -n ${I} | tail -n 1`
+  CheckFile
+  I=`expr ${I} + 1`
+  done

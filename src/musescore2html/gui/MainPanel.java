@@ -1,10 +1,15 @@
 package musescore2html.gui;
 
 import musescore2html.Arguments;
+import musescore2html.Config;
 import musescore2html.Version;
 
 import musescore2html.ProcessData;
 import musescore2html.ProcessScores;
+
+import java.util.List;
+import java.util.Arrays;
+import java.util.ArrayList;
 
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.Executors;
@@ -13,26 +18,23 @@ import java.util.concurrent.Future;
 import java.lang.InterruptedException;
 
 import java.io.File;
+import java.io.FilenameFilter;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
+import java.awt.FileDialog;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.Component;
 import java.awt.Dimension;
-
-import java.util.List;
-import java.util.Arrays;
-import java.util.ArrayList;
+import java.awt.Window;
+import java.awt.Frame;
+import java.awt.FlowLayout;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.BoxLayout;
-import javax.swing.JFileChooser;
 import javax.swing.JScrollPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -42,19 +44,14 @@ import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
 import javax.swing.JTable;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JCheckBox;
 
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileSystemView;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
-import javax.swing.JFrame;
 
 public class MainPanel extends JPanel implements ActionListener {
 
@@ -66,26 +63,26 @@ public class MainPanel extends JPanel implements ActionListener {
 	private final String helpDirectory=(new File(jarDirectory)).getParentFile().getParentFile().getParent()+
 		File.separator+"resources"+File.separator+"help";
 	private String helpLink;
-	public JMenuBar mainJMenuBar;
+	private JFrame parent;
+	private JMenuBar mainJMenuBar;
 	private JMenuItem
-		musescoreJMenuItem,
 		outputdirectoryJMenuItem,
-		scoresJMenuItem,
+		selectscoresJMenuItem,
+		addscoresJMenuItem,
+		settingsJMenuItem,
 		helpJMenuItem;
 	private static final String newline = "\n";
 
 	private Arguments.FILE_OPTION fileOption;
-	private String[] languageOptions, fileOptions, generateIndexFileOptions, indexFileOptions, logLevelOptions;
-	private String museScore;
+	private String[] fileOptions, generateIndexFileOptions, indexFileOptions, logLevelOptions;
 	private String[] scores;
-	private String museScoreDirectory, lastUsedScoreDirectory, outputDirectory, lastUsedOutputDirectory;
+	private String lastUsedScoreDirectory, outputdirectory, lastUsedOutputDirectory;
 
 	private JButton
 		processScoresJButton,
 		clearLogJButton,
 		closeJButton;
 	private JComboBox<String>
-		languageOptionsJComboBox,
 		fileOptionsJComboBox,
 		generateIndexFileOptionsJComboBox,
 		indexFileOptionsJComboBox,
@@ -94,65 +91,53 @@ public class MainPanel extends JPanel implements ActionListener {
 		musescoreJLabel,
 		outputdirectoryJLabel,
 		scoresJLabel,
-		languageJLabel,
 		indexFileNameJLabel,
 		logJLabel;
-	private JTextField indexFileNameJTextField;
-	private JFileChooser
-		musescoresJFileChooser,
-		outputdirectoryJFileChooser,
-		scoresJFileChooser;
+	private JTextField musescoreJTextField, outputdirectoryJTextField, indexFileNameJTextField;
+
+	private FileDialog outputdirectoryFileDialog, scoresFileDialog;	
 	private FileNameExtensionFilter scoreFileFilter;
 
-	private DefaultTableModel museScoreTableModel, scoresTableModel, outputDirectoryTableModel;
-	private JTable musescoreJTable, scoresJTable, outputdirectoryJTable;
+	private DefaultTableModel scoresTableModel;
+	private JTable scoresJTable;
 	private JScrollPane scoresJScrollPane;
 	private Arguments.LOG_LEVEL logLevel = Arguments.LOG_LEVEL.NORMAL;
 	private JTextArea logJTextArea;
 	private JCheckBox fileGenerateHtmlJCheckBox, indexFileGenerateAllJCheckBox, checkOnlyJCheckBox;
+
+	public HelpPanel helpPanel;
 
 	private int errors=0;
 
 	public void setUp() {
 		LayoutManager layout = new BoxLayout(this, BoxLayout.Y_AXIS);
 		setLayout(layout);
+		setName("MainPanel");
 
 		mainJMenuBar = new JMenuBar();
 
-		musescoreJMenuItem = new JMenuItem(arguments.translations.getKey("musescore.select"),KeyEvent.VK_M);
-		musescoreJMenuItem.addActionListener(this);
-		mainJMenuBar.add(musescoreJMenuItem);
-
-		musescoreJLabel = new JLabel(arguments.translations.getKey("musescore.label"));
-		musescoreJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-		outputdirectoryJMenuItem = new JMenuItem(arguments.translations.getKey("outputdirectory.select"),KeyEvent.VK_O);
+		outputdirectoryJMenuItem = new JMenuItem(arguments.translations.getKey("outputdirectory.select"));
 		outputdirectoryJMenuItem.addActionListener(this);
 		mainJMenuBar.add(outputdirectoryJMenuItem);
 
 		outputdirectoryJLabel = new JLabel(arguments.translations.getKey("outputdirectory.label"));
 		outputdirectoryJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-		scoresJMenuItem = new JMenuItem(arguments.translations.getKey("scores.select"),KeyEvent.VK_S);
-		scoresJMenuItem.addActionListener(this);
-		mainJMenuBar.add(scoresJMenuItem);
-		scoresJLabel = new JLabel(arguments.translations.getKey("scores.label"));
-		scoresJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+		selectscoresJMenuItem = new JMenuItem(arguments.translations.getKey("scores.select"));
+		selectscoresJMenuItem.addActionListener(this);
+		mainJMenuBar.add(selectscoresJMenuItem);
+
+		addscoresJMenuItem = new JMenuItem(arguments.translations.getKey("scores.add"));
+		addscoresJMenuItem.addActionListener(this);
+		mainJMenuBar.add(addscoresJMenuItem);
+
+		settingsJMenuItem = new JMenuItem(arguments.translations.getKey("settings.label"));
+		settingsJMenuItem.addActionListener(this);
+		mainJMenuBar.add(settingsJMenuItem);
 
 		helpJMenuItem = new JMenuItem(arguments.translations.getKey("help.label"));
-		helpJMenuItem.setMnemonic(KeyEvent.VK_H);
 		helpJMenuItem.addActionListener(this);
 		mainJMenuBar.add(helpJMenuItem);
-
-		languageJLabel = new JLabel(arguments.translations.getKey("language.label"));
-		languageOptions = arguments.translations.getLanguages();
-		languageOptionsJComboBox = new JComboBox<String>(languageOptions);
-		languageOptionsJComboBox.setMaximumSize(languageOptionsJComboBox.getPreferredSize());
-		languageOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
-		// adapt before setting addActionListener
-		languageOptionsJComboBox.setSelectedIndex(Arrays.asList(languageOptions).indexOf(arguments.language));
-		languageOptionsJComboBox.addActionListener(this);
 
 		fileGenerateHtmlJCheckBox = new JCheckBox(arguments.translations.getKey("file.generatehtml.label"), arguments.generateHtml);
 
@@ -162,10 +147,8 @@ public class MainPanel extends JPanel implements ActionListener {
 			arguments.translations.getKey("file.option.replace")
 		};
 		fileOptionsJComboBox = new JComboBox<String>(fileOptions);
-		fileOptionsJComboBox.addActionListener(this);
-		fileOptionsJComboBox.setMaximumSize(fileOptionsJComboBox.getPreferredSize());
 		fileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
+
 		fileOptionsJComboBox.setSelectedIndex(arguments.fileOption.ordinal());
 
 		indexFileNameJLabel = new JLabel(arguments.translations.getKey("indexfilename.label"));
@@ -175,13 +158,11 @@ public class MainPanel extends JPanel implements ActionListener {
 			arguments.translations.getKey("generateindexfile.option.html.yes")
 		};
 		generateIndexFileOptionsJComboBox = new JComboBox<String>(generateIndexFileOptions);
-		generateIndexFileOptionsJComboBox.addActionListener(this);
-		generateIndexFileOptionsJComboBox.setMaximumSize(generateIndexFileOptionsJComboBox.getPreferredSize());
 		generateIndexFileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		generateIndexFileOptionsJComboBox.setSelectedIndex(arguments.generateIndexFileOption.ordinal());
 
-		indexFileNameJTextField=new JTextField(arguments.indexFileName!=null?arguments.indexFileName:"");
+		indexFileNameJTextField = new JTextField(arguments.indexFileName!=null?arguments.indexFileName:"");
 		indexFileNameJTextField.addActionListener(this);
 
 		indexFileOptions = new String[] {
@@ -190,10 +171,8 @@ public class MainPanel extends JPanel implements ActionListener {
 			arguments.translations.getKey("indexfile.option.replace")
 		};
 		indexFileOptionsJComboBox = new JComboBox<String>(indexFileOptions);
-		indexFileOptionsJComboBox.addActionListener(this);
-		indexFileOptionsJComboBox.setMaximumSize(indexFileOptionsJComboBox.getPreferredSize());
 		indexFileOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
-		
+
 		indexFileOptionsJComboBox.setSelectedIndex(arguments.indexFileOption.ordinal());
 
 		indexFileGenerateAllJCheckBox = new JCheckBox(arguments.translations.getKey("generateindexfile.generateall.label"), arguments.generateIndexAll);
@@ -206,84 +185,55 @@ public class MainPanel extends JPanel implements ActionListener {
 			arguments.translations.getKey("loglevel.option.extreme")
 		};
 		logLevelOptionsJComboBox = new JComboBox<String>(logLevelOptions);
-		logLevelOptionsJComboBox.addActionListener(this);
-		logLevelOptionsJComboBox.setMaximumSize(logLevelOptionsJComboBox.getPreferredSize());
 		logLevelOptionsJComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 		logLevelOptionsJComboBox.setSelectedIndex(arguments.logLevel.ordinal());
 
-		museScore = arguments.config.getMuseScore();
-		museScoreDirectory = arguments.config.getLastUsedMuseScoreDirectory();
 		lastUsedScoreDirectory = arguments.config.getLastUsedScoreDirectory();
-		outputDirectory = arguments.outputDirectory;
 		lastUsedOutputDirectory = arguments.config.getLastUsedOutputDirectory();
-		museScoreTableModel = new DefaultTableModel(1, 1) {
+
+		musescoreJLabel = new JLabel(arguments.translations.getKey("musescore.label"));
+		musescoreJTextField = new JTextField(arguments.museScore);
+
+		outputdirectory = arguments.outputDirectory;
+		outputdirectoryJTextField = new JTextField(outputdirectory);
+
+		scoresJLabel = new JLabel(arguments.translations.getKey("scores.label"));
+		scoresJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+		scoresTableModel = new DefaultTableModel(new String [] {arguments.translations.getKey("scores.label")},0) {
 			@Override
 			public boolean isCellEditable(int row, int column) { return false; }
 		};
-		scoresTableModel = new DefaultTableModel(new String[]{arguments.translations.getKey("scores.label")}, 0) {
-			@Override
-			public boolean isCellEditable(int row, int column) { return false; }
-		};
-		outputDirectoryTableModel = new DefaultTableModel(1, 1) {
-			@Override
-			public boolean isCellEditable(int row, int column) { return false; }
-		};
-
-		musescoreJTable = new JTable(museScoreTableModel);
-
-		outputdirectoryJTable = new JTable(outputDirectoryTableModel);
-
-		// Create a musescore chooser
-		musescoresJFileChooser = new JFileChooser();
-		musescoresJFileChooser.setMultiSelectionEnabled(false);
-		musescoresJFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		musescoresJFileChooser.setFileSystemView(FileSystemView.getFileSystemView());
-
-		museScoreTableModel.setRowCount(0);
-		museScoreTableModel.addRow(new String[] { museScore.toString() });
-
-		// Create a directory chooser
-		outputdirectoryJFileChooser = new JFileChooser();
-		outputdirectoryJFileChooser.setAcceptAllFileFilterUsed(false);
-		outputdirectoryJFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
 		scoresJTable = new JTable(scoresTableModel);
 		scoresJTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
 		scoresJScrollPane = new JScrollPane(scoresJTable);
 		scoresJScrollPane.setPreferredSize(new Dimension(100, 100));
-
-		FileFilter outputDirectoryFileFilter = new FileFilter() {
-			//private final String[] supportedExtensions = new String[]{".*"};
+		scoresJScrollPane.setColumnHeader(null);
+		 
+		parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+		outputdirectoryFileDialog = new FileDialog(parent, arguments.translations.getKey("outputdirectory.select"), FileDialog.LOAD);
+		outputdirectoryFileDialog.setDirectory(lastUsedOutputDirectory);
+		outputdirectoryFileDialog.setFilenameFilter(new FilenameFilter() {
 			@Override
-			public boolean accept(File f) {
-				return f.isDirectory();
+			public boolean accept(File dir, String name) {
+				if (dir.isDirectory()) return true;
+				return false;
 			}
+		});
+				 
+		scoresFileDialog = new FileDialog(parent, arguments.translations.getKey("scores.select"), FileDialog.LOAD);
+		scoresFileDialog.setDirectory(lastUsedScoreDirectory);
+		scoresFileDialog.setMultipleMode(true);
+		scoresFileDialog.setFilenameFilter(new FilenameFilter() {
 			@Override
-			public String getDescription() {
-				return arguments.translations.getKey("gui.filefilter.alldirectories");
+			public boolean accept(File dir, String name) {
+				if (name.toLowerCase().endsWith(".mscz")) return true;
+				if (name.toLowerCase().endsWith(".mscx")) return true;
+				return false;
 			}
-		};
-		outputdirectoryJFileChooser.setFileFilter(outputDirectoryFileFilter);
-		outputdirectoryJFileChooser.setCurrentDirectory(new File(lastUsedOutputDirectory));
-
-		outputDirectoryTableModel.setRowCount(0);
-		outputDirectoryTableModel.addRow(new String[] { outputDirectory });
-
-		// Create a score file chooser
-		scoresJFileChooser = new JFileChooser();
-		scoresJFileChooser.setMultiSelectionEnabled(true);
-		scoresJFileChooser.setAcceptAllFileFilterUsed(false);
-		scoresJFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-		scoreFileFilter = new FileNameExtensionFilter(arguments.translations.getKey("scores.label"), "mscz", "mscx");
-		scoresJFileChooser.setFileFilter(scoreFileFilter);
-		scoresJFileChooser.setCurrentDirectory(new File(lastUsedScoreDirectory));
-
-		for (int i=0; i<arguments.scores.size(); i++) {
-			scoresTableModel.addRow(new String[]{arguments.scores.get(i)});
-		}
-		scores=arguments.scores.toArray(new String[0]);
+		});
 
 		processScoresJButton = new JButton(arguments.translations.getKey("scores.process"));
 		processScoresJButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -293,10 +243,11 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		logJLabel = new JLabel(arguments.translations.getKey("logging.label"));
 		logJLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
-		logJTextArea = new JTextArea(5, 50);
+		logJTextArea = new JTextArea(15, 50);
+		logJTextArea.setText("");
 		logJTextArea.setMargin(new Insets(5, 5, 5, 5));
 		logJTextArea.setEditable(false);
-		JScrollPane logScrollPane = new JScrollPane(logJTextArea);
+		JScrollPane logScrollPane = new JScrollPane(logJTextArea,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
 		clearLogJButton = new JButton(arguments.translations.getKey("logging.clear"));
 		clearLogJButton.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -304,23 +255,21 @@ public class MainPanel extends JPanel implements ActionListener {
 
 		closeJButton = new JButton(arguments.translations.getKey("close.label"));
 		closeJButton.setAlignmentX(Component.LEFT_ALIGNMENT);
-		closeJButton.addActionListener(e -> System.exit(0));
+		closeJButton.addActionListener(this);
 
 		add(mainJMenuBar);
 
-		add(languageJLabel);
-		add(languageOptionsJComboBox);
-
 		add(musescoreJLabel);
-		add(musescoreJTable);
-
-		add(outputdirectoryJLabel);
-		add(outputdirectoryJTable);
+		add(musescoreJTextField);
 
 		add(scoresJLabel);
 		add(scoresJScrollPane);
+		
 		add(fileGenerateHtmlJCheckBox);
 		add(fileOptionsJComboBox);
+
+		add(outputdirectoryJLabel);
+		add(outputdirectoryJTextField);
 
 		add(indexFileNameJLabel);
 		add(indexFileNameJTextField);
@@ -338,7 +287,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		add(checkOnlyJCheckBox);
 
 		add(closeJButton);
-		
+
 		for (int i=0; i<arguments.logging.size(); i++) {
 			logJTextArea.append(arguments.logging.get(i).logMessage + newline);
 			if (arguments.logging.get(i).logCode>0) errors++;
@@ -353,20 +302,22 @@ public class MainPanel extends JPanel implements ActionListener {
 		arguments.translations.setLanguage(language);
 		arguments.language = language;
 
-		musescoreJMenuItem.setText(arguments.translations.getKey("musescore.select"));
 		outputdirectoryJMenuItem.setText(arguments.translations.getKey("outputdirectory.select"));
-		scoresJMenuItem.setText(arguments.translations.getKey("scores.select"));
+		selectscoresJMenuItem.setText(arguments.translations.getKey("scores.select"));
+		addscoresJMenuItem.setText(arguments.translations.getKey("scores.add"));
+		settingsJMenuItem.setText(arguments.translations.getKey("settings.label"));
 		helpJMenuItem.setText(arguments.translations.getKey("help.label"));
-		
+
 		helpLink = "file:"+helpDirectory+File.separator+Version.NAME+"_"+language+".html";
 
-		languageJLabel.setText(arguments.translations.getKey("language.label"));
 		musescoreJLabel.setText(arguments.translations.getKey("musescore.label"));
 		outputdirectoryJLabel.setText(arguments.translations.getKey("outputdirectory.label"));
 		indexFileNameJLabel.setText(arguments.translations.getKey("indexfilename.label"));
-	
-		scoresTableModel.setColumnIdentifiers(new String[]{arguments.translations.getKey("scores.label")});
-		
+
+		//scoresTableModel.setColumnIdentifiers(new String[]{arguments.translations.getKey("scores.label")});
+		//scoresTableModel.setColumnIdentifiers(new String[]{});
+		scoresJScrollPane.setColumnHeader(null);
+
 		fileGenerateHtmlJCheckBox.setText(arguments.translations.getKey("file.generatehtml.label"));
 
 		int previous = fileOptionsJComboBox.getSelectedIndex();
@@ -379,7 +330,6 @@ public class MainPanel extends JPanel implements ActionListener {
 		for (int i=0;i<fileOptions.length; i++) {
 			 fileOptionsJComboBox.addItem(fileOptions[i]);
 		}
-		fileOptionsJComboBox.setMaximumSize(fileOptionsJComboBox.getPreferredSize());
 		fileOptionsJComboBox.setSelectedIndex(previous);
 
 		indexFileGenerateAllJCheckBox.setText(arguments.translations.getKey("generateindexfile.generateall.label"));
@@ -394,7 +344,6 @@ public class MainPanel extends JPanel implements ActionListener {
 		for (int i=0;i<generateIndexFileOptions.length; i++) {
 			 generateIndexFileOptionsJComboBox.addItem(generateIndexFileOptions[i]);
 		}
-		generateIndexFileOptionsJComboBox.setMaximumSize(generateIndexFileOptionsJComboBox.getPreferredSize());
 		generateIndexFileOptionsJComboBox.setSelectedIndex(previous);
 
 		previous = indexFileOptionsJComboBox.getSelectedIndex();
@@ -407,7 +356,6 @@ public class MainPanel extends JPanel implements ActionListener {
 		for (int i=0;i<indexFileOptions.length; i++) {
 			 indexFileOptionsJComboBox.addItem(indexFileOptions[i]);
 		}
-		indexFileOptionsJComboBox.setMaximumSize(indexFileOptionsJComboBox.getPreferredSize());
 		indexFileOptionsJComboBox.setSelectedIndex(previous);
 
 		checkOnlyJCheckBox.setText(arguments.translations.getKey("checkonly.label"));
@@ -424,11 +372,7 @@ public class MainPanel extends JPanel implements ActionListener {
 		for (int i=0;i<logLevelOptions.length; i++) {
 			 logLevelOptionsJComboBox.addItem(logLevelOptions[i]);
 		}
-		logLevelOptionsJComboBox.setMaximumSize(logLevelOptionsJComboBox.getPreferredSize());
 		logLevelOptionsJComboBox.setSelectedIndex(previous);
-
-		scoreFileFilter = new FileNameExtensionFilter(arguments.translations.getKey("scores.label"), "mscz", "mscx");
-		scoresJFileChooser.setFileFilter(scoreFileFilter);
 
 		processScoresJButton.setText(arguments.translations.getKey("scores.process"));
 		logJLabel.setText(arguments.translations.getKey("logging.label"));
@@ -439,68 +383,28 @@ public class MainPanel extends JPanel implements ActionListener {
 		parent.revalidate();
 		parent.repaint();
 		parent.pack();
+
+		for (Frame frame : Frame.getFrames()) {
+			if (frame.getName().equals("Settings")) {
+				frame.setTitle(arguments.translations.getKey("settings.label"));
+			}
+			if (frame.getName().equals("Help")) {
+				frame.setTitle(arguments.translations.getKey("help.label"));
+			}
+		}
 	}
 
 	public void actionPerformed(ActionEvent e) {
 
-		//Handle open file(s) button action.
-		if (e.getSource() == scoresJMenuItem) {
-			scoresJFileChooser.setCurrentDirectory(new File(lastUsedScoreDirectory));
-			int returnVal = scoresJFileChooser.showOpenDialog(MainPanel.this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				scoresTableModel.setRowCount(0);
-				File files[] = scoresJFileChooser.getSelectedFiles();
-				scores = new String[files.length];
-				for (int i = 0; i < files.length; i++) {
-					scores[i] = files[i].toString();
-					try {
-						logJTextArea.append(arguments.translations.translate(new String[] {"score.selected", files[i].getName()}) + newline);
-						scoresTableModel.addRow(new String[] {
-							files[i].getName()
-						});
-						lastUsedScoreDirectory = (new File(scores[0]).getAbsolutePath());
-					} catch (Exception exc) {
-						logJTextArea.append(arguments.translations.getKey("scores.select.canceled") + newline);
-					}
-				}
-			} else {
-				logJTextArea.append(arguments.translations.getKey("scores.select.canceled") + newline);
-			}
-			logJTextArea.setCaretPosition(logJTextArea.getDocument().getLength());
+		if (e.getSource() == selectscoresJMenuItem) {
+			getScores(false);
+			
+		} else if (e.getSource() == addscoresJMenuItem) {
+			getScores(true);
 
-			//Handle open directory button action.
 		} else if (e.getSource() == outputdirectoryJMenuItem) {
-			outputdirectoryJFileChooser.setCurrentDirectory(new File(lastUsedOutputDirectory));
-			int returnVal = outputdirectoryJFileChooser.showOpenDialog(MainPanel.this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				outputDirectory = outputdirectoryJFileChooser.getSelectedFile().toString();
-				lastUsedOutputDirectory = outputDirectory;
-				outputDirectoryTableModel.setRowCount(0);
-				outputDirectoryTableModel.addRow(new String[] {
-					outputDirectory
-				});
-				logJTextArea.append(arguments.translations.translate(new String[] {"outputdirectory.selected", outputDirectory}) + newline);
-			} else {
-				logJTextArea.append(arguments.translations.getKey("outputdirectory.select.canceled") + newline);
-			}
-			logJTextArea.setCaretPosition(logJTextArea.getDocument().getLength());
+			getOutputDirectory();
 
-			//Handle select musescore button action.
-		} else if (e.getSource() == musescoreJMenuItem) {
-			musescoresJFileChooser.setCurrentDirectory(new File(museScoreDirectory));
-			int returnVal = musescoresJFileChooser.showOpenDialog(MainPanel.this);
-			if (returnVal == JFileChooser.APPROVE_OPTION) {
-				File mscore = musescoresJFileChooser.getSelectedFile();
-				validateMuseScore(mscore);
-				museScoreTableModel.setRowCount(0);
-				museScoreTableModel.addRow(new String[] { museScore });
-				logJTextArea.append(arguments.translations.translate(new String[] {"musescore.selected", mscore.getName()}) + newline);
-			} else {
-				logJTextArea.append(arguments.translations.getKey("musescore.select.canceled") + newline);
-			}
-			logJTextArea.setCaretPosition(logJTextArea.getDocument().getLength());
-
-			//Handle select process scores button action.
 		} else if (e.getSource() == processScoresJButton) {
 			if (processingScores) {
 				processingScores = false;
@@ -510,10 +414,7 @@ public class MainPanel extends JPanel implements ActionListener {
 			} else {
 				processingScores = true;
 				processScoresJButton.setText(arguments.translations.getKey("scores.process.cancel"));
-				arguments.language = languageOptions[languageOptionsJComboBox.getSelectedIndex()];
-				arguments.translations.setLanguage(arguments.language);
-				arguments.museScore = museScore;
-				arguments.outputDirectory = outputDirectory;
+				arguments.outputDirectory = outputdirectory;
 				arguments.scores = new ArrayList<String>();
 				arguments.scores.addAll(Arrays.asList(scores));
 				arguments.fileOption = getFileOption();
@@ -527,18 +428,58 @@ public class MainPanel extends JPanel implements ActionListener {
 				processScoresTask = new ProcessScoresTask(arguments);
 				processScoresTask.execute();
 			}
-		//} else if (e.getSource() == fileOptionsJComboBox) {
-		//} else if (e.getSource() == logLevelOptionsJComboBox) {
-		//} else if (e.getSource() == indexFileOptionsJComboBox) {
-		} else if (e.getSource() == languageOptionsJComboBox) {
-			String s = (String) languageOptionsJComboBox.getSelectedItem();
-			changeLanguage(s);
 		} else if (e.getSource() == clearLogJButton) {
 			logJTextArea.selectAll();
 			logJTextArea.replaceSelection("");
+		} else if (e.getSource() == settingsJMenuItem) {
+			showSettings();
 		} else if (e.getSource() == helpJMenuItem) {
 			showHelp(helpLink);
+		} else if (e.getSource() == closeJButton) {
+			closeAction();			
 		}
+	}
+
+	private void getScores(boolean add) {
+		if (arguments.config.getOSId()==Config.OSId.OSX) System.setProperty("apple.awt.fileDialogForDirectories","false");
+		scoresFileDialog.setVisible(true);
+		String action;
+		if (add) action = "add";
+		else action = "select";
+		if (scoresFileDialog.getFiles().length > 0) {
+			if (!add) scoresTableModel.setRowCount(0);
+			File files[] = scoresFileDialog.getFiles();
+			scores = new String[files.length];
+			for (int i = 0; i < files.length; i++) {
+				scores[i] = files[i].toString();
+				try {
+					logJTextArea.append(arguments.translations.translate(new String[] {"scores."+action+"ed", scores[i]}) + newline);
+					scoresTableModel.addRow(new String[] { scores[i] });
+					lastUsedScoreDirectory = (new File(scores[0]).getParent());
+				} catch (Exception exc) {
+					if (exc.getMessage()==null) logJTextArea.append(arguments.translations.getKey("scores."+action+".error") + newline);
+					else logJTextArea.append(arguments.translations.translate(new String[] {"scores."+action+".error.message", exc.getMessage()}) + newline);
+					exc.printStackTrace();
+				}
+			}
+		} else {
+			logJTextArea.append(arguments.translations.getKey("scores."+action+".canceled") + newline);
+		}
+		logJTextArea.setCaretPosition(logJTextArea.getDocument().getLength());
+	}
+
+	private void getOutputDirectory() {
+		if (arguments.config.getOSId()==Config.OSId.OSX) System.setProperty("apple.awt.fileDialogForDirectories","true");
+		outputdirectoryFileDialog.setVisible(true);
+		if (outputdirectoryFileDialog.getFile() != null) {
+			outputdirectory = outputdirectoryFileDialog.getDirectory()+outputdirectoryFileDialog.getFile();
+			lastUsedOutputDirectory = outputdirectory;
+			outputdirectoryJTextField.setText(outputdirectory);
+			logJTextArea.append(arguments.translations.translate(new String[] {"outputdirectory.selected", outputdirectory}) + newline);
+		} else {
+			logJTextArea.append(arguments.translations.getKey("outputdirectory.select.canceled") + newline);
+		}
+		logJTextArea.setCaretPosition(logJTextArea.getDocument().getLength());
 	}
 
 	private Arguments.FILE_OPTION getFileOption() {
@@ -577,46 +518,49 @@ public class MainPanel extends JPanel implements ActionListener {
 		return Arguments.LOG_LEVEL.NORMAL;
 	}
 
-	private void showHelp(String link) {
-		JFrame jframe = new JFrame(arguments.translations.getKey("help.label"));
-		//jframe.setLayout(new BorderLayout());
-		Help help = new Help(arguments);
-		jframe.getContentPane().add(help);
-		jframe.setSize(560, 450);
-		jframe.setLocationRelativeTo(null);
-		jframe.setVisible(true);
-		//new Help(arguments);
+	public void changeMuseScore(String musescore) {
+		arguments.museScore = musescore;
+		musescoreJTextField.setText(musescore);
 	}
 
-	private void validateMuseScore(File mscore) {
-		String warning="";
-		switch (arguments.config.getOSId()) {
-			case OSX:
-				if (mscore.toString().endsWith(".app")) museScore=mscore.toString()+File.separator+"Contents"+File.separator+"MacOS"+File.separator+"mscore";
-				else if (mscore.getName().equals("mscore")) museScore=mscore.toString();
-				else {
-					museScore=mscore.toString();
-					warning=arguments.translations.translate(new String[] {"musescore.not.recognized",museScore});
-				}
-				break;
-			case UNIX:
-				if (mscore.getName().equals("mscore")) museScore=mscore.toString();
-				else if (mscore.toString().endsWith(".AppImage")&&mscore.toString().indexOf("MuseScore")>=0) museScore=mscore.toString();
-				else {
-					museScore=mscore.toString();
-					warning=arguments.translations.translate(new String[] {"musescore.not.recognized",museScore});
-				}
-				break;
-			case WINDOWS:
-				if (mscore.getName().indexOf("MuseScore")>=0) museScore=mscore.toString();
-				else if (mscore.getName().indexOf("mscore")>=0) museScore=mscore.toString();
-				else {
-					museScore=mscore.toString();
-					warning=arguments.translations.translate(new String[] {"musescore.not.recognized",museScore});
-				}
-				break;
+	private void showSettings() {
+		for (Frame frame : Frame.getFrames()) {
+			if (frame.getName().equals("Settings")) {
+				frame.setVisible(true);
+				frame.toFront();
+				frame.requestFocus();
+				return;
+			}
 		}
-		if (!warning.equals("")) logJTextArea.append(warning);
+
+		JFrame jframe = new JFrame(arguments.translations.getKey("settings.label"));
+		jframe.setLayout(new FlowLayout());
+		jframe.setName("Settings");
+		JPanel settings = new SettingsPanel(arguments, MainPanel.this);
+		jframe.getContentPane().add(settings);
+		jframe.pack();
+		jframe.setLocationRelativeTo(null);
+		jframe.setVisible(true);
+	}
+
+	private void showHelp(String link) {
+		for (Frame frame : Frame.getFrames()) {
+			if (frame.getName().equals("Help")) {
+				frame.setVisible(true);
+				frame.toFront();
+				frame.requestFocus();
+				return;
+			}
+		}
+
+		JFrame jframe = new JFrame(arguments.translations.getKey("help.label"));
+		jframe.setLayout(new FlowLayout());
+		jframe.setName("Help");
+		helpPanel = new HelpPanel(arguments);
+		jframe.getContentPane().add(helpPanel);
+		jframe.pack();
+		jframe.setLocationRelativeTo(null);
+		jframe.setVisible(true);
 	}
 
 	class ProcessScoresTask extends SwingWorker<Void, ProcessData.Data> {
@@ -677,6 +621,16 @@ public class MainPanel extends JPanel implements ActionListener {
 		}
 	}
 
+	public void closeAction() {
+		arguments.config.setLastUsedMuseScore(arguments.museScore);
+		arguments.config.setLastUsedScoreDirectory(lastUsedScoreDirectory);
+		arguments.config.setLastUsedOutputDirectory(lastUsedOutputDirectory);
+		try {
+			arguments.config.writeConfigLastUsed();
+			System.exit(0);
+		} catch (Exception exc) {};
+	}
+
 	public MainPanel() {
 		arguments=new Arguments();
 		arguments.setMissing();
@@ -685,6 +639,10 @@ public class MainPanel extends JPanel implements ActionListener {
 
 	public MainPanel(Arguments arguments) {
 		this.arguments=arguments;
+		if (arguments==null) {
+			System.err.println("arguments null");
+			this.arguments=new Arguments();
+		}
 		setUp();
 	}
 }

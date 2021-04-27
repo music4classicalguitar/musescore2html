@@ -22,6 +22,7 @@ public class ProcessArguments {
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.getKey("info.arguments"), 0);
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.osid", String.valueOf(arguments.config.getOSId())}), 0);
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.language", arguments.language}), 0);
+		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.lookandfeel", arguments.config.getLookAndFeel()}), 0);
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.loglevel", String.valueOf(arguments.logLevel)}), 0);
 		processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.interface", String.valueOf(arguments.interfaceType)}), 0);
 		if (arguments.cfgPath!=null) processInfo(Arguments.LOG_LEVEL.EXTREME, arguments.translations.translate(new String[] {"info.configuration.path", arguments.cfgPath}), 0);

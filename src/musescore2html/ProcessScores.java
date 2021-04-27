@@ -51,7 +51,7 @@ public class ProcessScores implements Callable<Integer>  {
 	};
 	private int imageExtension=2;
 
-    private String files2copy[]={
+	private String files2copy[]={
 			"css"+File.separator+"ms_player.css",
 			"js"+File.separator+"ms_player.js",
 			"images"+File.separator+"media-playback-loop.svg",
@@ -61,7 +61,7 @@ public class ProcessScores implements Callable<Integer>  {
 			"images"+File.separator+"media-skip-backward.svg",
 			"images"+File.separator+"media-skip-forward.svg",
 			"images"+File.separator+"window-close.svg"
-    	};
+		};
 
 	private String files2copyForIndexFile[]={
 			"css"+File.separator+"ms_player_index.css",
@@ -183,11 +183,11 @@ public class ProcessScores implements Callable<Integer>  {
   		// checking or contains() checking because of:
   		final int lastPeriodPos = name.lastIndexOf('.');
   		if (lastPeriodPos <= 0) {
-      		// No period after first character - return name as it was passed in
-       		return new String[] {directory, name, ""};
+	  		// No period after first character - return name as it was passed in
+	   		return new String[] {directory, name, ""};
   		} else {
-      		// Remove the last period and everything after it
-       		return new String[] {filePath, directory, name.substring(0, lastPeriodPos), name.substring(lastPeriodPos+1)};
+	  		// Remove the last period and everything after it
+	   		return new String[] {filePath, directory, name.substring(0, lastPeriodPos), name.substring(lastPeriodPos+1)};
   		}
 	}
 
@@ -214,8 +214,8 @@ public class ProcessScores implements Callable<Integer>  {
 	}
 
 	private boolean validateAction(String srcFile, String tgtFile) {
-    	File src = new File(srcFile), tgt = new File(tgtFile);
-    	if (tgt.exists()) {
+		File src = new File(srcFile), tgt = new File(tgtFile);
+		if (tgt.exists()) {
  			long srcLastModified = src.lastModified();
  			long tgtLastModified = tgt.lastModified();
 			if (arguments.fileOption==Arguments.FILE_OPTION.REPLACE||(arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEWER&&srcLastModified>tgtLastModified)) {
@@ -224,7 +224,7 @@ public class ProcessScores implements Callable<Integer>  {
 				}
 				return true;
 			} else return false;
-    	} else return true;
+		} else return true;
 	}
 
 	private void validateOutputFiles(String score, String outputDirectory, String fileName) throws Exception {
@@ -243,10 +243,10 @@ public class ProcessScores implements Callable<Integer>  {
 
 	private void validateCopyFiles() {
 		for (int i=0; i<files2copy.length;i++) {
-    		validateAction(insDirectory+File.separator+files2copy[i], arguments.outputDirectory+File.separator+files2copy[i]);
+			validateAction(insDirectory+File.separator+files2copy[i], arguments.outputDirectory+File.separator+files2copy[i]);
 		}
 		for (int i=0; i<files2copyForIndexFile.length;i++) {
-    		validateAction(insDirectory+File.separator+files2copyForIndexFile[i], arguments.outputDirectory+File.separator+files2copyForIndexFile[i]);
+			validateAction(insDirectory+File.separator+files2copyForIndexFile[i], arguments.outputDirectory+File.separator+files2copyForIndexFile[i]);
 		}
 	}
 
@@ -271,7 +271,7 @@ public class ProcessScores implements Callable<Integer>  {
 		} else files_generated++;
 	}
 
-    private void generateIndexHtml(String fileName, String[] fileNames) throws IOException {
+	private void generateIndexHtml(String fileName, String[] fileNames) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
@@ -290,35 +290,35 @@ public class ProcessScores implements Callable<Integer>  {
    		output.println("		</table>");
   		output.println("	</body>");
   		output.println("</html>");
-	    output.close();
-	    files_generated++;
-    }
+		output.close();
+		files_generated++;
+	}
 
-    private void generateIndexHtmlLinks2HtmlFiles(String fileName, String[] fileNames) throws IOException {
+	private void generateIndexHtmlLinks2HtmlFiles(String fileName, String[] fileNames) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
   		output.println("	<head>");
-  		output.println("    	<meta charset=\"UTF-8\"/>");
+  		output.println("		<meta charset=\"UTF-8\"/>");
   		output.println("		<meta http-equiv=\"Content-Style-Type\" content=\"text/css\"/>");
   		output.println("		<link rel=\"stylesheet\" type=\"text/css\" href=\"css/ms_player_index.css\"/>");
   		output.println("		<title>"+translations.getKey("scores.label")+"</title>");
   		output.println("	</head>");
   		output.println("	<body border=\"1\">");
   		output.println("		<h1>"+translations.getKey("scores.label")+"</h1>");
-   		output.println("    	<table>");
+   		output.println("		<table>");
   		output.println("			<tr><th>"+translations.getKey("scores.label")+"</th></tr>");
  		for (int i=0;i<fileNames.length;i++) {
   			output.println("			<tr><td><a href=\""+fileNames[i]+".html\">"+fileNames[i]+"</a></td></tr>");
   		}
-  		output.println("    </ul>");
-  		output.println("  </body>");
+  		output.println("		</table>");
+   		output.println("  </body>");
   		output.println("</html>");
-	    output.close();
-	    files_generated++;
-    }
+		output.close();
+		files_generated++;
+	}
 
-    private void generateHtml(String fileName, String title) throws IOException {
+	private void generateHtml(String fileName, String title) throws IOException {
    		PrintWriter output = new PrintWriter(new OutputStreamWriter(new FileOutputStream(new File(fileName)), StandardCharsets.UTF_8));
   		output.println("<!DOCTYPE html>");
   		output.println("<html lang=\"en\">");
@@ -329,69 +329,69 @@ public class ProcessScores implements Callable<Integer>  {
   		output.println("		<title>"+title+"</title>");
   		output.println("	</head>");
   		output.println("	<body>");
-  		output.println("    	<script type=\"text/javascript\">");
+  		output.println("		<script type=\"text/javascript\">");
   		output.println("			ms_player.load(\""+title+"\");");
   		output.println("		</script>");
   		output.println("	</body>");
   		output.println("</html>");
-	    output.close();
-	    files_generated++;
-    }
+		output.close();
+		files_generated++;
+	}
 
-    private void copyFiles(String outputDirectory, String[] files2copy, String actionPart) throws IOException {
-    	try {
-    		String action=actionPart+".installed";
-     		String lastSubdir="";
-     		int first=0, len=files2copy.length;
-     		if (actionPart.equals("indexfile")) {
-     			if (arguments.generateIndexFileOption == Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_TO_HTML) {
-     				first = 0;
-     				len = 1;
-     			}
-     		}
-    		for (int i=first; i<len; i++) {
-    			String srcFile=insDirectory+File.separator+files2copy[i], tgtFile=outputDirectory+File.separator+files2copy[i];
-    			File src = new File(srcFile), tgt = new File(tgtFile);
-    			if (tgt.exists()) {
+	private void copyFiles(String outputDirectory, String[] files2copy, String actionPart) throws IOException {
+		try {
+			String action=actionPart+".installed";
+	 		String lastSubdir="";
+	 		int first=0, len=files2copy.length;
+	 		if (actionPart.equals("indexfile")) {
+	 			if (arguments.generateIndexFileOption == Arguments.GENERATE_INDEX_FILE_OPTION.INDEX_TO_HTML) {
+	 				first = 0;
+	 				len = 1;
+	 			}
+	 		}
+			for (int i=first; i<len; i++) {
+				String srcFile=insDirectory+File.separator+files2copy[i], tgtFile=outputDirectory+File.separator+files2copy[i];
+				File src = new File(srcFile), tgt = new File(tgtFile);
+				if (tgt.exists()) {
 					if (arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEW||arguments.fileOption==Arguments.FILE_OPTION.ONLY_IF_NEWER&&src.lastModified()<=tgt.lastModified()) {
 						processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {actionPart+".already.exists"+translateCheckOnly,files2copy[i]}),0);
 						continue;
 					}
 					action = actionPart+".replaced";
-    			}
-    			String subDir=(new File(files2copy[i])).getParent();
-    			if (subDir!=null&&!subDir.equals(lastSubdir)) {
-	    			File subDirectory=new File(outputDirectory+File.separator+subDir);
-    				if (!subDirectory.exists()) {
-    					if (!arguments.checkOnly) {
-    						boolean success=subDirectory.mkdir();
-    						if (!success) {
-    							processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"directory.created.error",subDir}),1);
-     							return;
-    						}
-    					}
-    					processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"directory.created"+translateCheckOnly,subDir}),0);
-    					directories_created++;
-    				}
-    			}
-    			lastSubdir=subDir;
-    			if (!arguments.checkOnly) {
+				}
+				String subDir=(new File(files2copy[i])).getParent();
+				if (subDir!=null&&!subDir.equals(lastSubdir)) {
+					File subDirectory=new File(outputDirectory+File.separator+subDir);
+					if (!subDirectory.exists()) {
+						if (!arguments.checkOnly) {
+							boolean success=subDirectory.mkdir();
+							if (!success) {
+								processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"directory.created.error",subDir}),1);
+	 							return;
+							}
+						}
+						directories_created++;
+						processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {"directory.created"+translateCheckOnly,subDir}),0);
+					}
+				}
+				lastSubdir=subDir;
+				if (!arguments.checkOnly) {
 					Path srcPath=FileSystems.getDefault().getPath(srcFile), tgtPath=FileSystems.getDefault().getPath(tgtFile);
 					CopyOption[] copyOptions={StandardCopyOption.COPY_ATTRIBUTES, StandardCopyOption.REPLACE_EXISTING};//,StandardCopyOption.ATOMIC_MOVE
-    				Files.copy(srcPath, tgtPath, copyOptions);
-    				files_installed++;
-    			}
-	    		processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {action+translateCheckOnly,files2copy[i]}),0);
-    		}
-    	} catch (Exception exc) {
+					Files.copy(srcPath, tgtPath, copyOptions);
+				}
+				files_installed++;
+				processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {action+translateCheckOnly,files2copy[i]}),0);
+			}
+		} catch (Exception exc) {
 			exc.printStackTrace();
 			if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error.message", exc.getMessage()}),99);
 			else processInfo(Arguments.LOG_LEVEL.NORMAL, translations.getKey("exception.error"),99);
-    	}
-    }
+		}
+	}
 
-    private void generateFiles(String museScore, String score, String outputDirectory, String fileName) throws Exception {
-    	int filesGenerated = 0;
+	private void generateFiles(String museScore, String score, String outputDirectory, String fileName) throws Exception {
+		int filesGenerated = 0;
 		for (int e=0;e<extensions.length;e++) {
 			String sf;
 			if (e==imageExtension) sf="-*"; else sf="";
@@ -420,27 +420,28 @@ public class ProcessScores implements Callable<Integer>  {
 				if (!arguments.checkOnly) {
 					callMuseScore(museScore, score, tempDirectory, fileName, ".mpos");
 					XmlXslTransformer.doTransform(tempDirectory+File.separator+fileName+".mpos",xslDirectory+File.separator+"musescore_mpos.xsl",outputDirectory+File.separator+fileName+extensions[e]);
-				}
-				processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
+				} else files_generated++;
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
 				filesGenerated++;
 			} else if (extensions[e].equals(".html")) {
 				if (arguments.generateHtml) {
 					if (!arguments.checkOnly) generateHtml(arguments.outputDirectory+File.separator+fileName+".html",fileName);
-					processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
+					else files_generated++;
+					processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
 					filesGenerated++;
 				}
 			} else {
 				if (!arguments.checkOnly) callMuseScore(museScore, score, outputDirectory, fileName, extensions[e]);
-				processInfo(Arguments.LOG_LEVEL.EXTREME, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
+				else files_generated++;
+				processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {action+translateCheckOnly,fileName+sf+extensions[e]}),0);
 				filesGenerated++;
-
 			}
 		}
 		if (filesGenerated>0) {
 			processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"score.processed"+translateCheckOnly,score}),0);
 			scores_processed++;
 		} else scores_skipped++;
-    }
+	}
 
 	public ProcessScores(Arguments arguments, ProcessData processData) {
 		this.arguments = arguments;
@@ -563,8 +564,7 @@ public class ProcessScores implements Callable<Integer>  {
 
 			if (files_generated>0) {
 				try {
-					String metajsonFiles[] = MuseScore2HtmlUtils.findItems(arguments.outputDirectory+File.separator+"*.metajson", MuseScore2HtmlUtils.TYPE.FILE, arguments.isCaseSensitive);
-					if (metajsonFiles.length>0) copyFiles(arguments.outputDirectory, files2copy, "file");
+					copyFiles(arguments.outputDirectory, files2copy, "file");
 				} catch (Exception exc) {
 					exc.printStackTrace();
 					if (exc.getMessage()!=null) processInfo(Arguments.LOG_LEVEL.NORMAL, translations.translate(new String[] {"exception.error.message",exc.getMessage()}),99);

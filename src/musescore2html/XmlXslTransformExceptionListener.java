@@ -1,7 +1,5 @@
 package musescore2html;
 
-import org.xml.sax.ErrorHandler ;
-
 import javax.xml.transform.ErrorListener;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerConfigurationException;
