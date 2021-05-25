@@ -11,3 +11,5 @@ for commandline usage.
 
 See [resources/help/MuseScore2Html_Gui_en.png](resources/help/MuseScore2Html_Gui_en.png)
 for screenshot of gui.
+
+Explanation of how it works and examples can be found on [https://music4classicalguitar.github.io/musescore2html/index.html](https://music4classicalguitar.github.io/musescore2html/index.html)
