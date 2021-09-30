@@ -17,6 +17,8 @@ import java.nio.file.FileSystems;
 
 import javax.swing.UIManager;
 
+import musescore2html.gui.Gui;
+
 public class Config {
 
 	private Translations translations;
@@ -181,7 +183,11 @@ public class Config {
 		else if (!scoreDirectory1.equals("")) scoreDirectory=scoreDirectory1;
 		temp = new ArrayList<String>();
 
-		if (defaultMuseScore.equals("")) throw new Exception(translations.translate("musescore.not.specified"));
+		if (defaultMuseScore.equals("")) {
+			Gui gui = new Gui(new String[] { translations.translate("musescore.not.found_and_specified")});
+			throw new Exception(translations.translate("musescore.not.found_and_specified"));
+		}
+		
 		File exec = new File(defaultMuseScore);
 		if (!exec.exists()) throw new Exception(translations.translate(new String[] {"musescore.not.found", defaultMuseScore}));
 		if (!exec.canExecute()) throw new Exception(translations.translate(new String[] {"musescore.not.executable", defaultMuseScore}));

@@ -18,7 +18,9 @@ import javax.swing.UIManager;
 public class Gui extends JFrame {
 
 	private Arguments arguments;
-	private MainPanel mainpanel;
+	private MainPanel mainPanel;
+	private ConfigErrorPanel configErrorPanel;
+	private String[] errors;
 
 	private void setUp() {
 		//Create and set up the window.
@@ -26,8 +28,8 @@ public class Gui extends JFrame {
 		
 		this.setLayout(new FlowLayout());
 		//Add content to the window.
-		mainpanel = new MainPanel(arguments);
-		this.getContentPane().add(mainpanel);	
+		mainPanel = new MainPanel(arguments);
+		this.getContentPane().add(mainPanel);	
 		this.pack();
 
 		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
@@ -40,10 +42,42 @@ public class Gui extends JFrame {
 		WindowListener exitListener = new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				mainpanel.closeAction();
+				mainPanel.closeAction();
 			}
 		};
 		this.addWindowListener(exitListener);
+
+		//Display the window.
+		this.setVisible(true);
+	}
+
+	private void setUpShowErrors() {
+		//Create and set up the window.
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		
+		this.setLayout(new FlowLayout());
+		//Add content to the window.
+		configErrorPanel = new ConfigErrorPanel(errors);
+
+		this.getContentPane().add(configErrorPanel);	
+		this.pack();
+
+		Dimension dimension = Toolkit.getDefaultToolkit().getScreenSize();
+ 		int x = (int) ((dimension.getWidth() - this.getContentPane().getWidth()) / 2);
+ 		int y = (int) ((dimension.getHeight() - this.getContentPane().getHeight()) / 2);
+ 		this.setLocation(x, y);
+ 		
+		this.setName("MuseScore2Html");
+		
+		/*
+		WindowListener exitListener = new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		};
+		this.addWindowListener(exitListener);
+		*/
 
 		//Display the window.
 		this.setVisible(true);
@@ -76,33 +110,24 @@ public class Gui extends JFrame {
 		}
 	}
 	
-	public void showGui() {
+	public void showGui(boolean hasErrors) {
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				setDefaultLookAndFeel();
-				//Turn off metal's use of bold fonts
-				UIManager.put("swing.boldMetal", Boolean.FALSE);
-				setUp();
+				if (hasErrors) setUpShowErrors();
+				else {
+					setDefaultLookAndFeel();
+					//Turn off metal's use of bold fonts
+					UIManager.put("swing.boldMetal", Boolean.FALSE);
+					setUp();
+				}
 			}
 		});
 	}
-
-	/*
-	public void windowClosing(WindowEvent e) {
-		mainpanel.closeAction();
-		this.dispose();
+	
+	public Gui(String[] args) {
+		this.errors = args;
+		this.showGui(true);
 	}
-
-	public void windowClosed(WindowEvent e) {};
-	public void windowOpened(WindowEvent e) {};
-	public void windowIconified(WindowEvent e) {};
-	public void windowDeiconified(WindowEvent e) {};
-	public void windowActivated(WindowEvent e) {};
-	public void windowDeactivated(WindowEvent e) {};
-	public void windowGainedFocus(WindowEvent e) {};
-	public void windowLostFocus(WindowEvent e) {};
-	public void windowStateChanged(WindowEvent e) {};
-	*/
 	
 	public Gui(Arguments arguments) {
 		//super("MuseScore2Html");
@@ -111,14 +136,14 @@ public class Gui extends JFrame {
 			this.arguments=new Arguments();
 		} else this.arguments=arguments;
 		this.arguments.setMissing();
-		this.showGui();
+		this.showGui(false);
 	}
 
 	public Gui() {
 		//super("MuseScore2Html");
 		this.arguments=new Arguments();
 		this.arguments.setMissing();
-		this.showGui();
+		this.showGui(false);
 	}
 	
 	public static void main(String[] args) {
